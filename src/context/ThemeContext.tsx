@@ -12,7 +12,7 @@ const ThemeContext = createContext({} as ThemeContextValues);
 type ThemeContextValues = {
   getFontStyle: (variant: FontVariant) => FontValue;
   getColor: (variant: ColorVariant) => { main: string; contrast: string };
-  setMode: (mode: "dark" | "light") => void;
+  toggleMode: () => void;
   updateTheme: (theme: Partial<Theme>) => void;
   getSpacing: (size: number) => number;
   getRadius: () => number;
@@ -113,6 +113,10 @@ const ThemeProvider = ({
     [theme]
   );
 
+  const toggleMode = useCallback(() => {
+    setMode((mode) => (mode === "dark" ? "light" : "dark"));
+  }, [mode]);
+
   const getSpacing = useCallback(
     (size: number) => theme.spacing * size,
     [theme.spacing]
@@ -125,7 +129,7 @@ const ThemeProvider = ({
       value={{
         getFontStyle,
         getColor,
-        setMode,
+        toggleMode,
         updateTheme,
         getSpacing,
         getRadius,

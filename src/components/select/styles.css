@@ -1,0 +1,54 @@
+option:first-of-type {
+  border-radius: var(--radius-default) var(--radius-default) 0 0;
+}
+
+option:last-of-type {
+  border-radius: 0 0 var(--radius-default) var(--radius-default);
+}
+
+option:not(option:last-of-type) {
+  border-bottom: none;
+}
+
+::picker(select) {
+  border: none;
+}
+
+select,
+::picker(select) {
+  appearance: base-select;
+}
+
+select::picker-icon {
+  rotate: 0deg;
+  transition: rotate 0.5s ease-in;
+}
+
+select:open::picker-icon {
+  rotate: 180deg;
+  transition: rotate 0.5s ease-in;
+}
+
+option::checkmark {
+  display: none;
+}
+
+option:checked {
+  font-weight: bold;
+  background-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+::picker(select) {
+  opacity: 0;
+  transition: all 0.4s allow-discrete;
+}
+::picker(select):popover-open {
+  opacity: 1;
+}
+
+@starting-style {
+  ::picker(select):popover-open {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,65 @@
+import { useTheme } from "@hooks/useTheme";
+import type { PropsWithChildren } from "react";
+import { MdClose } from "react-icons/md";
+
+type DrawerProps = {
+  open: boolean;
+  onOpenChange: (e: boolean) => void;
+};
+
+const Drawer = ({
+  open,
+  onOpenChange,
+  children,
+}: PropsWithChildren<DrawerProps>) => {
+  const { getSpacing } = useTheme();
+
+  const handleCloseClick = () => {
+    onOpenChange(false);
+  };
+
+  return (
+    <div
+      className={`relative z-10 transition-all ${open ? "w-full" : "w-0"}`}
+      aria-labelledby="slide-over-title"
+      role="dialog"
+      aria-modal="true"
+    >
+      {open && (
+        <div
+          className={`fixed inset-y-0 right-0 bg-gray-950/75 transition-all ${
+            open ? "w-full" : "w-full"
+          }`}
+          onClick={handleCloseClick}
+        ></div>
+      )}
+      <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
+        <div
+          className={`pointer-events-auto relative w-screen transition-all ${
+            open ? "max-w-md" : "max-w-0"
+          }`}
+        >
+          <div className="flex h-full flex-col overflow-y-auto bg-background py-6 shadow-xl">
+            <div className="px-4 sm:px-6">
+              <h2 className="text-base font-semibold" id="slide-over-title">
+                Panel title
+              </h2>
+              <button
+                type="button"
+                className="relative cursor-pointer focus:border-0 focus:outline-hidden"
+                onClick={handleCloseClick}
+              >
+                <span className="absolute -inset-2.5"></span>
+                <span className="sr-only">Close panel</span>
+                <MdClose size={getSpacing(3)} />
+              </button>
+            </div>
+            <div className="relative mt-6 flex-1 px-4 sm:px-6">{children}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Drawer;
