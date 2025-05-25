@@ -1,8 +1,9 @@
 export type Theme = {
-  colors: Record<ColorVariant, ColorValue>
-  fonts: Record<FontVariant, FontValue>
+  colors: Record<ColorVariant, ColorValue>;
+  fonts: Record<FontVariant, FontValue>;
   spacing: number;
   radius: number;
+  name?: string;
 };
 
 export type FontVariant =
