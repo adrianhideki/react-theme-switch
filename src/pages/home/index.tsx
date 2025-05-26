@@ -31,6 +31,8 @@ const Home = () => {
             { value: 0, description: "test" },
             { value: 1, description: "test 1" },
           ]}
+          keyField="value"
+          getLabel={(item) => String(item["description"])}
           onChange={(item) => console.log(item)}
         />
         <Typography variant="h1" className="text-primary">

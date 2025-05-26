@@ -4,6 +4,7 @@ export type Theme = {
   spacing: number;
   radius: number;
   name?: string;
+  id?: string;
 };
 
 export type FontVariant =

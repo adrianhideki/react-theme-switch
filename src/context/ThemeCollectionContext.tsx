@@ -15,7 +15,7 @@ type ThemeCollectionContextValues = {
   updateCurrentTheme: (index: number) => void;
 };
 
-const ThemeCollectionContext = createContext(
+export const ThemeCollectionContext = createContext(
   {} as ThemeCollectionContextValues
 );
 

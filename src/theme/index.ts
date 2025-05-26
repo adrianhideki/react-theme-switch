@@ -2,6 +2,7 @@ import type { Theme } from "./types";
 
 export const defaultTheme: Theme = {
   name: "default",
+  id: "default",
   colors: {
     primary: {
       main: { light: "#bb86fc", dark: "#3700b3" },

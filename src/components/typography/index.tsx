@@ -14,7 +14,7 @@ type TypographyVariant =
   | "body-secondary";
 
 type TypographyProps = {
-  variant: TypographyVariant;
+  variant?: TypographyVariant;
   children: ReactNode;
   className?: string;
 };
@@ -37,7 +37,7 @@ const getElement = (variant: TypographyVariant) => {
 };
 
 const Typography = React.memo(
-  ({ variant, children, ...props }: TypographyProps) => {
+  ({ variant = "body", children, ...props }: TypographyProps) => {
     const enhancedProps = {
       ...props,
       className: `text-${variant} font-${variant} font-w${variant} ${

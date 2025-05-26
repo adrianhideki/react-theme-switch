@@ -1,3 +1,4 @@
+import Typography from "@components/typography";
 import { useTheme } from "@hooks/useTheme";
 import type { PropsWithChildren } from "react";
 import { MdClose } from "react-icons/md";
@@ -40,10 +41,8 @@ const Drawer = ({
           }`}
         >
           <div className="flex h-full flex-col overflow-y-auto bg-background py-6 shadow-xl">
-            <div className="px-4 sm:px-6">
-              <h2 className="text-base font-semibold" id="slide-over-title">
-                Panel title
-              </h2>
+            <div className="px-4 sm:px-6 flex justify-between">
+              <Typography variant="h2">React Theme Switcher</Typography>
               <button
                 type="button"
                 className="relative cursor-pointer focus:border-0 focus:outline-hidden"
@@ -54,7 +53,9 @@ const Drawer = ({
                 <MdClose size={getSpacing(3)} />
               </button>
             </div>
-            <div className="relative mt-6 flex-1 px-4 sm:px-6">{children}</div>
+            <div className="relative mt-6 flex-1 px-4 sm:px-6 flex flex-col gap-2">
+              {children}
+            </div>
           </div>
         </div>
       </div>
