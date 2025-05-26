@@ -1,0 +1,261 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --text-h1: var(--theme-font-size-h1);
+  --text-h2: var(--theme-font-size-h2);
+  --text-h3: var(--theme-font-size-h3);
+  --text-h4: var(--theme-font-size-h4);
+  --text-h5: var(--theme-font-size-h5);
+  --text-h6: var(--theme-font-size-h6);
+
+  --font-h1: var(--theme-font-family-h1);
+  --font-h2: var(--theme-font-family-h2);
+  --font-h3: var(--theme-font-family-h3);
+  --font-h4: var(--theme-font-family-h4);
+
+  --font-weight-wh1: var(--theme-font-weight-h1);
+  --font-weight-wh2: var(--theme-font-weight-h2);
+  --font-weight-wh3: var(--theme-font-weight-h3);
+  --font-weight-wh4: var(--theme-font-weight-h4);
+
+  --font-h5: var(--theme-font-family-h5);
+  --font-weight-wh5: var(--theme-font-weight-h5);
+
+  --font-h6: var(--theme-font-family-h6);
+  --font-weight-wh6: var(--theme-font-weight-h6);
+
+  --font-subtitle: var(--theme-font-family-subtitle);
+  --text-subtitle: var(--theme-font-size-subtitle);
+  --font-weight-wsubtitle: var(--theme-font-weight-subtitle);
+
+  --font-subtitle-secondary: var(--theme-font-family-subtitle-secondary);
+  --text-subtitle-secondary: var(--theme-font-size-subtitle-secondary);
+  --font-weight-wsubtitle-secondary: var(
+    --theme-font-weight-subtitle-secondary
+  );
+
+  --font-body: var(--theme-font-family-body);
+  --text-body: var(--theme-font-size-body);
+  --font-weight-wbody: var(--theme-font-weight-body);
+
+  --font-body-secondary: var(--theme-font-family-body-secondary);
+  --text-body-secondary: var(--theme-font-size-body-secondary);
+  --font-weight-wbody-secondary: var(--theme-font-weight-body-secondary);
+
+  --font-button: var(--theme-font-family-button);
+  --text-button: var(--theme-font-size-button);
+  --font-weight-wbutton: var(--theme-font-weight-button);
+
+  --font-caption: var(--theme-font-family-caption);
+  --text-caption: var(--theme-font-size-caption);
+  --font-weight-wcaption: var(--theme-font-weight-caption);
+
+  --color-primary: var(--theme-color-primary);
+  --color-primary-contrast: var(--theme-color-primary-contrast);
+
+  --color-secondary: var(--theme-color-secondary);
+  --color-secondary-contrast: var(--theme-color-secondary-contrast);
+
+  --color-tertiary: var(--theme-color-tertiary);
+  --color-tertiary-contrast: var(--theme-color-tertiary-contrast);
+
+  --color-background: var(--theme-color-background);
+  --color-background-contrast: var(--theme-color-background-contrast);
+
+  --color-text: var(--theme-color-text);
+  --color-text-contrast: var(--theme-color-text-contrast);
+
+  --color-border: var(--theme-color-border);
+  --color-border-contrast: var(--theme-color-border-contrast);
+
+  --color-error: var(--theme-color-error);
+  --color-error-contrast: var(--theme-color-error-contrast);
+
+  --color-success: var(--theme-color-success);
+  --color-success-contrast: var(--theme-color-success-contrast);
+
+  --color-warning: var(--theme-color-warning);
+  --color-warning-contrast: var(--theme-color-warning-contrast);
+
+  --color-info: var(--theme-color-info);
+  --color-info-contrast: var(--theme-color-info-contrast);
+
+  --color-paper: var(--theme-color-paper);
+  --color-paper-contrast: var(--theme-color-paper-contrast);
+
+  --radius-default: var(--theme-radius);
+  --spacing: var(--theme-spacing);
+}
+
+/* Font family classes */
+.font-h1 {
+  font-family: var(--theme-font-family-h1);
+}
+.font-h2 {
+  font-family: var(--theme-font-family-h2);
+}
+.font-h3 {
+  font-family: var(--theme-font-family-h3);
+}
+.font-h4 {
+  font-family: var(--theme-font-family-h4);
+}
+.font-h5 {
+  font-family: var(--theme-font-family-h5);
+}
+.font-h6 {
+  font-family: var(--theme-font-family-h6);
+}
+.font-subtitle {
+  font-family: var(--theme-font-family-subtitle);
+}
+.font-subtitle-secondary {
+  font-family: var(--theme-font-family-subtitle-secondary);
+}
+.font-body {
+  font-family: var(--theme-font-family-body);
+}
+.font-body-secondary {
+  font-family: var(--theme-font-family-body-secondary);
+}
+.font-button {
+  font-family: var(--theme-font-family-button);
+}
+.font-caption {
+  font-family: var(--theme-font-family-caption);
+}
+
+/* Font size classes */
+.text-h1 {
+  font-size: var(--theme-font-size-h1);
+}
+.text-h2 {
+  font-size: var(--theme-font-size-h2);
+}
+.text-h3 {
+  font-size: var(--theme-font-size-h3);
+}
+.text-h4 {
+  font-size: var(--theme-font-size-h4);
+}
+.text-h5 {
+  font-size: var(--theme-font-size-h5);
+}
+.text-h6 {
+  font-size: var(--theme-font-size-h6);
+}
+
+/* Color classes */
+.text-primary {
+  color: var(--theme-color-primary);
+}
+.text-primary-contrast {
+  color: var(--theme-color-primary-contrast);
+}
+.text-secondary {
+  color: var(--theme-color-secondary);
+}
+.text-secondary-contrast {
+  color: var(--theme-color-secondary-contrast);
+}
+.text-tertiary {
+  color: var(--theme-color-tertiary);
+}
+.text-tertiary-contrast {
+  color: var(--theme-color-tertiary-contrast);
+}
+.text-background {
+  color: var(--theme-color-background);
+}
+.text-background-contrast {
+  color: var(--theme-color-background-contrast);
+}
+.text-error {
+  color: var(--theme-color-error);
+}
+.text-success {
+  color: var(--theme-color-success);
+}
+.text-warning {
+  color: var(--theme-color-warning);
+}
+.text-info {
+  color: var(--theme-color-info);
+}
+.text-paper {
+  color: var(--theme-color-paper);
+}
+
+.bg-primary {
+  background-color: var(--theme-color-primary);
+}
+.bg-primary-contrast {
+  background-color: var(--theme-color-primary-contrast);
+}
+.bg-secondary {
+  background-color: var(--theme-color-secondary);
+}
+.bg-secondary-contrast {
+  background-color: var(--theme-color-secondary-contrast);
+}
+.bg-tertiary {
+  background-color: var(--theme-color-tertiary);
+}
+.bg-tertiary-contrast {
+  background-color: var(--theme-color-tertiary-contrast);
+}
+.bg-background {
+  background-color: var(--theme-color-background);
+}
+.bg-background-contrast {
+  background-color: var(--theme-color-background-contrast);
+}
+.bg-error {
+  background-color: var(--theme-color-error);
+}
+.bg-success {
+  background-color: var(--theme-color-success);
+}
+.bg-warning {
+  background-color: var(--theme-color-warning);
+}
+.bg-info {
+  background-color: var(--theme-color-info);
+}
+.bg-paper {
+  background-color: var(--theme-color-paper);
+}
+
+/* Border color classes */
+.border-primary {
+  border-color: var(--theme-color-primary);
+}
+.border-secondary {
+  border-color: var(--theme-color-secondary);
+}
+.border-tertiary {
+  border-color: var(--theme-color-tertiary);
+}
+.border-background {
+  border-color: var(--theme-color-background);
+}
+.border-error {
+  border-color: var(--theme-color-error);
+}
+.border-success {
+  border-color: var(--theme-color-success);
+}
+.border-warning {
+  border-color: var(--theme-color-warning);
+}
+.border-info {
+  border-color: var(--theme-color-info);
+}
+.border-paper {
+  border-color: var(--theme-color-paper);
+}
+.rouded-default {
+  border-radius: var(--radius-default);
+}
