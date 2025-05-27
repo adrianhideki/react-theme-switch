@@ -53,6 +53,7 @@ const ColorPicker = ({ color, onColorChange }: ColorPickerProps) => {
               inputType={ChromeInputType.RGBA}
               color={color}
               onChange={(color) => handleColorChange(color.hex)}
+              className="text-gray-950"
             />
           </div>
           <div

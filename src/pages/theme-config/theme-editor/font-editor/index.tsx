@@ -42,7 +42,7 @@ const FontEditor = ({ name, value, onChange, error }: FontEditorProps) => {
   return (
     <div className="flex flex-col gap-2">
       <Typography variant="h4">{name}</Typography>
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-start flex-col md:flex-row md:items-center">
         <Typography>Family</Typography>
         <Input
           type="text"

@@ -44,7 +44,7 @@ const ColorEditor = ({ name, value, onChange }: ColorEditorProps) => {
   };
 
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-2 items-center flex-col lg:flex-row">
       <Typography variant="h4" className="w-20">
         {name}
       </Typography>

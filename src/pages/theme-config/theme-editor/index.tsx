@@ -54,7 +54,7 @@ const ThemeEditor = ({ theme }: ThemeEditorProps) => {
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <Typography variant="h2">Colors</Typography>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 justify-evenly md:justify-start">
         <ColorEditor
           onChange={handleColorChange("colors.primary")}
           value={getValues("colors.primary")}
