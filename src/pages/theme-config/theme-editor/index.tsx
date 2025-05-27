@@ -1,43 +1,284 @@
-import type { Theme } from "@theme/types";
+import type { ColorValue, Theme } from "@theme/types";
 import ColorEditor from "./color-editor";
 import Typography from "@components/typography";
 import Input from "@components/input";
+import FontEditor, { type FontEditorValue } from "./font-editor";
+import { useForm, type FieldPath } from "react-hook-form";
+import Button from "@components/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod/v3";
+import schema from "./schema";
+import { useCallback, type ChangeEvent } from "react";
 
 type ThemeEditorProps = {
-  theme: Theme;
+  theme?: Theme;
 };
 
+type ThemeValues = z.infer<typeof schema>;
+
 const ThemeEditor = ({ theme }: ThemeEditorProps) => {
+  const {
+    handleSubmit,
+    register,
+    getValues,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: { ...theme } as ThemeValues,
+  });
+
+  const handleFormSubmit = (value: ThemeValues) => {
+    console.log("submit", value);
+  };
+
+  const handleColorChange = useCallback(
+    (field: FieldPath<ThemeValues>) => {
+      return (e: ChangeEvent<{ value: ColorValue }>) =>
+        setValue(field, e.target.value);
+    },
+    [setValue]
+  );
+
+  const handleFontChange = useCallback(
+    (field: FieldPath<ThemeValues>) => {
+      return (e: ChangeEvent<{ value: FontEditorValue }>) =>
+        setValue(field, e.target.value);
+    },
+    [setValue]
+  );
+
   return (
-    <>
+    <form
+      className="flex flex-col gap-4"
+      onSubmit={handleSubmit(handleFormSubmit)}
+    >
       <Typography variant="h2">Colors</Typography>
       <div className="flex flex-wrap gap-2">
-        <ColorEditor name="Primary" onChange={(value) => console.log(value)} />
         <ColorEditor
+          onChange={handleColorChange("colors.primary")}
+          value={getValues("colors.primary")}
+          name="Primary"
+        />
+        <ColorEditor
+          onChange={handleColorChange("colors.secondary")}
+          value={getValues("colors.secondary")}
           name="Secondary"
-          onChange={(value) => console.log(value)}
         />
-        <ColorEditor name="Tertiary" onChange={(value) => console.log(value)} />
         <ColorEditor
-          name="Background"
-          onChange={(value) => console.log(value)}
+          onChange={handleColorChange("colors.tertiary")}
+          value={getValues("colors.tertiary")}
+          name="Tertiary"
         />
-        <ColorEditor name="Text" onChange={(value) => console.log(value)} />
-        <ColorEditor name="Border" onChange={(value) => console.log(value)} />
-        <ColorEditor name="Error" onChange={(value) => console.log(value)} />
-        <ColorEditor name="Success" onChange={(value) => console.log(value)} />
-        <ColorEditor name="Warning" onChange={(value) => console.log(value)} />
-        <ColorEditor name="Info" onChange={(value) => console.log(value)} />
-        <ColorEditor name="Paper" onChange={(value) => console.log(value)} />
+        <ColorEditor
+          onChange={handleColorChange("colors.background")}
+          value={getValues("colors.background")}
+          name="Background"
+        />
+        <ColorEditor
+          onChange={handleColorChange("colors.background")}
+          value={getValues("colors.text")}
+          name="Text"
+        />
+        <ColorEditor
+          onChange={handleColorChange("colors.background")}
+          value={getValues("colors.border")}
+          name="Border"
+        />
+        <ColorEditor
+          onChange={handleColorChange("colors.background")}
+          value={getValues("colors.error")}
+          name="Error"
+        />
+        <ColorEditor
+          onChange={handleColorChange("colors.background")}
+          value={getValues("colors.success")}
+          name="Success"
+        />
+        <ColorEditor
+          onChange={handleColorChange("colors.background")}
+          value={getValues("colors.warning")}
+          name="Warning"
+        />
+        <ColorEditor
+          onChange={handleColorChange("colors.background")}
+          value={getValues("colors.info")}
+          name="Info"
+        />
+        <ColorEditor
+          onChange={handleColorChange("colors.background")}
+          value={getValues("colors.paper")}
+          name="Paper"
+        />
       </div>
       <Typography variant="h2">Typography</Typography>
+      <div className="flex flex-wrap gap-2">
+        <FontEditor
+          value={getValues("fonts.h1")}
+          onChange={handleFontChange("fonts.h1")}
+          name="Heading 1"
+          error={
+            errors.fonts?.h1?.size?.message ??
+            errors.fonts?.h1?.family?.message ??
+            errors.fonts?.h1?.weight?.message
+          }
+        />
+        <FontEditor
+          value={getValues("fonts.h2")}
+          onChange={handleFontChange("fonts.h2")}
+          name="Heading 2"
+          error={
+            errors.fonts?.h2?.size?.message ??
+            errors.fonts?.h2?.family?.message ??
+            errors.fonts?.h2?.weight?.message
+          }
+        />
+        <FontEditor
+          value={getValues("fonts.h3")}
+          onChange={handleFontChange("fonts.h3")}
+          name="Heading 3"
+          error={
+            errors.fonts?.h3?.size?.message ??
+            errors.fonts?.h3?.family?.message ??
+            errors.fonts?.h3?.weight?.message
+          }
+        />
+        <FontEditor
+          value={getValues("fonts.h4")}
+          onChange={handleFontChange("fonts.h4")}
+          name="Heading 4"
+          error={
+            errors.fonts?.h4?.size?.message ??
+            errors.fonts?.h4?.family?.message ??
+            errors.fonts?.h4?.weight?.message
+          }
+        />
+        <FontEditor
+          value={getValues("fonts.h5")}
+          onChange={handleFontChange("fonts.h5")}
+          name="Heading 5"
+          error={
+            errors.fonts?.h5?.size?.message ??
+            errors.fonts?.h5?.family?.message ??
+            errors.fonts?.h5?.weight?.message
+          }
+        />
+        <FontEditor
+          value={getValues("fonts.h6")}
+          onChange={handleFontChange("fonts.h6")}
+          name="Heading 6"
+          error={
+            errors.fonts?.h6?.size?.message ??
+            errors.fonts?.h6?.family?.message ??
+            errors.fonts?.h6?.weight?.message
+          }
+        />
+        <FontEditor
+          value={getValues("fonts.subtitle")}
+          onChange={handleFontChange("fonts.subtitle")}
+          name="Subtitle"
+          error={
+            errors.fonts?.subtitle?.size?.message ??
+            errors.fonts?.subtitle?.family?.message ??
+            errors.fonts?.subtitle?.weight?.message
+          }
+        />
+        <FontEditor
+          value={getValues("fonts.subtitle-secondary")}
+          onChange={handleFontChange("fonts.subtitle-secondary")}
+          name="Subtitle"
+          error={
+            errors.fonts?.["subtitle-secondary"]?.size?.message ??
+            errors.fonts?.["subtitle-secondary"]?.family?.message ??
+            errors.fonts?.["subtitle-secondary"]?.weight?.message
+          }
+        />
+        <FontEditor
+          value={getValues("fonts.body")}
+          onChange={handleFontChange("fonts.body")}
+          name="Body"
+          error={
+            errors.fonts?.body?.size?.message ??
+            errors.fonts?.body?.family?.message ??
+            errors.fonts?.body?.weight?.message
+          }
+        />
+        <FontEditor
+          value={getValues("fonts.body-secondary")}
+          onChange={handleFontChange("fonts.body-secondary")}
+          name="Body"
+          error={
+            errors.fonts?.["body-secondary"]?.size?.message ??
+            errors.fonts?.["body-secondary"]?.family?.message ??
+            errors.fonts?.["body-secondary"]?.weight?.message
+          }
+        />
+        <FontEditor
+          value={getValues("fonts.button")}
+          onChange={handleFontChange("fonts.button")}
+          name="Button"
+          error={
+            errors.fonts?.button?.size?.message ??
+            errors.fonts?.button?.family?.message ??
+            errors.fonts?.button?.weight?.message
+          }
+        />
+        <FontEditor
+          value={getValues("fonts.caption")}
+          onChange={handleFontChange("fonts.caption")}
+          name="Caption"
+          error={
+            errors.fonts?.caption?.size?.message ??
+            errors.fonts?.caption?.family?.message ??
+            errors.fonts?.caption?.weight?.message
+          }
+        />
+      </div>
       <Typography variant="h2">Additional configs</Typography>
-      <Input
-        type="email"
-        disabled={true}
-        onChange={(e) => console.log(e.target.value)}
-      />
-    </>
+      <div className="flex flex-col gap-2">
+        <div className="flex gap-2 items-center">
+          <Typography className="w-16" variant="h4">
+            Name
+          </Typography>
+          <Input
+            type="text"
+            {...register("name")}
+            error={errors.name?.message}
+          />
+        </div>
+        <div className="flex gap-2 items-center">
+          <Typography className="w-16" variant="h4">
+            Spacing
+          </Typography>
+          <Input
+            type="number"
+            {...register("spacing", { valueAsNumber: true })}
+            error={errors.spacing?.message}
+          />
+          {errors.spacing?.message && (
+            <Typography className="text-error">
+              {errors.spacing.message}
+            </Typography>
+          )}
+        </div>
+        <div className="flex gap-2 items-center">
+          <Typography className="w-16" variant="h4">
+            Radius
+          </Typography>
+          <Input
+            type="number"
+            {...register("radius", { valueAsNumber: true })}
+            error={errors.radius?.message}
+          />
+          {errors.radius?.message && (
+            <Typography className="text-error">
+              {errors.radius.message}
+            </Typography>
+          )}
+        </div>
+        <Button type="submit">Save</Button>
+      </div>
+    </form>
   );
 };
 

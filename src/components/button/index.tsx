@@ -1,4 +1,9 @@
-import { useCallback, type ReactNode } from "react";
+import {
+  useCallback,
+  type ButtonHTMLAttributes,
+  type DetailedHTMLProps,
+  type ReactNode,
+} from "react";
 import cn from "classnames";
 
 type ButtonVariant = "filled" | "text" | "outlined";
@@ -9,7 +14,10 @@ type ButtonProps = {
   className?: string;
   disabled?: boolean;
   onClick?: () => void;
-};
+} & DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
 const Button = ({
   children,
@@ -17,6 +25,7 @@ const Button = ({
   onClick,
   disabled = false,
   variant = "filled",
+  ...props
 }: ButtonProps) => {
   const getStyle = useCallback(() => {
     let style = "bg-primary text-primary-contrast ";
@@ -39,6 +48,7 @@ const Button = ({
 
   return (
     <button
+      {...props}
       disabled={disabled}
       className={cn(
         "rounded-default",
@@ -46,6 +56,7 @@ const Button = ({
         "hover:transition",
         "p-1",
         getStyle(),
+        { "hover:brightness-150 hover:transition-all": !disabled },
         className
       )}
       onClick={onClick}

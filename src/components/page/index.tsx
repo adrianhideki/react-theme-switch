@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 
 const Page = ({ children }: PropsWithChildren) => {
   return (
-    <div className="w-full bg-background text-text">
+    <div className="w-full bg-background text-text pb-4">
       <Navbar />
       <div className="container m-auto flex flex-col gap-4 overflow-y-auto">
         {children}

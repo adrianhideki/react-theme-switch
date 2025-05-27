@@ -8,7 +8,7 @@ import cn from "classnames";
 type InputProps = {
   value?: string;
   error?: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 } & Partial<
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 >;

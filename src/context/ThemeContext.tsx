@@ -72,9 +72,6 @@ const ThemeProvider = ({
   useEffect(() => {
     const root = document.documentElement;
 
-    console.log(Object.keys(theme.fonts));
-    console.log(theme);
-
     (Object.keys(theme.fonts) as FontVariant[]).forEach((item) => {
       if (!theme.fonts[item]) {
         return;
