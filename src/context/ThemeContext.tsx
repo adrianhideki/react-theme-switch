@@ -132,6 +132,7 @@ const ThemeProvider = ({
           ...prev.fonts,
           ...theme?.fonts,
         },
+        ...theme,
       }));
     },
     [theme]
