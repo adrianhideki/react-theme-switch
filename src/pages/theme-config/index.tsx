@@ -5,6 +5,7 @@ import { useThemeCollection } from "@hooks/useThemeCollection";
 import ThemeEditor from "./theme-editor";
 import Button from "@components/button";
 import type { Theme } from "@theme/types";
+import { useEffect } from "react";
 
 const ThemeConfig = () => {
   const {
@@ -16,12 +17,19 @@ const ThemeConfig = () => {
     updateTheme,
   } = useThemeCollection();
 
-  const handleSelectChange = (value: number) => {
+  useEffect(() => {
+    console.log(themes.length);
+  });
+
+  const handleSelectChange = (value: string) => {
     updateCurrentTheme(value);
   };
 
   const handleDuplicateClick = () => {
-    const theme = themes[currentTheme];
+    const theme = themes.find((t) => t.id === currentTheme);
+
+    if (!theme) return;
+
     addTheme({
       ...theme,
       name: theme.name?.concat(" copy"),
@@ -36,7 +44,7 @@ const ThemeConfig = () => {
   const handleFormSave = (value: Theme) => {
     updateTheme({
       ...value,
-      id: themes[currentTheme].id,
+      id: currentTheme,
     });
   };
 
@@ -45,11 +53,11 @@ const ThemeConfig = () => {
       <Typography variant="h1">Choose the theme:</Typography>
       <div className="flex w-full gap-2">
         <Select
-          items={themes.map((t, index) => ({ ...t, index }))}
-          keyField="index"
+          items={themes}
+          keyField="id"
           value={currentTheme}
           getLabel={(item) => String(item["name"])}
-          onChange={(value) => handleSelectChange(+value)}
+          onChange={(value) => handleSelectChange(value)}
           className="w-full"
         />
         <Button
@@ -67,7 +75,10 @@ const ThemeConfig = () => {
           Duplicate
         </Button>
       </div>
-      <ThemeEditor onSave={handleFormSave} theme={themes[currentTheme]} />
+      <ThemeEditor
+        onSave={handleFormSave}
+        theme={themes.find((t) => t.id === currentTheme)}
+      />
     </Page>
   );
 };

@@ -13,9 +13,9 @@ type ThemeCollectionContextValues = {
   themes: Array<Theme>;
   addTheme: (theme: Theme) => void;
   updateTheme: (theme: Theme) => void;
-  updateCurrentTheme: (index: number) => void;
-  deleteTheme: (index: number) => void;
-  currentTheme: number;
+  updateCurrentTheme: (id: string) => void;
+  deleteTheme: (id: string) => void;
+  currentTheme: string;
 };
 
 export const ThemeCollectionContext = createContext(
@@ -30,12 +30,16 @@ const ThemeCollectionProvider = ({ children }: PropsWithChildren) => {
       : [defaultTheme]
   );
   const [currentTheme, setCurrentTheme] = useState(
-    Number(localStorage.getItem("currentTheme") ?? 0)
+    String(localStorage.getItem("currentTheme") ?? themes[0].id)
   );
 
   useEffect(() => {
-    updateTheme(themes[currentTheme]);
-    localStorage.setItem("currentTheme", String(currentTheme));
+    const theme = themes.find((theme) => theme.id === currentTheme);
+
+    if (theme) {
+      updateTheme(theme);
+      localStorage.setItem("currentTheme", String(currentTheme));
+    }
   }, [currentTheme]);
 
   useEffect(() => {
@@ -48,22 +52,29 @@ const ThemeCollectionProvider = ({ children }: PropsWithChildren) => {
   );
 
   const handleDelete = useCallback(
-    (index: number) => {
-      setThemes((prev) => [...prev.filter((_, i) => i !== index)]);
-      setCurrentTheme(0);
+    (id: string) => {
+      setThemes((prev) => [...prev.filter((t) => t.id !== id)]);
+
+      const theme = themes.find((t) => t.id !== id);
+
+      if (theme) {
+        setCurrentTheme(theme.id!);
+      }
     },
     [themes]
   );
 
   const handleUpdate = useCallback(
     (theme: Theme) => {
-      setThemes((prev) => {
-        return [
-          ...prev.filter((_, i) => i < currentTheme),
-          theme,
-          ...prev.filter((_, i) => i > currentTheme),
-        ];
-      });
+      setThemes((prev) =>
+        prev.map((item) => {
+          if (item.id === theme.id) {
+            return theme;
+          }
+
+          return item;
+        })
+      );
 
       updateTheme(theme);
     },
@@ -71,8 +82,8 @@ const ThemeCollectionProvider = ({ children }: PropsWithChildren) => {
   );
 
   const handleUpdateCurrentTheme = useCallback(
-    (index: number) => {
-      setCurrentTheme(index);
+    (id: string) => {
+      setCurrentTheme(id);
     },
     [setCurrentTheme]
   );
