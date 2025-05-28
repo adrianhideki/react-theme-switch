@@ -39,7 +39,7 @@ export type ThemeMode = "light" | "dark";
 export type FontValue = {
   size: string;
   family: string;
-  weight: string;
+  weight: string | number;
 };
 
 export type ColorValue = {

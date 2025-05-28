@@ -2,33 +2,72 @@ import Page from "@components/page";
 import Select from "@components/select";
 import Typography from "@components/typography";
 import { useThemeCollection } from "@hooks/useThemeCollection";
-import { useEffect, useState } from "react";
 import ThemeEditor from "./theme-editor";
+import Button from "@components/button";
+import type { Theme } from "@theme/types";
 
 const ThemeConfig = () => {
-  const { themes, updateCurrentTheme } = useThemeCollection();
-  const [themeId, setThemeId] = useState<string>();
+  const {
+    themes,
+    updateCurrentTheme,
+    addTheme,
+    currentTheme,
+    deleteTheme,
+    updateTheme,
+  } = useThemeCollection();
 
-  useEffect(() => {
-    if (!themeId) return;
-    updateCurrentTheme(themes.findIndex((t) => t.id === themeId));
-  }, [themeId]);
+  const handleSelectChange = (value: number) => {
+    updateCurrentTheme(value);
+  };
 
-  const handleSelectChange = (value: string) => {
-    console.log(themeId);
-    setThemeId(value);
+  const handleDuplicateClick = () => {
+    const theme = themes[currentTheme];
+    addTheme({
+      ...theme,
+      name: theme.name?.concat(" copy"),
+      id: crypto.randomUUID().toString(),
+    });
+  };
+
+  const handleDeleteTheme = () => {
+    deleteTheme(currentTheme);
+  };
+
+  const handleFormSave = (value: Theme) => {
+    updateTheme({
+      ...value,
+      id: themes[currentTheme].id,
+    });
   };
 
   return (
     <Page>
       <Typography variant="h1">Choose the theme:</Typography>
-      <Select
-        items={themes}
-        keyField="id"
-        getLabel={(item) => String(item["name"])}
-        onChange={handleSelectChange}
-      />
-      <ThemeEditor theme={themes.find((t) => t.id === themeId) ?? themes[0]} />
+      <div className="flex w-full gap-2">
+        <Select
+          items={themes.map((t, index) => ({ ...t, index }))}
+          keyField="index"
+          value={currentTheme}
+          getLabel={(item) => String(item["name"])}
+          onChange={(value) => handleSelectChange(+value)}
+          className="w-full"
+        />
+        <Button
+          disabled={themes.length <= 1}
+          className="w-10"
+          onClick={handleDeleteTheme}
+        >
+          Delete
+        </Button>
+        <Button
+          disabled={currentTheme === undefined}
+          className="w-10"
+          onClick={handleDuplicateClick}
+        >
+          Duplicate
+        </Button>
+      </div>
+      <ThemeEditor onSave={handleFormSave} theme={themes[currentTheme]} />
     </Page>
   );
 };

@@ -8,15 +8,16 @@ import Button from "@components/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v3";
 import schema from "./schema";
-import { useCallback, type ChangeEvent } from "react";
+import { useCallback, useEffect, type ChangeEvent } from "react";
 
 type ThemeEditorProps = {
   theme?: Theme;
+  onSave?: (value: ThemeValues) => void;
 };
 
 type ThemeValues = z.infer<typeof schema>;
 
-const ThemeEditor = ({ theme }: ThemeEditorProps) => {
+const ThemeEditor = ({ theme, onSave }: ThemeEditorProps) => {
   const {
     handleSubmit,
     register,
@@ -28,8 +29,22 @@ const ThemeEditor = ({ theme }: ThemeEditorProps) => {
     defaultValues: { ...theme } as ThemeValues,
   });
 
+  useEffect(() => {
+    if (!theme) return;
+
+    setValue("colors", theme.colors);
+
+    setValue("fonts", theme.fonts);
+
+    setValue("radius", theme.radius);
+    setValue("name", theme.name ?? "");
+    setValue("spacing", theme.spacing);
+  }, [theme]);
+
   const handleFormSubmit = (value: ThemeValues) => {
-    console.log("submit", value);
+    if (!onSave) return;
+
+    onSave(value);
   };
 
   const handleColorChange = useCallback(
@@ -276,7 +291,11 @@ const ThemeEditor = ({ theme }: ThemeEditorProps) => {
             </Typography>
           )}
         </div>
-        <Button type="submit">Save</Button>
+        <div className="flex sm:flex-col lg:flex-row gap-2">
+          <Button className="w-full" type="submit">
+            Save
+          </Button>
+        </div>
       </div>
     </form>
   );

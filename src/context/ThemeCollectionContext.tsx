@@ -12,7 +12,10 @@ import {
 type ThemeCollectionContextValues = {
   themes: Array<Theme>;
   addTheme: (theme: Theme) => void;
+  updateTheme: (theme: Theme) => void;
   updateCurrentTheme: (index: number) => void;
+  deleteTheme: (index: number) => void;
+  currentTheme: number;
 };
 
 export const ThemeCollectionContext = createContext(
@@ -44,6 +47,29 @@ const ThemeCollectionProvider = ({ children }: PropsWithChildren) => {
     [themes]
   );
 
+  const handleDelete = useCallback(
+    (index: number) => {
+      setThemes((prev) => [...prev.filter((_, i) => i !== index)]);
+      setCurrentTheme(0);
+    },
+    [themes]
+  );
+
+  const handleUpdate = useCallback(
+    (theme: Theme) => {
+      setThemes((prev) => {
+        return [
+          ...prev.filter((_, i) => i < currentTheme),
+          theme,
+          ...prev.filter((_, i) => i > currentTheme),
+        ];
+      });
+
+      updateTheme(theme);
+    },
+    [themes]
+  );
+
   const handleUpdateCurrentTheme = useCallback(
     (index: number) => {
       setCurrentTheme(index);
@@ -57,6 +83,9 @@ const ThemeCollectionProvider = ({ children }: PropsWithChildren) => {
         themes,
         addTheme: handleAddTheme,
         updateCurrentTheme: handleUpdateCurrentTheme,
+        deleteTheme: handleDelete,
+        updateTheme: handleUpdate,
+        currentTheme,
       }}
     >
       {children}

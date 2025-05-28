@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="top-0 right-0 left-0 w-full min-h-8 bg-primary mb-2 p-2 flex gap-2 justify-between items-center">
+      <div className="top-0 right-0 left-0 w-full min-h-8 bg-primary mb-2 p-2 flex gap-2 justify-between items-center text-primary-contrast">
         <div className="flex gap-2 items-center flex-1">
           <FaBars
             className="cursor-pointer transition-all"

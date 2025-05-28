@@ -21,6 +21,12 @@ const FontEditor = ({ name, value, onChange, error }: FontEditorProps) => {
   );
 
   useEffect(() => {
+    if (!value) return;
+
+    setData(value!);
+  }, [value]);
+
+  useEffect(() => {
     if (!onChange) return;
 
     const target = { target: { value: data } } as ChangeEvent<{

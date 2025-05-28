@@ -23,6 +23,11 @@ const ColorEditor = ({ name, value, onChange }: ColorEditorProps) => {
   });
 
   useEffect(() => {
+    if (!value) return;
+    setData(value!);
+  }, [value]);
+
+  useEffect(() => {
     const target = { target: { value: data } } as ChangeEvent<{
       value: ColorValue;
     }>;
