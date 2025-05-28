@@ -87,7 +87,7 @@ const ThemeProvider = ({
       );
       root.style.setProperty(
         `--theme-font-weight-${item}`,
-        theme.fonts[item].weight
+        String(theme.fonts[item].weight)
       );
     });
   }, [theme]);
