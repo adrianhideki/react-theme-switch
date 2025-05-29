@@ -24,10 +24,23 @@ const ColorPicker = ({ color, onColorChange }: ColorPickerProps) => {
     return position.top + position.height;
   };
 
+  const isWidthGreatherThanScreen = () => {
+    const position = colorRef.current?.getBoundingClientRect()!;
+    let result = position.left;
+
+    return result + 200 > window.innerWidth;
+  };
+
   const getLeftPosition = () => {
     const position = colorRef.current?.getBoundingClientRect()!;
 
-    return position.left;
+    let result = position.left;
+
+    if (isWidthGreatherThanScreen()) {
+      result -= 200;
+    }
+
+    return result;
   };
 
   return (
@@ -43,7 +56,7 @@ const ColorPicker = ({ color, onColorChange }: ColorPickerProps) => {
       {showPicker && (
         <>
           <div
-            className="fixed z-10"
+            className="fixed z-10 overflow-clip"
             style={{
               top: getTopPosition(),
               left: getLeftPosition(),
@@ -57,7 +70,7 @@ const ColorPicker = ({ color, onColorChange }: ColorPickerProps) => {
             />
           </div>
           <div
-            className="w-full h-full absolute top-0 left-0"
+            className="left-0 top-0 fixed w-full h-full"
             onClick={() => setShowPicker(false)}
           ></div>
         </>

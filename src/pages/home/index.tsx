@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from "@components/button";
 import Typography from "@components/typography";
-import Select from "@components/select";
 import Page from "@components/page";
 import Alert from "@components/alert";
 import IconButton from "@components/icon-button";
