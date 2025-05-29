@@ -27,13 +27,13 @@ const Select = ({
 
   return (
     <select
-      className={`bg-background brightness-95 dark:brightness-75 hover:brightness-150 text-body p-1 cursor-pointer rounded-default transition-all ${className}`}
+      className={`bg-paper hover:brightness-150 text-paper-contrast p-1 cursor-pointer rounded-default transition-all border-2 border-border ${className}`}
       value={value}
       onChange={handleChange}
     >
       {items.map((item) => (
         <option
-          className="p-1 bg-background brightness-95 dark:brightness-75 text-text hover:bg-primary hover:text-primary-contrast hover:transition-all"
+          className="p-1 bg-paper text-paper-contrast hover:bg-primary hover:text-primary-contrast hover:transition-all"
           key={String(item[keyField])}
           value={String(item[keyField])}
         >

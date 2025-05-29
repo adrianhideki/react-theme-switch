@@ -91,37 +91,37 @@ const ThemeEditor = ({ theme, onSave }: ThemeEditorProps) => {
           name="Background"
         />
         <ColorEditor
-          onChange={handleColorChange("colors.background")}
+          onChange={handleColorChange("colors.text")}
           value={getValues("colors.text")}
           name="Text"
         />
         <ColorEditor
-          onChange={handleColorChange("colors.background")}
+          onChange={handleColorChange("colors.border")}
           value={getValues("colors.border")}
           name="Border"
         />
         <ColorEditor
-          onChange={handleColorChange("colors.background")}
+          onChange={handleColorChange("colors.error")}
           value={getValues("colors.error")}
           name="Error"
         />
         <ColorEditor
-          onChange={handleColorChange("colors.background")}
+          onChange={handleColorChange("colors.success")}
           value={getValues("colors.success")}
           name="Success"
         />
         <ColorEditor
-          onChange={handleColorChange("colors.background")}
+          onChange={handleColorChange("colors.warning")}
           value={getValues("colors.warning")}
           name="Warning"
         />
         <ColorEditor
-          onChange={handleColorChange("colors.background")}
+          onChange={handleColorChange("colors.info")}
           value={getValues("colors.info")}
           name="Info"
         />
         <ColorEditor
-          onChange={handleColorChange("colors.background")}
+          onChange={handleColorChange("colors.paper")}
           value={getValues("colors.paper")}
           name="Paper"
         />

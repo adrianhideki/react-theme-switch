@@ -51,6 +51,7 @@ const Button = ({
       {...props}
       disabled={disabled}
       className={cn(
+        "text-button",
         "rounded-default",
         "cursor-pointer",
         "hover:transition",

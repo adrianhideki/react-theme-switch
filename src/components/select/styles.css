@@ -6,6 +6,12 @@ option:last-of-type {
   border-radius: 0 0 var(--radius-default) var(--radius-default);
 }
 
+option:hover {
+  background-color: var(--color-secondary) !important;
+  color: var(--color-secondary-contrast) !important;
+  transition: 0.5s ease-out;
+}
+
 option:not(option:last-of-type) {
   border-bottom: none;
 }
@@ -45,10 +51,12 @@ option:checked {
 }
 ::picker(select):popover-open {
   opacity: 1;
+  background-color: transparent;
 }
 
 @starting-style {
   ::picker(select):popover-open {
     opacity: 0;
+    background-color: transparent;
   }
 }

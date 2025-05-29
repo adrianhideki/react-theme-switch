@@ -33,7 +33,7 @@ const ColorPicker = ({ color, onColorChange }: ColorPickerProps) => {
   return (
     <>
       <div
-        className="w-4 h-4 border-2 text-text cursor-pointer rounded-default"
+        className="w-4 h-4 border-2 border-border text-text cursor-pointer rounded-default"
         style={{
           backgroundColor: color,
         }}

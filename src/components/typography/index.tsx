@@ -11,7 +11,9 @@ type TypographyVariant =
   | "subtitle"
   | "subtitle-secondary"
   | "body"
-  | "body-secondary";
+  | "body-secondary"
+  | "button"
+  | "caption";
 
 type TypographyProps = {
   variant?: TypographyVariant;
@@ -31,6 +33,8 @@ const getElement = (variant: TypographyVariant) => {
     h4: "h4",
     h5: "h5",
     h6: "h6",
+    button: "span",
+    caption: "span",
   };
 
   return elements[variant];

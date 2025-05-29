@@ -62,14 +62,13 @@ const ThemeConfig = () => {
         />
         <Button
           disabled={themes.length <= 1}
-          className="w-10"
+          className="min-w-10"
           onClick={handleDeleteTheme}
         >
           Delete
         </Button>
         <Button
           disabled={currentTheme === undefined}
-          className="w-10"
           onClick={handleDuplicateClick}
         >
           Duplicate
