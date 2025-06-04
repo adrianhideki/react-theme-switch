@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useMode } from "@hooks/useMode";
 import { ThemeContext } from "@context/ThemeContext";
-import { getBaseTheme, injectCssColors, injectCssFonts } from "@theme/utils";
-import type { BaseTheme, Theme } from "../theme/types";
+import { getBaseTheme } from "@theme/utils";
+import type { BaseTheme, OptionalTheme, Theme } from "../theme/types";
 import { defaultTheme } from "../theme";
 
 type ThemeProviderProps = {
-  theme?: Theme;
+  theme?: Partial<OptionalTheme>;
   children: React.ReactNode;
 };
 
@@ -18,27 +18,14 @@ const ThemeProvider = ({
   const [theme, setTheme] = useState<Theme>({
     ...defaultTheme,
     ...initialTheme,
+    colors: { ...defaultTheme.colors, ...initialTheme?.colors },
+    fonts: { ...defaultTheme.fonts, ...initialTheme?.fonts },
   });
 
   const baseTheme: BaseTheme<string> = useMemo(
     () => getBaseTheme(theme, mode),
     [theme, mode]
   );
-
-  useEffect(() => {
-    injectCssColors(theme, mode);
-  }, [mode, theme]);
-
-  useEffect(() => {
-    injectCssFonts(theme);
-  }, [theme]);
-
-  useEffect(() => {
-    const root = document.documentElement;
-
-    root.style.setProperty("--theme-radius", `${theme.radius}px`);
-    root.style.setProperty("--theme-spacing", `${theme.spacing}px`);
-  }, [theme]);
 
   const updateTheme = useCallback((theme: Partial<Theme>) => {
     setTheme((prev) => ({

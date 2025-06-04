@@ -1,17 +1,17 @@
 import { useEffect, useState, type ChangeEvent } from "react";
-import type { ColorValue } from "@theme/types";
+import type { ColorModeValue, ColorValue } from "@theme/types";
 import ColorPicker from "../color-picker";
 import Typography from "@components/typography";
 
 type ColorEditorProps = {
   name: string;
-  onChange: (value: ChangeEvent<{ value: ColorValue }>) => void;
-  value?: ColorValue;
+  onChange: (value: ChangeEvent<{ value: ColorValue<ColorModeValue> }>) => void;
+  value?: ColorValue<ColorModeValue>;
   error?: string;
 };
 
 const ColorEditor = ({ name, value, onChange }: ColorEditorProps) => {
-  const [data, setData] = useState<ColorValue>({
+  const [data, setData] = useState<ColorValue<ColorModeValue>>({
     contrast: {
       dark: value?.contrast?.dark ?? "#ffffff",
       light: value?.contrast?.light ?? "#ffffff",
@@ -29,10 +29,10 @@ const ColorEditor = ({ name, value, onChange }: ColorEditorProps) => {
 
   useEffect(() => {
     const target = { target: { value: data } } as ChangeEvent<{
-      value: ColorValue;
+      value: ColorValue<ColorModeValue>;
     }>;
     onChange(target);
-  }, [data]);
+  }, [data, onChange]);
 
   const handleChange = (
     type: "main" | "contrast",

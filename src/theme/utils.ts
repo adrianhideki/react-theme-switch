@@ -15,8 +15,8 @@ export const getBaseTheme = (
     (prev, key) => ({
       ...prev,
       [key]: {
-        main: theme.colors[key].main[mode],
-        contrast: theme.colors[key].contrast[mode],
+        main: theme.colors[key as ColorVariant].main[mode],
+        contrast: theme.colors[key as ColorVariant].contrast[mode],
       },
     }),
     {} as Record<ColorVariant, ColorValue<string>>
@@ -30,22 +30,19 @@ export const getBaseTheme = (
   };
 };
 
-export const injectCssColors = (theme: Theme, mode: ThemeMode) => {
+export const injectCssColors = (theme: BaseTheme<string>) => {
   const root = document.documentElement;
 
   (Object.keys(theme.colors) as ColorVariant[]).forEach((item) => {
-    root.style.setProperty(
-      `--theme-color-${item}`,
-      theme.colors[item].main[mode]
-    );
+    root.style.setProperty(`--theme-color-${item}`, theme.colors[item].main);
     root.style.setProperty(
       `--theme-color-${item}-contrast`,
-      theme.colors[item].contrast[mode]
+      theme.colors[item].contrast
     );
   });
 };
 
-export const injectCssFonts = (theme: Theme) => {
+export const injectCssFonts = (theme: BaseTheme<string>) => {
   const root = document.documentElement;
 
   (Object.keys(theme.fonts) as FontVariant[]).forEach((item) => {
@@ -63,6 +60,13 @@ export const injectCssFonts = (theme: Theme) => {
       String(theme.fonts[item].weight)
     );
   });
+};
+
+export const injectCssConfig = (theme: BaseTheme) => {
+  const root = document.documentElement;
+
+  root.style.setProperty("--theme-radius", `${theme.radius}px`);
+  root.style.setProperty("--theme-spacing", `${theme.spacing}px`);
 };
 
 export const getIsDarkMode = () => {

@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import { ModeContext } from "../context/ModeContext";
+import { ModeContext, type ModeContextValues } from "../context/ModeContext";
 
-export const useMode = () => {
+export const useMode = (): ModeContextValues => {
   const context = useContext(ModeContext);
 
   if (!context) {
-    throw "ModeContext not defined";
+    return { mode: "light", toggle: () => {} };
   }
 
   return context;

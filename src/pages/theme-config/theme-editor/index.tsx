@@ -1,4 +1,4 @@
-import type { ColorValue, Theme } from "@theme/types";
+import type { ColorModeValue, ColorValue, Theme } from "@theme/types";
 import ColorEditor from "./color-editor";
 import Typography from "@components/typography";
 import Input from "@components/input";
@@ -33,13 +33,12 @@ const ThemeEditor = ({ theme, onSave }: ThemeEditorProps) => {
     if (!theme) return;
 
     setValue("colors", theme.colors);
-
     setValue("fonts", theme.fonts);
 
     setValue("radius", theme.radius);
     setValue("name", theme.name ?? "");
     setValue("spacing", theme.spacing);
-  }, [theme]);
+  }, [theme, setValue]);
 
   const handleFormSubmit = (value: ThemeValues) => {
     if (!onSave) return;
@@ -49,7 +48,7 @@ const ThemeEditor = ({ theme, onSave }: ThemeEditorProps) => {
 
   const handleColorChange = useCallback(
     (field: FieldPath<ThemeValues>) => {
-      return (e: ChangeEvent<{ value: ColorValue }>) =>
+      return (e: ChangeEvent<{ value: ColorValue<ColorModeValue> }>) =>
         setValue(field, e.target.value);
     },
     [setValue]

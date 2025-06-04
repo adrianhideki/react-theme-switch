@@ -3,11 +3,26 @@ export type Theme = {
   id?: string;
 } & BaseTheme<ColorModeValue>;
 
-export type BaseTheme<T = ColorModeValue | string> = {
-  colors: Record<ColorVariant, ColorValue<T>>;
-  fonts: Record<FontVariant, FontValue>;
+export type OptionalTheme = {
+  colors: Partial<Color<ColorModeValue>>;
+  fonts: Partial<Font>;
   spacing: number;
   radius: number;
+};
+
+export type BaseTheme<T = ColorModeValue | string> = {
+  colors: Color<T>;
+  fonts: Font;
+  spacing: number;
+  radius: number;
+};
+
+export type Color<T> = {
+  [p in ColorVariant]: ColorValue<T>;
+};
+
+export type Font = {
+  [p in FontVariant]: FontValue;
 };
 
 export type FontVariant =
@@ -22,8 +37,7 @@ export type FontVariant =
   | "body"
   | "body-secondary"
   | "button"
-  | "caption"
-  | string;
+  | "caption";
 
 export type ColorVariant =
   | "primary"
@@ -36,8 +50,7 @@ export type ColorVariant =
   | "background"
   | "paper"
   | "text"
-  | "border"
-  | string;
+  | "border";
 
 export type ThemeMode = "light" | "dark";
 

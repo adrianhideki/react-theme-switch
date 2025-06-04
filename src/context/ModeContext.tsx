@@ -1,9 +1,8 @@
 import type { ThemeMode } from "@theme/types";
 import { createContext } from "react";
 
-type ModeContextValues = {
+export type ModeContextValues = {
   mode: ThemeMode;
-  updateMode: (value: ThemeMode) => void;
   toggle: () => void;
 };
 

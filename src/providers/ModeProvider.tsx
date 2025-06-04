@@ -23,18 +23,12 @@ const ModeProvider = ({ children }: PropsWithChildren) => {
     }
   }, [mode]);
 
-  const handleModeChange = useCallback((value: ThemeMode) => {
-    setMode(value);
-  }, []);
-
   const handleToggle = useCallback(() => {
     setMode((prev) => (prev === "light" ? "dark" : "light"));
   }, []);
 
   return (
-    <ModeContext.Provider
-      value={{ mode, updateMode: handleModeChange, toggle: handleToggle }}
-    >
+    <ModeContext.Provider value={{ mode, toggle: handleToggle }}>
       {children}
     </ModeContext.Provider>
   );

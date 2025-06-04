@@ -40,9 +40,9 @@ const Navbar = () => {
         </div>
         <div className="cursor-pointer" onClick={toggle}>
           {mode === "dark" ? (
-            <FaMoon size={theme.spacing * 3} />
-          ) : (
             <FaSun size={theme.spacing * 3} />
+          ) : (
+            <FaMoon size={theme.spacing * 3} />
           )}
         </div>
       </div>

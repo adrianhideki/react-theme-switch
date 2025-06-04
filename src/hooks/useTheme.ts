@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { defaultTheme } from "@theme/index";
-import { getBaseTheme, getIsDarkMode } from "@theme/utils";
+import { getBaseTheme } from "@theme/utils";
 import { ThemeContext } from "@context/ThemeContext";
 
 export const useTheme = () => {
@@ -9,7 +9,7 @@ export const useTheme = () => {
   if (!context) {
     return {
       updateTheme: () => undefined,
-      theme: getBaseTheme(defaultTheme, getIsDarkMode() ? "dark" : "light"),
+      theme: getBaseTheme(defaultTheme, "light"),
     };
   }
 

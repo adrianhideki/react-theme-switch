@@ -34,7 +34,7 @@ const FontEditor = ({ name, value, onChange, error }: FontEditorProps) => {
     }>;
 
     onChange(target);
-  }, [data]);
+  }, [data, onChange]);
 
   const handleChange = (property: string) => {
     return (e: ChangeEvent<HTMLInputElement>) => {

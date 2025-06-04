@@ -19,24 +19,34 @@ const ColorPicker = ({ color, onColorChange }: ColorPickerProps) => {
   };
 
   const getTopPosition = () => {
-    const position = colorRef.current?.getBoundingClientRect()!;
+    const position = colorRef.current?.getBoundingClientRect();
+
+    if (!position) {
+      return 0;
+    }
 
     return position.top + position.height;
   };
 
-  const isWidthGreatherThanScreen = () => {
-    const position = colorRef.current?.getBoundingClientRect()!;
-    let result = position.left;
+  const isComponentOverflowingScreen = () => {
+    const position = colorRef.current?.getBoundingClientRect();
 
+    if (!position) {
+      return false;
+    }
+
+    const result = position.left;
     return result + 200 > window.innerWidth;
   };
 
   const getLeftPosition = () => {
-    const position = colorRef.current?.getBoundingClientRect()!;
+    const position = colorRef.current?.getBoundingClientRect();
+
+    if (!position) return 0;
 
     let result = position.left;
 
-    if (isWidthGreatherThanScreen()) {
+    if (isComponentOverflowingScreen()) {
       result -= 200;
     }
 
