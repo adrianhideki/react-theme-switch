@@ -1,4 +1,5 @@
 import Drawer from "@components/drawer";
+import { useMode } from "@hooks/useMode";
 import { useTheme } from "@hooks/useTheme";
 import { useState } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
@@ -6,7 +7,8 @@ import { FaBars } from "react-icons/fa6";
 import { useNavigate } from "react-router";
 
 const Navbar = () => {
-  const { mode, toggleMode, getSpacing } = useTheme();
+  const { toggle, mode } = useMode();
+  const { theme } = useTheme();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -27,7 +29,7 @@ const Navbar = () => {
             onClick={() => {
               setOpen(true);
             }}
-            size={getSpacing(3)}
+            size={theme.spacing * 3}
           />
           <span
             className="text-primary-contrast text-h2 cursor-pointer"
@@ -36,11 +38,11 @@ const Navbar = () => {
             React Theme Switcher
           </span>
         </div>
-        <div className="cursor-pointer" onClick={toggleMode}>
+        <div className="cursor-pointer" onClick={toggle}>
           {mode === "dark" ? (
-            <FaMoon size={getSpacing(3)} />
+            <FaMoon size={theme.spacing * 3} />
           ) : (
-            <FaSun size={getSpacing(3)} />
+            <FaSun size={theme.spacing * 3} />
           )}
         </div>
       </div>

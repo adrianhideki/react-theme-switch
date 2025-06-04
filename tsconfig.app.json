@@ -28,7 +28,8 @@
       "@theme/*": ["src/theme/*"],
       "@hooks/*": ["src/hooks/*"],
       "@context/*": ["src/context/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@providers/*": ["src/providers/*"]
     }
   },
   "include": ["src"]

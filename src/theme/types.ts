@@ -1,10 +1,13 @@
 export type Theme = {
-  colors: Record<ColorVariant, ColorValue>;
+  name?: string;
+  id?: string;
+} & BaseTheme<ColorModeValue>;
+
+export type BaseTheme<T = ColorModeValue | string> = {
+  colors: Record<ColorVariant, ColorValue<T>>;
   fonts: Record<FontVariant, FontValue>;
   spacing: number;
   radius: number;
-  name?: string;
-  id?: string;
 };
 
 export type FontVariant =
@@ -19,7 +22,8 @@ export type FontVariant =
   | "body"
   | "body-secondary"
   | "button"
-  | "caption";
+  | "caption"
+  | string;
 
 export type ColorVariant =
   | "primary"
@@ -32,7 +36,8 @@ export type ColorVariant =
   | "background"
   | "paper"
   | "text"
-  | "border";
+  | "border"
+  | string;
 
 export type ThemeMode = "light" | "dark";
 
@@ -42,9 +47,9 @@ export type FontValue = {
   weight: string | number;
 };
 
-export type ColorValue = {
-  main: ColorModeValue;
-  contrast: ColorModeValue;
+export type ColorValue<T> = {
+  main: T;
+  contrast: T;
 };
 
 export type ColorModeValue = {

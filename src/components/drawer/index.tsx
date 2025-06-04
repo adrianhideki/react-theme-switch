@@ -14,7 +14,7 @@ const Drawer = ({
   onOpenChange,
   children,
 }: PropsWithChildren<DrawerProps>) => {
-  const { getSpacing } = useTheme();
+  const { theme } = useTheme();
 
   const handleCloseClick = () => {
     onOpenChange(false);
@@ -45,7 +45,7 @@ const Drawer = ({
             <div className="px-4 sm:px-6 flex justify-between">
               <Typography variant="h2">React Theme Switcher</Typography>
               <IconButton
-                icon={<MdClose size={getSpacing(3)} />}
+                icon={<MdClose size={theme.spacing * 3} />}
                 onClick={handleCloseClick}
               />
             </div>

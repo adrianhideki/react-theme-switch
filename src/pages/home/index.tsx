@@ -11,7 +11,7 @@ import Tag from "@components/tag";
 
 const Home = () => {
   const [count, setCount] = useState(0);
-  const { getSpacing } = useTheme();
+  const { theme } = useTheme();
 
   return (
     <Page>
@@ -104,25 +104,25 @@ const Home = () => {
         <Alert className="font-medium" level="success">
           <div className="flex justify-between">
             This is a success alert!{" "}
-            <IconButton icon={<MdClose size={getSpacing(3)} />} />
+            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
           </div>
         </Alert>
         <Alert className="font-medium" level="error">
           <div className="flex justify-between">
             This is a error alert!
-            <IconButton icon={<MdClose size={getSpacing(3)} />} />
+            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
           </div>
         </Alert>
         <Alert className="font-medium" level="warning">
           <div className="flex justify-between">
             This is a warning alert!
-            <IconButton icon={<MdClose size={getSpacing(3)} />} />
+            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
           </div>
         </Alert>
         <Alert className="font-medium" level="info">
           <div className="flex justify-between">
             This is a information alert!
-            <IconButton icon={<MdClose size={getSpacing(3)} />} />
+            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
           </div>
         </Alert>
         <Button
