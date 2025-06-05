@@ -4,10 +4,9 @@ import { createRoot } from "react-dom/client";
 import ModeProvider from "@providers/ModeProvider.tsx";
 import ThemeProvider from "@providers/ThemeProvider.tsx";
 import ThemeCollectionProvider from "@providers/ThemeCollectionContext.tsx";
-import CssBaseLine from "@theme/CssBaseLine.tsx";
+import CssBaseLine from "@theme/CssBaseLine";
 import { router } from "./routes.tsx";
 import "./index.css";
-import "./theme.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
