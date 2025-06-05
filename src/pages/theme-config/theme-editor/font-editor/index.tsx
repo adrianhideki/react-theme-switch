@@ -48,7 +48,7 @@ const FontEditor = ({ name, value, onChange, error }: FontEditorProps) => {
   return (
     <div className="flex flex-col gap-2">
       <Typography variant="h4">{name}</Typography>
-      <div className="flex gap-2 items-start flex-col md:flex-row md:items-center">
+      <div className="flex gap-2 items-start flex-col bg-paper p-2">
         <Typography>Family</Typography>
         <Input
           type="text"
@@ -58,7 +58,6 @@ const FontEditor = ({ name, value, onChange, error }: FontEditorProps) => {
         />
         <Typography>Size</Typography>
         <Input
-          className="w-16"
           type="text"
           onChange={handleChange("size")}
           min={1}
@@ -67,8 +66,7 @@ const FontEditor = ({ name, value, onChange, error }: FontEditorProps) => {
         />
         <Typography>Weight</Typography>
         <Input
-          className="w-16"
-          type="text"
+          type="number"
           value={String(data?.weight)}
           onChange={handleChange("weight")}
           error={error}

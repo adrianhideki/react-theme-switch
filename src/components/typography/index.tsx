@@ -44,7 +44,7 @@ const Typography = React.memo(
   ({ variant = "body", children, ...props }: TypographyProps) => {
     const enhancedProps = {
       ...props,
-      className: `text-${variant} font-${variant} font-w${variant} ${
+      className: `text-${variant} font-${variant} font-weight-${variant} ${
         props.className ?? ""
       }`,
     };

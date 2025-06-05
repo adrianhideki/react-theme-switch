@@ -1,7 +1,7 @@
 import { useTheme } from "@hooks/useTheme";
 import { useEffect } from "react";
 import { injectCssColors, injectCssConfig, injectCssFonts } from "../utils";
-import "./theme.css";
+import "./styles.css";
 
 /**
  * CssBaseLine

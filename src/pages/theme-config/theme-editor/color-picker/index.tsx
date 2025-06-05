@@ -1,10 +1,12 @@
-import Chrome, { ChromeInputType } from "@uiw/react-color-chrome";
+import { HexColorPicker, HexColorInput } from "react-colorful";
 import { useRef, useState } from "react";
 
 type ColorPickerProps = {
   color: string;
   onColorChange?: (color: string) => void;
 };
+
+const PICKER_WIDTH = 180;
 
 const ColorPicker = ({ color, onColorChange }: ColorPickerProps) => {
   const colorRef = useRef<HTMLDivElement>(null);
@@ -36,7 +38,7 @@ const ColorPicker = ({ color, onColorChange }: ColorPickerProps) => {
     }
 
     const result = position.left;
-    return result + 200 > window.innerWidth;
+    return result + PICKER_WIDTH > window.innerWidth;
   };
 
   const getLeftPosition = () => {
@@ -47,7 +49,7 @@ const ColorPicker = ({ color, onColorChange }: ColorPickerProps) => {
     let result = position.left;
 
     if (isComponentOverflowingScreen()) {
-      result -= 200;
+      result -= PICKER_WIDTH;
     }
 
     return result;
@@ -66,17 +68,24 @@ const ColorPicker = ({ color, onColorChange }: ColorPickerProps) => {
       {showPicker && (
         <>
           <div
-            className="fixed z-10 overflow-clip"
+            className="fixed z-10 bg-paper rounded-sm"
             style={{
               top: getTopPosition(),
               left: getLeftPosition(),
             }}
           >
-            <Chrome
-              inputType={ChromeInputType.RGBA}
+            <HexColorPicker
               color={color}
-              onChange={(color) => handleColorChange(color.hex)}
+              style={{ width: "auto" }}
+              onChange={handleColorChange}
               className="text-gray-950"
+              prefix="#"
+            />
+            <HexColorInput
+              className="p-2"
+              color={color}
+              onChange={handleColorChange}
+              prefix="#"
             />
           </div>
           <div

@@ -127,6 +127,44 @@
   font-family: var(--theme-font-family-caption);
 }
 
+/* Font weight classes */
+.font-weight-h1 {
+  font-weight: var(--theme-font-weight-h1);
+}
+.font-weight-h2 {
+  font-weight: var(--theme-font-weight-h2);
+}
+.font-weight-h3 {
+  font-weight: var(--theme-font-weight-h3);
+}
+.font-weight-h4 {
+  font-weight: var(--theme-font-weight-h4);
+}
+.font-weight-h5 {
+  font-weight: var(--theme-font-weight-h5);
+}
+.font-weight-h6 {
+  font-weight: var(--theme-font-weight-h6);
+}
+.font-weight-subtitle {
+  font-weight: var(--theme-font-weight-subtitle);
+}
+.font-weight-subtitle-secondary {
+  font-weight: var(--theme-font-weight-subtitle-secondary);
+}
+.font-weight-body {
+  font-weight: var(--theme-font-weight-body);
+}
+.font-weight-body-secondary {
+  font-weight: var(--theme-font-weight-body-secondary);
+}
+.font-weight-button {
+  font-weight: var(--theme-font-weight-button);
+}
+.font-weight-caption {
+  font-weight: var(--theme-font-weight-caption);
+}
+
 /* Font size classes */
 .text-h1 {
   font-size: var(--theme-font-size-h1);
@@ -145,6 +183,24 @@
 }
 .text-h6 {
   font-size: var(--theme-font-size-h6);
+}
+.text-subtitle {
+  font-size: var(--theme-font-size-subtitle);
+}
+.text-subtitle-secondary {
+  font-size: var(--theme-font-size-subtitle-secondary);
+}
+.text-body {
+  font-size: var(--theme-font-size-body);
+}
+.text-body-secondary {
+  font-size: var(--theme-font-size-body-secondary);
+}
+.text-button {
+  font-size: var(--theme-font-size-button);
+}
+.text-caption {
+  font-size: var(--theme-font-size-caption);
 }
 
 /* Color classes */
@@ -175,17 +231,32 @@
 .text-error {
   color: var(--theme-color-error);
 }
+.text-error-contrast {
+  color: var(--theme-color-error-contrast);
+}
 .text-success {
   color: var(--theme-color-success);
+}
+.text-success-contrast {
+  color: var(--theme-color-success-contrast);
 }
 .text-warning {
   color: var(--theme-color-warning);
 }
+.text-warning-contrast {
+  color: var(--theme-color-warning-contrast);
+}
 .text-info {
   color: var(--theme-color-info);
 }
+.text-info-contrast {
+  color: var(--theme-color-info-contrast);
+}
 .text-paper {
   color: var(--theme-color-paper);
+}
+.text-paper-contrast {
+  color: var(--theme-color-paper-contrast);
 }
 
 .bg-primary {

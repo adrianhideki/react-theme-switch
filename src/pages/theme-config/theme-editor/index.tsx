@@ -1,3 +1,4 @@
+import { useCallback, useEffect, type ChangeEvent } from "react";
 import type { ColorModeValue, ColorValue, Theme } from "@theme/types";
 import ColorEditor from "./color-editor";
 import Typography from "@components/typography";
@@ -8,7 +9,6 @@ import Button from "@components/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod/v3";
 import schema from "./schema";
-import { useCallback, useEffect, type ChangeEvent } from "react";
 
 type ThemeEditorProps = {
   theme?: Theme;
@@ -72,16 +72,19 @@ const ThemeEditor = ({ theme, onSave }: ThemeEditorProps) => {
         <ColorEditor
           onChange={handleColorChange("colors.primary")}
           value={getValues("colors.primary")}
+          backgroundValue={getValues("colors.background")}
           name="Primary"
         />
         <ColorEditor
           onChange={handleColorChange("colors.secondary")}
           value={getValues("colors.secondary")}
+          backgroundValue={getValues("colors.background")}
           name="Secondary"
         />
         <ColorEditor
           onChange={handleColorChange("colors.tertiary")}
           value={getValues("colors.tertiary")}
+          backgroundValue={getValues("colors.background")}
           name="Tertiary"
         />
         <ColorEditor
@@ -92,36 +95,43 @@ const ThemeEditor = ({ theme, onSave }: ThemeEditorProps) => {
         <ColorEditor
           onChange={handleColorChange("colors.text")}
           value={getValues("colors.text")}
+          backgroundValue={getValues("colors.background")}
           name="Text"
         />
         <ColorEditor
           onChange={handleColorChange("colors.border")}
           value={getValues("colors.border")}
+          backgroundValue={getValues("colors.background")}
           name="Border"
         />
         <ColorEditor
           onChange={handleColorChange("colors.error")}
           value={getValues("colors.error")}
+          backgroundValue={getValues("colors.background")}
           name="Error"
         />
         <ColorEditor
           onChange={handleColorChange("colors.success")}
           value={getValues("colors.success")}
+          backgroundValue={getValues("colors.background")}
           name="Success"
         />
         <ColorEditor
           onChange={handleColorChange("colors.warning")}
           value={getValues("colors.warning")}
+          backgroundValue={getValues("colors.background")}
           name="Warning"
         />
         <ColorEditor
           onChange={handleColorChange("colors.info")}
           value={getValues("colors.info")}
+          backgroundValue={getValues("colors.background")}
           name="Info"
         />
         <ColorEditor
           onChange={handleColorChange("colors.paper")}
           value={getValues("colors.paper")}
+          backgroundValue={getValues("colors.background")}
           name="Paper"
         />
       </div>
