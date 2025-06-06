@@ -39,6 +39,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: "./dist"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
