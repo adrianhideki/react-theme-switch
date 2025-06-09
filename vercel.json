@@ -2,7 +2,7 @@
   "redirects": [
     {
       "source": "/react-theme-switch/:path*",
-      "destination": "/",
+      "destination": "/:path*",
       "permanent": true
     }
   ]
