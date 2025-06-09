@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/react-theme-switch/*",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
