@@ -1,6 +1,6 @@
 import type { FontHeight } from "./types";
 
-export const size: Record<FontHeight, number> = {
+export const height: Record<FontHeight, number> = {
   "4xl": 64,
   "3xl": 48,
   "2xl": 40,

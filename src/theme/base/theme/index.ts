@@ -1,4 +1,5 @@
 import type { ColorScaleValues } from "../colors";
+
 import type {
   FontFamily,
   FontLetterSpacing,
@@ -33,7 +34,7 @@ export type FoundationValues =
 
 export type FontValues =
   | "label"
-  | "label.long"
+  | "labelLong"
   | "h1"
   | "h2"
   | "h3"
@@ -41,36 +42,284 @@ export type FontValues =
   | "h5"
   | "h6"
   | "hyperlink"
-  | "hyperlink.hover"
+  | "hyperlinkHover"
   | "caption"
   | "body"
-  | "body.short"
-  | "body.long";
+  | "bodyShort"
+  | "bodyLong";
+
+export type ThemeColorValue = {
+  color: string;
+  scale?: ColorScaleValues;
+};
+
+export type BaseThemeConfig = {
+  font?: {
+    family?: Record<FontFamily, string>;
+    letterSpacing?: Record<FontLetterSpacing, number>;
+    paragraphSpacing?: Record<FontParagraphSpacing, number>;
+    size?: Record<FontParagraphSpacing, number>;
+    weight?: Record<FontWeight, number>;
+    height?: Record<FontHeight, number>;
+  };
+  color?: {
+    /** Collection of colors to reference in theme */
+    collection?: Record<string, Record<ColorScaleValues, string>>;
+    /** basic foundations colors */
+    foundations?: {
+      white?: string;
+      black?: string;
+    };
+  };
+  size?: {
+    dimension?: Record<DimensionValues, number>;
+  };
+};
+
+export type ThemePalette = {
+  surface: {
+    primary: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+      defaultSubtleHoverAlt: ThemeColorValue;
+    };
+    secondary: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+    };
+    disabled: {
+      default: ThemeColorValue;
+    };
+    error: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+    };
+    success: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+    };
+    information: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+    };
+    warning: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+    };
+    default: {
+      default: ThemeColorValue;
+    };
+    page: {
+      default: ThemeColorValue;
+    };
+    pageAlternative: {
+      default: ThemeColorValue;
+    };
+    alternative: {
+      default: ThemeColorValue;
+    };
+  };
+  text: {
+    primary: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+    secondary: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+    disabled: {
+      default: ThemeColorValue;
+      onColor: ThemeColorValue;
+    };
+    error: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+    success: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+    information: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+    warning: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+    default: {
+      body: ThemeColorValue;
+      hero: ThemeColorValue;
+      heading: ThemeColorValue;
+      caption: ThemeColorValue;
+      placeholder: ThemeColorValue;
+    };
+    onColor: {
+      hero: ThemeColorValue;
+      heading: ThemeColorValue;
+      body: ThemeColorValue;
+      caption: ThemeColorValue;
+      placeholder: ThemeColorValue;
+    };
+    accent: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+  };
+  icon: {
+    primary: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+    };
+    secondary: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+    disabled: {
+      default: ThemeColorValue;
+      onColor: ThemeColorValue;
+    };
+    error: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+    success: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+    information: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+    warning: {
+      onColor: ThemeColorValue;
+      onColorHover: ThemeColorValue;
+      onColorSubtle: ThemeColorValue;
+      onColorSubtleHover: ThemeColorValue;
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+    };
+  };
+  border: {
+    primary: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+      focus: ThemeColorValue;
+    };
+    error: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+      focus: ThemeColorValue;
+    };
+    success: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+      focus: ThemeColorValue;
+    };
+    information: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+      focus: ThemeColorValue;
+    };
+    warning: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+      focus: ThemeColorValue;
+    };
+    secondary: {
+      default: ThemeColorValue;
+      defaultHover: ThemeColorValue;
+      defaultSubtle: ThemeColorValue;
+      defaultSubtleHover: ThemeColorValue;
+      focus: ThemeColorValue;
+    };
+    disabled: {
+      default: ThemeColorValue;
+      onColor: ThemeColorValue;
+    };
+    default: ThemeColorValue;
+    onColor: ThemeColorValue;
+  };
+};
 
 export type Theme = {
   /**
    * Base values to use on theme customization
    */
-  base: {
-    font?: {
-      family?: Record<FontFamily, string>;
-      letterSpacing?: Record<FontLetterSpacing, number>;
-      paragraphSpacing?: Record<FontParagraphSpacing, number>;
-      size?: Record<FontParagraphSpacing, number>;
-      weight?: Record<FontWeight, number>;
-      height?: Record<FontHeight, number>;
-    };
-    color?: {
-      collection?: Record<string, Record<ColorScaleValues, string>>;
-      foundations?: {
-        white?: string;
-        black?: string;
-      };
-    };
-    size?: {
-      dimension?: Record<DimensionValues, number>;
-    };
-  };
+  base: BaseThemeConfig;
   color: {
     primary: string;
     secondary: string;
@@ -78,7 +327,8 @@ export type Theme = {
     success: string;
     error: string;
     warning: string;
-    neutral: { light: string; dark: string };
+    neutralLight: string;
+    neutralDark: string;
   };
   font: {
     family: Record<FontValues, FontFamily>;
@@ -93,4 +343,5 @@ export type Theme = {
     };
     spacing?: Record<SpacingValues, DimensionValues>;
   };
+  palette: { light: ThemePalette; dark: ThemePalette };
 };

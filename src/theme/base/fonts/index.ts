@@ -1,5 +1,7 @@
 import { family } from "./family";
 import type { FontFamily } from "./family/types";
+import { height } from "./height";
+import type { FontHeight } from "./height/types";
 import { letterSpacing } from "./letter-spacing";
 import type { FontLetterSpacing } from "./letter-spacing/types";
 import { paragraphSpacing } from "./paragraph-spacing";
@@ -15,6 +17,7 @@ export default {
   family,
   letterSpacing,
   paragraphSpacing,
+  height,
 };
 
 export type {
@@ -23,4 +26,5 @@ export type {
   FontParagraphSpacing,
   FontLetterSpacing,
   FontFamily,
+  FontHeight,
 };
