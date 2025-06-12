@@ -1,4 +1,4 @@
-import type { Theme } from ".";
+import type { Theme } from "./types";
 import colors from "../colors";
 import fonts from "../fonts";
 import sizes from "../sizes";
@@ -24,7 +24,7 @@ export const defaultTheme: Theme = {
     font: {
       family: fonts.family,
       height: fonts.height,
-      letterSpacing: fonts.letterSpacing,
+      spacing: fonts.spacing,
       paragraphSpacing: fonts.paragraphSpacing,
       size: fonts.size,
       weight: fonts.weight,
@@ -38,10 +38,11 @@ export const defaultTheme: Theme = {
     secondary: "galaxy-purple",
     accent: "pink",
     error: "red",
+    information: "deep-blue",
     success: "green",
     warning: "yellow",
-    neutralDark: "slate",
-    neutralLight: "grey",
+    "neutral-dark": "slate",
+    "neutral-light": "grey",
   },
   font: {
     family: {
@@ -107,6 +108,38 @@ export const defaultTheme: Theme = {
       h5: "lg",
       h6: "md",
       caption: "xs",
+    },
+    weight: {
+      hyperlink: "regular",
+      hyperlinkHover: "regular",
+      bodyShort: "regular",
+      body: "regular",
+      bodyLong: "regular",
+      label: "regular",
+      labelLong: "regular",
+      h1: "bold",
+      h2: "bold",
+      h3: "semiBold",
+      h4: "semiBold",
+      h5: "semiBold",
+      h6: "semiBold",
+      caption: "medium",
+    },
+    paragraphSpacing: {
+      hyperlink: "base",
+      hyperlinkHover: "base",
+      bodyShort: "base",
+      body: "base",
+      bodyLong: "base",
+      label: "base",
+      labelLong: "base",
+      h1: "base",
+      h2: "base",
+      h3: "base",
+      h4: "base",
+      h5: "base",
+      h6: "base",
+      caption: "base",
     },
   },
   size: {
@@ -380,11 +413,12 @@ export const defaultTheme: Theme = {
           default: { color: "neutral-light", scale: 1000 },
           onColor: { color: "neutral-light", scale: 200 },
         },
-        default: { color: "neutral-light", scale: 800 },
-        onColor: { color: "neutral-light", scale: 800 },
+        default: {
+          default: { color: "neutral-light", scale: 800 },
+          onColor: { color: "neutral-light", scale: 800 },
+        },
       },
     },
-    // ...existing code...
     light: {
       surface: {
         primary: {
@@ -428,10 +462,10 @@ export const defaultTheme: Theme = {
           defaultSubtleHover: { color: "warning", scale: 150 },
         },
         default: {
-          default: { color: "foundations.white" },
+          default: { color: "foundation.white" },
         },
         page: {
-          default: { color: "foundations.white" },
+          default: { color: "foundation.white" },
         },
         pageAlternative: {
           default: { color: "neutral-light", scale: 100 },
@@ -619,10 +653,11 @@ export const defaultTheme: Theme = {
           default: { color: "neutral-light", scale: 200 },
           onColor: { color: "neutral-light", scale: 900 },
         },
-        default: { color: "neutral-light", scale: 300 },
-        onColor: { color: "foundations.white" },
+        default: {
+          default: { color: "neutral-light", scale: 300 },
+          onColor: { color: "foundation.white" },
+        },
       },
     },
-    // ...existing code...
   },
 };

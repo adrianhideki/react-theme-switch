@@ -1,4 +1,4 @@
-import type { Theme } from ".";
+import type { Theme } from "./types";
 
 /**
  * Validates that the theme object's color, font, size, and palette properties
@@ -8,40 +8,77 @@ import type { Theme } from ".";
 export function validateTheme(theme: Theme) {
   const errors: string[] = [];
 
+  const colorCollection = Object.keys(theme?.base?.color?.collection || {});
+  const colorFoundations = Object.keys(
+    theme?.base?.color?.foundations || {}
+  ).map((item) => `foundation.${item}`);
+  const colorTheme = Object.keys(theme?.color || {});
+
+  const allColors = [...colorCollection, ...colorFoundations, ...colorTheme];
+
   // Helper to check if a value exists in an object
   const hasKey = (obj: object, key: string) =>
     Object.prototype.hasOwnProperty.call(obj, key);
 
-  // Validate color keys
-  if (theme.color && theme.base?.color) {
-    const collection = theme.base.color.collection || {};
-    const foundations = theme.base.color.foundations || {};
-    Object.entries(theme.color).forEach(([key, value]) => {
+  const validatePropertyValue = (
+    object: object,
+    possibleValues: Array<string>,
+    errorCallback: (key: string, value: string) => string
+  ) => {
+    Object.entries(object || {}).forEach(([key, value]) => {
       if (
         typeof value === "string" &&
-        !hasKey(collection, value) &&
-        !hasKey(foundations, value)
+        !possibleValues.some((v) => v === value)
       ) {
-        errors.push(`color.${key} references unknown color "${value}"`);
+        errors.push(errorCallback(key, value));
       }
     });
+  };
+
+  // Validate color keys
+  if (theme.color && theme.base?.color) {
+    validatePropertyValue(
+      theme.color,
+      [...colorCollection, ...colorFoundations],
+      (key, value) => `color.${key} references unknown color "${value}"`
+    );
   }
 
-  // Validate font keys
   if (theme.font && theme.base?.font) {
-    const families = theme.base.font.family || {};
-    Object.entries(theme.font.family || {}).forEach(([key, value]) => {
-      if (typeof value === "string" && !hasKey(families, value)) {
-        errors.push(`font.family.${key} references unknown family "${value}"`);
-      }
-    });
-    // You can add similar checks for spacing, height, size, etc.
+    validatePropertyValue(
+      theme.font.family,
+      Object.keys(theme.base.font.family || {}),
+      (key, value) => `font.family.${key} references unknown family "${value}"`
+    );
   }
 
-  // Validate size keys
+  if (theme.font && theme.base?.font) {
+    validatePropertyValue(
+      theme.font.size,
+      Object.keys(theme.base.font.size || {}),
+      (key, value) => `font.size.${key} references unknown size "${value}"`
+    );
+  }
+
+  if (theme.font && theme.base?.font) {
+    validatePropertyValue(
+      theme.font.height,
+      Object.keys(theme.base.font.height || {}),
+      (key, value) => `font.height.${key} references unknown height "${value}"`
+    );
+  }
+
+  if (theme.font && theme.base?.font) {
+    validatePropertyValue(
+      theme.font.spacing,
+      Object.keys(theme.base.font.spacing || {}),
+      (key, value) =>
+        `font.spacing.${key} references unknown spacing "${value}"`
+    );
+  }
+
   if (theme.size && theme.base?.size) {
     const dimensions = theme.base.size.dimension || {};
-    // Example: check if spacing values exist in dimensions
     Object.entries(theme.size.spacing || {}).forEach(([key, value]) => {
       if (typeof value === "string" && !hasKey(dimensions, value)) {
         errors.push(
@@ -49,21 +86,16 @@ export function validateTheme(theme: Theme) {
         );
       }
     });
-    // Add more checks for border, radius, etc. as needed
   }
 
-  // Validate palette color references
   function validatePalette(palette: object, path: string[] = []) {
     if (typeof palette !== "object" || palette === null) return;
+
     Object.entries(palette).forEach(([key, value]) => {
       if (typeof value === "object" && value !== null && "color" in value) {
         const colorRef = value.color as string;
-        if (
-          colorRef &&
-          !hasKey(theme.color || {}, colorRef) &&
-          !hasKey(theme.base?.color!.collection || {}, colorRef) &&
-          !hasKey(theme.base?.color!.foundations || {}, colorRef)
-        ) {
+
+        if (!allColors.some((v) => v === colorRef)) {
           errors.push(
             `palette.${[...path, key].join(".")}.color references unknown color "${colorRef}"`
           );
@@ -73,6 +105,7 @@ export function validateTheme(theme: Theme) {
       }
     });
   }
+
   if (theme.palette) {
     validatePalette(theme.palette);
   }
