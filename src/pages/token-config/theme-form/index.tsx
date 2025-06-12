@@ -30,6 +30,7 @@ import { borderWidthValuesTokens } from "@token/sizes/border-width/types";
 import { spacingValuesTokens } from "@token/sizes/spacing/types";
 import ColorCollection from "./color-collection";
 import { colorScaleValuesTokens } from "@token/colors/types";
+import ColorFoundation from "./color-foundation";
 
 type ThemeFormValues = z.infer<typeof schema>;
 
@@ -63,11 +64,6 @@ const ThemeForm = ({
       resolver: zodResolver(schema),
       defaultValues: {},
     });
-
-  const foundations = useMemo(
-    () => watch("base.color.foundations") ?? {},
-    [watch]
-  );
 
   const handleAddColor = useCallback(
     (name: string, scales: Record<number | string, string>) => {
@@ -112,7 +108,7 @@ const ThemeForm = ({
         "foundation.white",
         "foundation.black",
       ].map((name) => ({ value: name, label: name })),
-    []
+    [watch]
   );
 
   const baseFontFamily = useMemo(
@@ -157,7 +153,7 @@ const ThemeForm = ({
 
   // --- Color options for theme.color ---
   const colorOptions = [
-    ...Object.keys(watch("base.color.collection") ?? {}),
+    ...Object.keys(getValues("base.color.collection") ?? {}),
     "foundation.white",
     "foundation.black",
   ].map((name) => ({ value: name, label: name }));
@@ -175,8 +171,10 @@ const ThemeForm = ({
             `palette.${mode}.${section}.${token}.color` as const;
           const scalePath =
             `palette.${mode}.${section}.${token}.scale` as const;
-          const colorValue = watch(fieldPath);
-          const scaleValue = watch(scalePath);
+
+          const colorValue = getValues(fieldPath);
+          const scaleValue = getValues(scalePath);
+
           return (
             <div key={token} className="flex flex-col">
               <span>{token}</span>
@@ -220,12 +218,19 @@ const ThemeForm = ({
     );
   }
 
+  const handleColorFoundationChange = useCallback(
+    (white?: string, black?: string) => {
+      setValue("base.color.foundations", { white, black });
+    },
+    [setValue]
+  );
+
   return (
     <>
       <Button onClick={() => setIsOpen(true)}>Create Theme</Button>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <form
-          className="flex flex-col gap-8 p-4"
+          className="flex flex-col gap-2 p-4"
           onSubmit={handleSubmit(onSubmit)}
         >
           {/* --- BASE PROPERTIES SECTION --- */}
@@ -237,40 +242,11 @@ const ThemeForm = ({
             onColorEdit={handleSaveEditColor}
             onColorRemove={handleRemoveColor}
           />
-          {/* Base Foundations */}
-          <Typography variant="h3">Base Foundations</Typography>
-          <div className="flex gap-4">
-            <div>
-              <Input
-                {...register("base.color.foundations.white")}
-                placeholder="White"
-              />
-              <div
-                style={{
-                  width: 24,
-                  height: 24,
-                  background: foundations.white ?? "#fff",
-                  border: "1px solid #ccc",
-                  marginTop: 4,
-                }}
-              />
-            </div>
-            <div>
-              <Input
-                {...register("base.color.foundations.black")}
-                placeholder="Black"
-              />
-              <div
-                style={{
-                  width: 24,
-                  height: 24,
-                  background: foundations.black ?? "#fff",
-                  border: "1px solid #ccc",
-                  marginTop: 4,
-                }}
-              />
-            </div>
-          </div>
+          <ColorFoundation
+            white={getValues("base.color.foundations.white")}
+            black={getValues("base.color.foundations.black")}
+            onChange={handleColorFoundationChange}
+          />
           {/* Base Font Family */}
           <Typography variant="h3">Base Font Family</Typography>
           <div className="flex flex-wrap gap-4">

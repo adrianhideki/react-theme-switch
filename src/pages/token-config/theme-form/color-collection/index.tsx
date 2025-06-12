@@ -89,17 +89,17 @@ const ColorCollection = ({
   return (
     <>
       <Typography variant="h3">Base Colors Collection</Typography>
-      <table className="w-full border">
+      <table className="w-full border border-border">
         <thead>
           <tr>
-            <th className="border px-2 py-1">Color Name</th>
-            <th className="border px-2 py-1">Scales</th>
-            <th className="border px-2 py-1">Actions</th>
+            <th className="border border-border px-2 py-1">Color Name</th>
+            <th className="border border-border px-2 py-1">Scales</th>
+            <th className="border border-border px-2 py-1">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className="border px-2 py-1">
+            <td className="border border-border px-2 py-1">
               <Input
                 placeholder="Color name"
                 value={newColorName}
@@ -123,7 +123,7 @@ const ColorCollection = ({
                 </div>
               ))}
             </td>
-            <td className="border px-2 py-1">
+            <td className="border border-border px-2 py-1">
               {editingColor ? (
                 <Button
                   type="button"
@@ -146,16 +146,15 @@ const ColorCollection = ({
 
           {Object.entries(collection ?? {}).map(([name, scales]) => (
             <tr key={name}>
-              <td className="border px-2 py-1">{name}</td>
-              <td className="border px-2 py-1">
+              <td className="border border-border px-2 py-1">{name}</td>
+              <td className="border border-border px-2 py-1">
                 <div className="flex gap-2">
                   {Object.entries(scales).map(([scale, value]) => (
                     <span
                       key={scale}
-                      className="flex flex-col gap-1 w-6 h-6"
+                      className="flex border border-border flex-col gap-1 w-6 h-6"
                       style={{
                         background: value,
-                        border: "1px solid #ccc",
                         display: "inline-block",
                       }}
                       title={value}
@@ -173,7 +172,7 @@ const ColorCollection = ({
                   ))}
                 </div>
               </td>
-              <td className="border px-2 py-1">
+              <td className="border border-border px-2 py-1">
                 <div className="flex gap-2 items-center justify-center">
                   <Button type="button" onClick={() => handleEditColor(name)}>
                     Edit
