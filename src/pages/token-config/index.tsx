@@ -3,6 +3,7 @@ import Typography from "@components/typography";
 import Select from "@components/select";
 import Button from "@components/button";
 import { useTokenCollection } from "@token/hook/use-token-collection";
+import ThemeForm from "./theme-form";
 
 const TokenConfig = () => {
   const { themes, currentTheme, updateCurrentTheme, addTheme, deleteTheme } =
@@ -33,7 +34,7 @@ const TokenConfig = () => {
       <div className="flex w-full gap-2">
         <Select
           items={themes}
-          keyField="id"
+          getKey={(item) => item.id ?? ""}
           value={currentTheme}
           getLabel={(item) => String(item["name"])}
           onChange={(value) => handleSelectChange(value)}
@@ -52,6 +53,13 @@ const TokenConfig = () => {
         >
           Duplicate
         </Button>
+      </div>
+      <div>
+        <ThemeForm
+          onSubmit={(values) => {
+            console.log("submit", values);
+          }}
+        />
       </div>
     </Page>
   );

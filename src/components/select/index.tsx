@@ -1,23 +1,23 @@
 import { useCallback, type ChangeEvent } from "react";
 import "./styles.css";
 
-type SelectProps = {
-  items: Array<Record<string, unknown>>;
-  keyField: string;
-  getLabel: (item: Record<string, unknown>) => string;
+type SelectProps<T> = {
+  items: Array<T>;
+  getLabel: (item: T) => string;
+  getKey: (item: T) => string | number;
   value?: string | number;
   onChange: (value: string) => void;
   className?: string;
 };
 
-const Select = ({
+const Select = <T=object,>({
   items,
-  keyField,
+  getKey,
   getLabel,
   value,
   onChange,
   className = "",
-}: SelectProps) => {
+}: SelectProps<T>) => {
   const handleChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
       onChange(e.target.value);
@@ -34,10 +34,10 @@ const Select = ({
       {items.map((item) => (
         <option
           className="p-1 bg-paper text-paper-contrast hover:bg-primary hover:text-primary-contrast hover:transition-all"
-          key={String(item[keyField])}
-          value={String(item[keyField])}
+          key={getKey(item)}
+          value={getKey(item)}
         >
-          {getLabel(item)}
+          {getLabel(item as T)}
         </option>
       ))}
     </select>

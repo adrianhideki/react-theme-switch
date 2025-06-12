@@ -6,6 +6,9 @@ import type {
 import cn from "classnames";
 
 type InputProps = {
+  id?: string;
+  label?: string;
+  multiline?: boolean;
   value?: string;
   error?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -18,6 +21,8 @@ const Input = ({
   onChange,
   className,
   disabled,
+  label,
+  id,
   error = "",
   ...props
 }: InputProps) => {
@@ -29,16 +34,24 @@ const Input = ({
   const disableStyle = "cursor-not-allowed bg-gray-500/25";
 
   return (
-    <input
-      {...props}
-      disabled={disabled}
-      className={cn(style, className, {
-        [errorStyle]: !!error,
-        [disableStyle]: !!disabled,
-      })}
-      onChange={onChange}
-      value={value}
-    />
+    <>
+      {label && (
+        <label className="relative" htmlFor={id}>
+          {label}
+        </label>
+      )}
+      <input
+        {...props}
+        id={id}
+        disabled={disabled}
+        className={cn(style, className, {
+          [errorStyle]: !!error,
+          [disableStyle]: !!disabled,
+        })}
+        onChange={onChange}
+        value={value}
+      />
+    </>
   );
 };
 
