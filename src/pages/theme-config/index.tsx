@@ -1,9 +1,9 @@
 import Page from "@components/page";
 import Select from "@components/select";
 import Typography from "@components/typography";
+import Button from "@components/button";
 import { useThemeCollection } from "@hooks/useThemeCollection";
 import ThemeEditor from "./theme-editor";
-import Button from "@components/button";
 import type { Theme } from "@theme/types";
 import { useEffect } from "react";
 

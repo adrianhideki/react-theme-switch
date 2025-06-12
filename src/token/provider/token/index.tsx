@@ -1,4 +1,4 @@
-import { ThemeContext } from "@token/context/token-context";
+import { TokenContext } from "@token/context/token-context";
 import type { PartialTheme, Theme } from "@token/theme";
 import { defaultTheme } from "@token/theme/defaultTheme";
 import {
@@ -34,14 +34,14 @@ const TokenProvider = ({
   const transformedTheme = useMemo(() => transformTheme(theme), [theme]);
 
   return (
-    <ThemeContext.Provider
+    <TokenContext.Provider
       value={{
         theme: transformedTheme,
         updateTheme: handleUpdateTheme,
       }}
     >
       {children}
-    </ThemeContext.Provider>
+    </TokenContext.Provider>
   );
 };
 

@@ -6,4 +6,4 @@ export type TokenContextValues = {
   updateTheme: (value: PartialTheme) => void;
 };
 
-export const ThemeContext = createContext<TokenContextValues | null>(null);
+export const TokenContext = createContext<TokenContextValues | null>(null);

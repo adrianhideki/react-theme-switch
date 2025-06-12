@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import {
-  ThemeContext,
+  TokenContext,
   type TokenContextValues,
 } from "../context/token-context";
 import { transformTheme } from "../theme/transformTheme";
 import { defaultTheme } from "../theme/defaultTheme";
 
 export const useToken = () => {
-  const context = useContext(ThemeContext);
+  const context = useContext(TokenContext);
 
   if (!context) {
     return {

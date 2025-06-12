@@ -1,4 +1,4 @@
-import { useTheme } from "@hooks/useTheme";
+import { useToken } from "@token/hook/use-token";
 import { defaultTheme } from "@token/theme/defaultTheme";
 import type { Theme } from "@token/theme";
 import { TokenCollectionContext } from "@token/context/token-collection";
@@ -10,11 +10,11 @@ import {
 } from "react";
 
 const TokenCollectionProvider = ({ children }: PropsWithChildren) => {
-  const { updateTheme } = useTheme();
+  const { updateTheme } = useToken();
   const [themes, setThemes] = useState(
     localStorage.getItem("tokens")
       ? (JSON.parse(localStorage.getItem("tokens")!) as Theme[])
-      : [defaultTheme]
+      : [{ ...defaultTheme, id: "default", name: "default" }]
   );
   const [currentTheme, setCurrentTheme] = useState(
     String(localStorage.getItem("currentToken") ?? themes[0].id)

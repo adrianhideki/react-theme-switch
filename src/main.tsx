@@ -24,7 +24,9 @@ createRoot(document.getElementById("root")!).render(
           },
         }}
       >
-        <TokenProvider theme={defaultTheme}>
+        <TokenProvider
+          theme={{ ...defaultTheme, id: "default", name: "default" }}
+        >
           <CssBaseLine />
           <ThemeCollectionProvider>
             <TokenCollectionProvider>
