@@ -1,4 +1,7 @@
-import { colorScaleValuesTokens } from "@token/colors/types";
+import {
+  colorScaleStringValuesTokens,
+  colorScaleValuesTokens,
+} from "@token/colors/types";
 import { fontFamilyTokens } from "@token/fonts/family/types";
 import { fontHeightTokens } from "@token/fonts/height/types";
 import { fontParagraphSpacingTokens } from "@token/fonts/paragraph-spacing/types";
@@ -97,6 +100,8 @@ const themeSizeSchema = z.object({
   spacing: z.record(z.string(), z.string()),
 });
 
+const colorScaleEnum = z.enum(colorScaleStringValuesTokens);
+
 // BaseThemeConfig
 const baseThemeConfigSchema = z.object({
   font: z.object({
@@ -108,13 +113,11 @@ const baseThemeConfigSchema = z.object({
     height: z.record(z.enum(fontHeightTokens), z.number()),
   }),
   color: z.object({
-    collection: z.record(
-      z.string(),
-      z.record(
-        z.enum(colorScaleValuesTokens.map(String) as [string]),
-        z.string()
-      )
-    ),
+    collection: z
+      .record(z.string(), z.record(colorScaleEnum, z.string()))
+      .refine((obj): obj is Record<string, Record<string, string>> =>
+        colorScaleEnum.options.every((key) => obj[key] != null)
+      ),
     foundations: z.object({
       white: z.string().optional(),
       black: z.string().optional(),
