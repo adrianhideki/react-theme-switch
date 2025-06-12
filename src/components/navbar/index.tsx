@@ -12,6 +12,10 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
+  const handleConfigureTokenClick = () => {
+    navigate("/token-config");
+  };
+
   const handleConfigureThemeClick = () => {
     navigate("/theme-config");
   };
@@ -58,6 +62,12 @@ const Navbar = () => {
           onClick={handleConfigureThemeClick}
         >
           Configure theme
+        </a>
+        <a
+          className="text-text cursor-pointer flex w-full transition-all hover:text-secondary"
+          onClick={handleConfigureTokenClick}
+        >
+          Configure token
         </a>
       </Drawer>
     </>

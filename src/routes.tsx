@@ -1,6 +1,6 @@
 import Home from "@pages/home";
 import ThemeConfig from "@pages/theme-config";
-import ThemeV2 from "@pages/theme-v2";
+import TokenConfig from "@pages/token-config";
 import { createBrowserRouter } from "react-router";
 
 export const router = createBrowserRouter(
@@ -14,8 +14,8 @@ export const router = createBrowserRouter(
       element: <ThemeConfig />,
     },
     {
-      path: "/theme-v2",
-      element: <ThemeV2 />,
+      path: "/token-config",
+      element: <TokenConfig />,
     },
   ],
   {

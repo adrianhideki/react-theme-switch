@@ -354,6 +354,8 @@ export type Theme = {
   /**
    * Base values to use on theme customization
    */
+  id?: string;
+  name?: string;
   base: BaseThemeConfig;
   color: ThemeColor<string>;
   font: ThemeFont<

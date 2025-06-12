@@ -1,19 +1,21 @@
-import { ThemeContext } from "@theme/base/context/theme-context";
-import type { PartialTheme, Theme } from "@theme/base/theme";
-import { defaultTheme } from "@theme/base/theme/defaultTheme";
+import { ThemeContext } from "@token/context/token-context";
+import type { PartialTheme, Theme } from "@token/theme";
+import { defaultTheme } from "@token/theme/defaultTheme";
 import {
   useCallback,
   useEffect,
+  useMemo,
   useState,
   type PropsWithChildren,
 } from "react";
 import { deepMerge } from "./utils";
+import { transformTheme } from "@token/theme/transformTheme";
 
 type ThemeProviderProps = {
   theme: PartialTheme;
 };
 
-const ThemeProvider = ({
+const TokenProvider = ({
   children,
   theme: inputTheme,
 }: PropsWithChildren<ThemeProviderProps>) => {
@@ -25,12 +27,16 @@ const ThemeProvider = ({
     setTheme((prev) => deepMerge<Theme>(value, prev));
   }, []);
 
-  useEffect(() => {}, [inputTheme]);
+  useEffect(() => {
+    setTheme(deepMerge<Theme>(inputTheme, defaultTheme));
+  }, [inputTheme]);
+
+  const transformedTheme = useMemo(() => transformTheme(theme), [theme]);
 
   return (
     <ThemeContext.Provider
       value={{
-        theme: theme,
+        theme: transformedTheme,
         updateTheme: handleUpdateTheme,
       }}
     >
@@ -39,4 +45,4 @@ const ThemeProvider = ({
   );
 };
 
-export default ThemeProvider;
+export default TokenProvider;

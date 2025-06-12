@@ -5,8 +5,11 @@ import ModeProvider from "@providers/ModeProvider.tsx";
 import ThemeProvider from "@providers/ThemeProvider.tsx";
 import ThemeCollectionProvider from "@providers/ThemeCollectionContext.tsx";
 import CssBaseLine from "@theme/CssBaseLine";
+import TokenProvider from "@token/provider/token";
 import { router } from "./routes.tsx";
+import { defaultTheme } from "@token/theme/defaultTheme.ts";
 import "./index.css";
+import TokenCollectionProvider from "@token/provider/token-collection/ThemeCollectionContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -21,10 +24,14 @@ createRoot(document.getElementById("root")!).render(
           },
         }}
       >
-        <CssBaseLine />
-        <ThemeCollectionProvider>
-          <RouterProvider router={router} />
-        </ThemeCollectionProvider>
+        <TokenProvider theme={defaultTheme}>
+          <CssBaseLine />
+          <ThemeCollectionProvider>
+            <TokenCollectionProvider>
+              <RouterProvider router={router} />
+            </TokenCollectionProvider>
+          </ThemeCollectionProvider>
+        </TokenProvider>
       </ThemeProvider>
     </ModeProvider>
   </StrictMode>
