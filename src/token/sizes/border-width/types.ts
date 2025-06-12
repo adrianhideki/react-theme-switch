@@ -1,1 +1,3 @@
-export type BorderWidthValues = "xs" | "sm" | "md";
+export const borderWidthValuesTokens = ["xs", "sm", "md"] as const;
+
+export type BorderWidthValues = (typeof borderWidthValuesTokens)[number];

@@ -1,5 +1,4 @@
 import type { ColorScaleValues } from "../colors";
-
 import type {
   FontFamily,
   FontSpacing,
@@ -15,34 +14,47 @@ import type {
   SpacingValues,
 } from "../sizes";
 
-export type ColorValues =
-  | "primary"
-  | "secondary"
-  | "accent"
-  | "success"
-  | "information"
-  | "error"
-  | "warning"
-  | "neutral-dark"
-  | "neutral-light";
+export type DashToObj<
+  T,
+  K extends string = ThemePaletteBorderTokens,
+> = K extends `${infer Outer}-${infer Rest}`
+  ? { [O in Outer]: DashToObj<T, Rest> }
+  : { [O in K]: T };
+
+export const colorValuesTokens = [
+  "primary",
+  "secondary",
+  "accent",
+  "success",
+  "information",
+  "error",
+  "warning",
+  "neutral-dark",
+  "neutral-light",
+] as const;
+
+export type ColorValues = (typeof colorValuesTokens)[number];
 
 export type FoundationValues = "foundation.white" | "foundation.black";
 
-export type FontValues =
-  | "label"
-  | "labelLong"
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "h5"
-  | "h6"
-  | "hyperlink"
-  | "hyperlinkHover"
-  | "caption"
-  | "body"
-  | "bodyShort"
-  | "bodyLong";
+export const fontValuesTokens = [
+  "label",
+  "labelLong",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "hyperlink",
+  "hyperlinkHover",
+  "caption",
+  "body",
+  "bodyShort",
+  "bodyLong",
+] as const;
+
+export type FontValues = (typeof fontValuesTokens)[number];
 
 export type ThemeColorValue = {
   color: ColorValues | FoundationValues;
@@ -72,247 +84,199 @@ export type BaseThemeConfig = {
   };
 };
 
-export type ThemePaletteSurface<Value> = {
-  primary: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-    defaultSubtleHoverAlt: Value;
-  };
-  secondary: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-  };
-  disabled: {
-    default: Value;
-  };
-  error: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-  };
-  success: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-  };
-  information: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-  };
-  warning: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-  };
-  default: {
-    default: Value;
-  };
-  page: {
-    default: Value;
-  };
-  pageAlternative: {
-    default: Value;
-  };
-  alternative: {
-    default: Value;
-  };
-};
+export const themePaletteSurfaceTokens = [
+  "primary-default",
+  "primary-defaultHover",
+  "primary-defaultSubtle",
+  "primary-defaultSubtleHover",
+  "primary-defaultSubtleHoverAlt",
+  "secondary-default",
+  "secondary-defaultHover",
+  "secondary-defaultSubtle",
+  "secondary-defaultSubtleHover",
+  "disabled-default",
+  "error-default",
+  "error-defaultHover",
+  "error-defaultSubtle",
+  "error-defaultSubtleHover",
+  "success-default",
+  "success-defaultHover",
+  "success-defaultSubtle",
+  "success-defaultSubtleHover",
+  "information-default",
+  "information-defaultHover",
+  "information-defaultSubtle",
+  "information-defaultSubtleHover",
+  "warning-default",
+  "warning-defaultHover",
+  "warning-defaultSubtle",
+  "warning-defaultSubtleHover",
+  "default",
+  "page",
+  "pageAlternative",
+  "alternative",
+] as const;
 
-export type ThemePaletteText<Value> = {
-  primary: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-  secondary: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-  disabled: {
-    default: Value;
-    onColor: Value;
-  };
-  error: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-  success: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-  information: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-  warning: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-  default: {
-    body: Value;
-    hero: Value;
-    heading: Value;
-    caption: Value;
-    placeholder: Value;
-  };
-  onColor: {
-    hero: Value;
-    heading: Value;
-    body: Value;
-    caption: Value;
-    placeholder: Value;
-  };
-  accent: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-};
+export type ThemePaletteSurfaceTokens =
+  (typeof themePaletteSurfaceTokens)[number];
 
-export type ThemePaletteIcon<Value> = {
-  primary: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-  };
-  secondary: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-  disabled: {
-    default: Value;
-    onColor: Value;
-  };
-  error: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-  success: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-  information: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-  warning: {
-    onColor: Value;
-    onColorHover: Value;
-    onColorSubtle: Value;
-    onColorSubtleHover: Value;
-    default: Value;
-    defaultHover: Value;
-  };
-};
+export type ThemePaletteSurface<Value> = Record<
+  ThemePaletteSurfaceTokens,
+  Value
+>;
 
-export type ThemePaletteBorder<Value> = {
-  primary: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-    focus: Value;
-  };
-  error: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-    focus: Value;
-  };
-  success: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-    focus: Value;
-  };
-  information: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-    focus: Value;
-  };
-  warning: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-    focus: Value;
-  };
-  secondary: {
-    default: Value;
-    defaultHover: Value;
-    defaultSubtle: Value;
-    defaultSubtleHover: Value;
-    focus: Value;
-  };
-  disabled: {
-    default: Value;
-    onColor: Value;
-  };
-  default: {
-    default: Value;
-    onColor: Value;
-  };
-};
+export const themePaletteTextTokens = [
+  "primary-onColor",
+  "primary-onColorHover",
+  "primary-onColorSubtle",
+  "primary-onColorSubtleHover",
+  "primary-default",
+  "primary-defaultHover",
+  "secondary-onColor",
+  "secondary-onColorHover",
+  "secondary-onColorSubtle",
+  "secondary-onColorSubtleHover",
+  "secondary-default",
+  "secondary-defaultHover",
+  "disabled-default",
+  "disabled-onColor",
+  "error-onColor",
+  "error-onColorHover",
+  "error-onColorSubtle",
+  "error-onColorSubtleHover",
+  "error-default",
+  "error-defaultHover",
+  "success-onColor",
+  "success-onColorHover",
+  "success-onColorSubtle",
+  "success-onColorSubtleHover",
+  "success-default",
+  "success-defaultHover",
+  "information-onColor",
+  "information-onColorHover",
+  "information-onColorSubtle",
+  "information-onColorSubtleHover",
+  "information-default",
+  "information-defaultHover",
+  "warning-onColor",
+  "warning-onColorHover",
+  "warning-onColorSubtle",
+  "warning-onColorSubtleHover",
+  "warning-default",
+  "warning-defaultHover",
+  "default-body",
+  "default-hero",
+  "default-heading",
+  "default-caption",
+  "default-placeholder",
+  "onColor-hero",
+  "onColor-heading",
+  "onColor-body",
+  "onColor-caption",
+  "onColor-placeholder",
+  "accent-onColor",
+  "accent-onColorHover",
+  "accent-onColorSubtle",
+  "accent-onColorSubtleHover",
+  "accent-default",
+  "accent-defaultHover",
+] as const;
+
+export type ThemePaletteTextTokens = (typeof themePaletteTextTokens)[number];
+
+export type ThemePaletteText<Value> = Record<ThemePaletteTextTokens, Value>;
+
+export const themePaletteIconTokens = [
+  "primary-onColor",
+  "primary-onColorHover",
+  "primary-onColorSubtle",
+  "primary-onColorSubtleHover",
+  "primary-default",
+  "primary-defaultHover",
+  "primary-defaultSubtle",
+  "primary-defaultSubtleHover",
+  "secondary-onColor",
+  "secondary-onColorHover",
+  "secondary-onColorSubtle",
+  "secondary-onColorSubtleHover",
+  "secondary-default",
+  "secondary-defaultHover",
+  "disabled-default",
+  "disabled-onColor",
+  "error-onColor",
+  "error-onColorHover",
+  "error-onColorSubtle",
+  "error-onColorSubtleHover",
+  "error-default",
+  "error-defaultHover",
+
+  "success-onColor",
+  "success-onColorHover",
+  "success-onColorSubtle",
+  "success-onColorSubtleHover",
+  "success-default",
+  "success-defaultHover",
+
+  "information-onColor",
+  "information-onColorHover",
+  "information-onColorSubtle",
+  "information-onColorSubtleHover",
+  "information-default",
+  "information-defaultHover",
+
+  "warning-onColor",
+  "warning-onColorHover",
+  "warning-onColorSubtle",
+  "warning-onColorSubtleHover",
+  "warning-default",
+  "warning-defaultHover",
+] as const;
+
+export type ThemePaletteIconTokens = (typeof themePaletteIconTokens)[number];
+
+export type ThemePaletteIcon<Value> = Record<ThemePaletteIconTokens, Value>;
+
+export const themePaletteBorderTokens = [
+  "primary-default",
+  "primary-defaultHover",
+  "primary-defaultSubtle",
+  "primary-defaultSubtleHover",
+  "primary-focus",
+  "error-default",
+  "error-defaultHover",
+  "error-defaultSubtle",
+  "error-defaultSubtleHover",
+  "error-focus",
+  "success-default",
+  "success-defaultHover",
+  "success-defaultSubtle",
+  "success-defaultSubtleHover",
+  "success-focus",
+  "warning-default",
+  "warning-defaultHover",
+  "warning-defaultSubtle",
+  "warning-defaultSubtleHover",
+  "warning-focus",
+  "information-default",
+  "information-defaultHover",
+  "information-defaultSubtle",
+  "information-defaultSubtleHover",
+  "information-focus",
+  "secondary-default",
+  "secondary-defaultHover",
+  "secondary-defaultSubtle",
+  "secondary-defaultSubtleHover",
+  "secondary-focus",
+  "disabled",
+  "disabled-onColor",
+  "default",
+  "default-onColor",
+] as const;
+
+export type ThemePaletteBorderTokens =
+  (typeof themePaletteBorderTokens)[number];
+
+export type ThemePaletteBorder<Value> = Record<ThemePaletteBorderTokens, Value>;
 
 export type ThemePalette<Value> = {
   surface: ThemePaletteSurface<Value>;

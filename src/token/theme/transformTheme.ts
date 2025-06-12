@@ -130,21 +130,13 @@ const getColorValue = (theme: Theme, value: string, scale?: number) => {
 };
 
 const getPaletteValues = (
-  surface: Record<string, Record<string, ThemeColorValue>>,
+  surface: Record<string, ThemeColorValue>,
   theme: Theme
 ) =>
   Object.entries(surface).reduce((prev, [key, value]) => {
     return {
       ...prev,
-      [key]: Object.entries(value).reduce(
-        (p, [k, v]) => {
-          return {
-            ...p,
-            [k]: getColorValue(theme, v.color, v.scale) ?? "",
-          };
-        },
-        {} as Record<string, string>
-      ),
+      [key]: getColorValue(theme, value.color, value.scale),
     };
   }, {});
 

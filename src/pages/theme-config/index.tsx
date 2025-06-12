@@ -54,7 +54,7 @@ const ThemeConfig = () => {
       <div className="flex w-full gap-2">
         <Select
           items={themes}
-          keyField="id"
+          getKey={(item) => item.id ?? ""}
           value={currentTheme}
           getLabel={(item) => String(item["name"])}
           onChange={(value) => handleSelectChange(value)}

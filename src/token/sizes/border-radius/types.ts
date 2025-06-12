@@ -1,13 +1,16 @@
-export type BorderRadiusValues =
-  | "none"
-  | "3xs"
-  | "2xs"
-  | "xs"
-  | "sm"
-  | "lg"
-  | "md"
-  | "xl"
-  | "2xl"
-  | "3xl"
-  | "4xl"
-  | "pill";
+export const borderRadiusValuesTokens = [
+  "none",
+  "3xs",
+  "2xs",
+  "xs",
+  "sm",
+  "lg",
+  "md",
+  "xl",
+  "2xl",
+  "3xl",
+  "4xl",
+  "pill",
+] as const;
+
+export type BorderRadiusValues = (typeof borderRadiusValuesTokens)[number];

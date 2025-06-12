@@ -1,1 +1,8 @@
-export type FontWeight = "regular" | "medium" | "semiBold" | "bold";
+export const fontWeightTokens = [
+  "regular",
+  "medium",
+  "semiBold",
+  "bold",
+] as const;
+
+export type FontWeight = (typeof fontWeightTokens)[number];

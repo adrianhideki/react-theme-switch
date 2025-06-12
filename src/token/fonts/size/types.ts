@@ -1,10 +1,13 @@
-export type FontSize =
-  | "4xl"
-  | "3xl"
-  | "2xl"
-  | "xl"
-  | "lg"
-  | "md"
-  | "base"
-  | "sm"
-  | "xs";
+export const fontSizeTokens = [
+  "4xl",
+  "3xl",
+  "2xl",
+  "xl",
+  "lg",
+  "md",
+  "base",
+  "sm",
+  "xs",
+] as const;
+
+export type FontSize = (typeof fontSizeTokens)[number];

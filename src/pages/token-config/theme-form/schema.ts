@@ -1,274 +1,63 @@
+import { colorScaleValuesTokens } from "@token/colors/types";
+import { fontFamilyTokens } from "@token/fonts/family/types";
+import { fontHeightTokens } from "@token/fonts/height/types";
+import { fontParagraphSpacingTokens } from "@token/fonts/paragraph-spacing/types";
+import { fontSizeTokens } from "@token/fonts/size/types";
+import { fontSpacingTokens } from "@token/fonts/spacing/types";
+import { fontWeightTokens } from "@token/fonts/weight/types";
+import { dimensionValuesTokens } from "@token/sizes/dimensions/types";
+import {
+  colorValuesTokens,
+  fontValuesTokens,
+  themePaletteBorderTokens,
+  themePaletteIconTokens,
+  themePaletteSurfaceTokens,
+  themePaletteTextTokens,
+} from "@token/theme/types";
 import z from "zod";
-
 // --- Helper Enums and Schemas based on Theme types ---
 
 // ColorValues and FoundationValues
-const colorValues = [
-  "primary",
-  "secondary",
-  "accent",
-  "success",
-  "information",
-  "error",
-  "warning",
-  "neutral-dark",
-  "neutral-light",
-] as const;
 const foundationValues = ["foundation.white", "foundation.black"] as const;
 
 // ThemeColorValue
 const themeColorValueSchema = z.object({
-  color: z.enum([...colorValues, ...foundationValues]),
-  scale: z.number().optional(),
+  color: z.enum([...colorValuesTokens, ...foundationValues]),
+  scale: z
+    .enum(
+      colorScaleValuesTokens.map((item) => String(item)) as [
+        string,
+        ...string[],
+      ]
+    )
+    .optional(),
 });
 
-// ThemePaletteSurface
-const themePaletteSurfaceSchema = z.object({
-  primary: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-    defaultSubtleHoverAlt: themeColorValueSchema,
-  }),
-  secondary: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-  }),
-  disabled: z.object({
-    default: themeColorValueSchema,
-  }),
-  error: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-  }),
-  success: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-  }),
-  information: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-  }),
-  warning: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-  }),
-  default: z.object({
-    default: themeColorValueSchema,
-  }),
-  page: z.object({
-    default: themeColorValueSchema,
-  }),
-  pageAlternative: z.object({
-    default: themeColorValueSchema,
-  }),
-  alternative: z.object({
-    default: themeColorValueSchema,
-  }),
-});
+// Palette schemas
+const themePaletteSurfaceSchema = z.object(
+  Object.fromEntries(
+    themePaletteSurfaceTokens.map((token) => [token, themeColorValueSchema])
+  )
+);
 
-// ThemePaletteText
-const themePaletteTextSchema = z.object({
-  primary: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-  secondary: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-  disabled: z.object({
-    default: themeColorValueSchema,
-    onColor: themeColorValueSchema,
-  }),
-  error: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-  success: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-  information: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-  warning: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-  default: z.object({
-    body: themeColorValueSchema,
-    hero: themeColorValueSchema,
-    heading: themeColorValueSchema,
-    caption: themeColorValueSchema,
-    placeholder: themeColorValueSchema,
-  }),
-  onColor: z.object({
-    hero: themeColorValueSchema,
-    heading: themeColorValueSchema,
-    body: themeColorValueSchema,
-    caption: themeColorValueSchema,
-    placeholder: themeColorValueSchema,
-  }),
-  accent: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-});
+const themePaletteTextSchema = z.object(
+  Object.fromEntries(
+    themePaletteTextTokens.map((token) => [token, themeColorValueSchema])
+  )
+);
 
-// ThemePaletteIcon
-const themePaletteIconSchema = z.object({
-  primary: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-  }),
-  secondary: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-  disabled: z.object({
-    default: themeColorValueSchema,
-    onColor: themeColorValueSchema,
-  }),
-  error: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-  success: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-  information: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-  warning: z.object({
-    onColor: themeColorValueSchema,
-    onColorHover: themeColorValueSchema,
-    onColorSubtle: themeColorValueSchema,
-    onColorSubtleHover: themeColorValueSchema,
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-  }),
-});
+const themePaletteIconSchema = z.object(
+  Object.fromEntries(
+    themePaletteIconTokens.map((token) => [token, themeColorValueSchema])
+  )
+);
 
-// ThemePaletteBorder
-const themePaletteBorderSchema = z.object({
-  primary: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-    focus: themeColorValueSchema,
-  }),
-  error: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-    focus: themeColorValueSchema,
-  }),
-  success: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-    focus: themeColorValueSchema,
-  }),
-  information: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-    focus: themeColorValueSchema,
-  }),
-  warning: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-    focus: themeColorValueSchema,
-  }),
-  secondary: z.object({
-    default: themeColorValueSchema,
-    defaultHover: themeColorValueSchema,
-    defaultSubtle: themeColorValueSchema,
-    defaultSubtleHover: themeColorValueSchema,
-    focus: themeColorValueSchema,
-  }),
-  disabled: z.object({
-    default: themeColorValueSchema,
-    onColor: themeColorValueSchema,
-  }),
-  default: z.object({
-    default: themeColorValueSchema,
-    onColor: themeColorValueSchema,
-  }),
-});
+const themePaletteBorderSchema = z.object(
+  Object.fromEntries(
+    themePaletteBorderTokens.map((token) => [token, themeColorValueSchema])
+  )
+);
 
-// ThemePalette
 const themePaletteSchema = z.object({
   surface: themePaletteSurfaceSchema,
   text: themePaletteTextSchema,
@@ -289,73 +78,54 @@ const themeColorSchema = z.object({
   "neutral-dark": z.string(),
 });
 
-// FontValues
-const fontValues = [
-  "label",
-  "labelLong",
-  "h1",
-  "h2",
-  "h3",
-  "h4",
-  "h5",
-  "h6",
-  "hyperlink",
-  "hyperlinkHover",
-  "caption",
-  "body",
-  "bodyShort",
-  "bodyLong",
-] as const;
-
 // ThemeFont
 const themeFontSchema = z.object({
-  family: z.record(z.enum(fontValues), z.string()),
-  spacing: z.record(z.enum(fontValues), z.number()),
-  size: z.record(z.enum(fontValues), z.number()),
-  height: z.record(z.enum(fontValues), z.number()),
-  weight: z.record(z.enum(fontValues), z.number()),
-  paragraphSpacing: z.record(z.enum(fontValues), z.number()),
+  family: z.record(z.enum(fontValuesTokens), z.string()),
+  spacing: z.record(z.enum(fontValuesTokens), z.string()),
+  size: z.record(z.enum(fontValuesTokens), z.string()),
+  height: z.record(z.enum(fontValuesTokens), z.string()),
+  weight: z.record(z.enum(fontValuesTokens), z.string()),
+  paragraphSpacing: z.record(z.enum(fontValuesTokens), z.string()),
 });
 
 // ThemeSize
 const themeSizeSchema = z.object({
-  border: z
-    .object({
-      width: z.record(z.string(), z.number()).optional(),
-      radius: z.record(z.string(), z.number()).optional(),
-    })
-    .optional(),
-  spacing: z.record(z.string(), z.number()).optional(),
+  border: z.object({
+    width: z.record(z.string(), z.string()),
+    radius: z.record(z.string(), z.string()),
+  }),
+  spacing: z.record(z.string(), z.string()),
 });
 
 // BaseThemeConfig
 const baseThemeConfigSchema = z.object({
-  font: z
-    .object({
-      family: z.record(z.string()).optional(),
-      spacing: z.record(z.number()).optional(),
-      paragraphSpacing: z.record(z.number()).optional(),
-      size: z.record(z.number()).optional(),
-      weight: z.record(z.number()).optional(),
-      height: z.record(z.number()).optional(),
-    })
-    .optional(),
-  color: z
-    .object({
-      collection: z.record(z.record(z.string())).optional(),
-      foundations: z
-        .object({
-          white: z.string().optional(),
-          black: z.string().optional(),
-        })
-        .optional(),
-    })
-    .optional(),
-  size: z
-    .object({
-      dimension: z.record(z.number()).optional(),
-    })
-    .optional(),
+  font: z.object({
+    family: z.record(z.enum(fontFamilyTokens), z.string()),
+    spacing: z.record(z.enum(fontSpacingTokens), z.number()),
+    paragraphSpacing: z.record(z.enum(fontParagraphSpacingTokens), z.number()),
+    size: z.record(z.enum(fontSizeTokens), z.number()),
+    weight: z.record(z.enum(fontWeightTokens), z.number()),
+    height: z.record(z.enum(fontHeightTokens), z.number()),
+  }),
+  color: z.object({
+    collection: z.record(
+      z.string(),
+      z.record(
+        z.enum(colorScaleValuesTokens.map(String) as [string]),
+        z.string()
+      )
+    ),
+    foundations: z.object({
+      white: z.string().optional(),
+      black: z.string().optional(),
+    }),
+  }),
+  size: z.object({
+    dimension: z.record(
+      z.enum(dimensionValuesTokens.map(String) as [string, ...string[]]),
+      z.number()
+    ),
+  }),
 });
 
 // --- Main Theme Schema ---
