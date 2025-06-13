@@ -1,32 +1,36 @@
 import Typography from "@components/typography";
 import { useCallback, useEffect, useState } from "react";
-import ColorPicker from "../color-picker";
+import ColorPicker from "../../color-picker";
+
+type ColorFoundationData = {
+  white: string;
+  black: string;
+};
 
 type ColorFoundationProps = {
-  white?: string;
-  black?: string;
-  onChange?: (white?: string, black?: string) => void;
+  data?: ColorFoundationData;
+  onChange?: (data: ColorFoundationData) => void;
 };
 
 const ColorFoundation = ({
-  black: initialBlack,
-  white: initialWhite,
+  data: initialData,
   onChange,
 }: ColorFoundationProps) => {
-  const [white, setWhite] = useState<string>(() => initialWhite ?? "");
-  const [black, setBlack] = useState<string>(() => initialBlack ?? "");
+  const [data, setData] = useState<ColorFoundationData>(
+    () => initialData as ColorFoundationData
+  );
 
   useEffect(() => {
     if (!onChange) return;
-    onChange(white, black);
-  }, [white, black, onChange]);
+    onChange(data);
+  }, [data, onChange]);
 
   const handleBlackChange = useCallback((value: string) => {
-    setBlack(value);
+    setData((p) => ({ ...p, black: value }));
   }, []);
 
   const handleWhiteChange = useCallback((value: string) => {
-    setWhite(value);
+    setData((p) => ({ ...p, white: value }));
   }, []);
 
   return (
@@ -36,13 +40,13 @@ const ColorFoundation = ({
         <Typography>White</Typography>
         <ColorPicker
           className="w-6 h-6"
-          color={white ?? ""}
+          color={data?.white ?? ""}
           onColorChange={handleWhiteChange}
         />
         <Typography>Black</Typography>
         <ColorPicker
           className="w-6 h-6"
-          color={black ?? ""}
+          color={data?.black ?? ""}
           onColorChange={handleBlackChange}
         />
       </div>

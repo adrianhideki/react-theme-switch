@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import schema from "./schema";
 import type { z } from "zod";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Button from "@components/button";
 import Typography from "@components/typography";
 import Input from "@components/input";
@@ -28,9 +28,8 @@ import {
 import { borderRadiusValuesTokens } from "@token/sizes/border-radius/types";
 import { borderWidthValuesTokens } from "@token/sizes/border-width/types";
 import { spacingValuesTokens } from "@token/sizes/spacing/types";
-import ColorCollection from "./color-collection";
 import { colorScaleValuesTokens } from "@token/colors/types";
-import ColorFoundation from "./color-foundation";
+import BaseForm from "./base-form";
 
 type ThemeFormValues = z.infer<typeof schema>;
 
@@ -59,47 +58,12 @@ const ThemeForm = ({
   onSubmit: (values: ThemeFormValues) => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { watch, getValues, setValue, unregister, handleSubmit, register } =
+  const [isBaseFormOpen, setIsBaseFormOpen] = useState(false);
+  const { watch, getValues, setValue, handleSubmit, register } =
     useForm<ThemeFormValues>({
       resolver: zodResolver(schema),
       defaultValues: {},
     });
-
-  const handleAddColor = useCallback(
-    (name: string, scales: Record<number | string, string>) => {
-      setValue(`base.color.collection.${name}`, {
-        ...scales,
-      } as Record<number, string>);
-    },
-    [setValue]
-  );
-
-  const handleSaveEditColor = useCallback(
-    (
-      oldName: string,
-      name: string,
-      scales: Record<number | string, string>
-    ) => {
-      if (oldName !== name) {
-        unregister(`base.color.collection.${oldName}`);
-      }
-
-      setValue(`base.color.collection.${name}`, {
-        ...scales,
-      });
-    },
-    [setValue, unregister]
-  );
-
-  const handleRemoveColor = useCallback(
-    (name: string) => {
-      unregister(`base.color.collection.${name}`);
-      const current = { ...getValues("base.color.collection") };
-      delete current[name];
-      setValue("base.color.collection", current);
-    },
-    [getValues, setValue, unregister]
-  );
 
   const paletteColorOptions = useMemo(
     () =>
@@ -218,135 +182,43 @@ const ThemeForm = ({
     );
   }
 
-  const handleColorFoundationChange = useCallback(
-    (white?: string, black?: string) => {
-      setValue("base.color.foundations", { white, black });
-    },
-    [setValue]
-  );
-
   return (
     <>
-      <Button onClick={() => setIsOpen(true)}>Create Theme</Button>
+      <div className="flex gap-2">
+        <Button onClick={() => setIsBaseFormOpen(true)}>
+          Create Base Theme
+        </Button>
+        <Button onClick={() => setIsOpen(true)}>Create Theme</Button>
+      </div>
+
+      <Modal isOpen={isBaseFormOpen} onClose={() => setIsBaseFormOpen(false)}>
+        <BaseForm
+          onSubmit={(value) => {
+            console.log("base submit", value);
+            setValue("base", value);
+          }}
+        />
+      </Modal>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <form
           className="flex flex-col gap-2 p-4"
           onSubmit={handleSubmit(onSubmit)}
         >
-          {/* --- BASE PROPERTIES SECTION --- */}
-          <Typography variant="h2">Base Properties</Typography>
-          {/* Base Colors Collection Table */}
-          <ColorCollection
-            collection={getValues("base.color.collection")}
-            onColorAdd={handleAddColor}
-            onColorEdit={handleSaveEditColor}
-            onColorRemove={handleRemoveColor}
-          />
-          <ColorFoundation
-            white={getValues("base.color.foundations.white")}
-            black={getValues("base.color.foundations.black")}
-            onChange={handleColorFoundationChange}
-          />
-          {/* Base Font Family */}
-          <Typography variant="h3">Base Font Family</Typography>
-          <div className="flex flex-wrap gap-4">
-            {fontFamilyTokens.map((key) => (
-              <Input
-                key={key}
-                placeholder={key}
-                {...register(`base.font.family.${key}`)}
-              />
-            ))}
-          </div>
-          {/* Base Font Height */}
-          <Typography variant="h3">Base Font Height</Typography>
-          <div className="flex flex-wrap gap-4">
-            {fontHeightTokens.map((key) => (
-              <Input
-                key={key}
-                placeholder={key}
-                type="number"
-                {...register(`base.font.height.${key}`)}
-              />
-            ))}
-          </div>
-          {/* Base Font Spacing */}
-          <Typography variant="h3">Base Font Spacing</Typography>
-          <div className="flex flex-wrap gap-4">
-            {fontSpacingTokens.map((key) => (
-              <Input
-                key={key}
-                placeholder={key}
-                type="number"
-                {...register(`base.font.spacing.${key}`)}
-              />
-            ))}
-          </div>
-          {/* Base Font Paragraph Spacing */}
-          <Typography variant="h3">Base Font Paragraph Spacing</Typography>
-          <div className="flex flex-wrap gap-4">
-            {fontParagraphSpacingTokens.map((key) => (
-              <Input
-                key={key}
-                placeholder={key}
-                type="number"
-                {...register(`base.font.paragraphSpacing.${key}`)}
-              />
-            ))}
-          </div>
-          {/* Base Font Size */}
-          <Typography variant="h3">Base Font Size</Typography>
-          <div className="flex flex-wrap gap-4">
-            {fontSizeTokens.map((key) => (
-              <Input
-                key={key}
-                placeholder={key}
-                type="number"
-                {...register(`base.font.size.${key}`)}
-              />
-            ))}
-          </div>
-          {/* Base Font Weight */}
-          <Typography variant="h3">Base Font Weight</Typography>
-          <div className="flex flex-wrap gap-4">
-            {fontWeightTokens.map((key) => (
-              <Input
-                key={key}
-                placeholder={key}
-                type="number"
-                {...register(`base.font.weight.${key}`)}
-              />
-            ))}
-          </div>
-          {/* Base Size Dimension */}
-          <Typography variant="h3">Base Size Dimension</Typography>
-          <div className="flex flex-wrap gap-4">
-            {dimensionValuesTokens.map((key) => (
-              <Input
-                key={key}
-                placeholder={String(key)}
-                type="number"
-                {...register(`base.size.dimension.${key}`)}
-              />
-            ))}
-          </div>
-
-          {/* --- OTHER PROPERTIES SECTION --- */}
           <Typography variant="h2">Other Properties</Typography>
-          {/* Theme Name */}
           <Input placeholder="Theme Name" {...register("name")} />
-          {/* Theme Colors */}
           <Typography variant="h3">Theme Colors</Typography>
           <div className="flex flex-wrap gap-4">
             {colorValuesTokens.map((field) => (
-              <Select<{ value: string; label: string }>
-                key={field}
-                items={colorOptions}
-                getKey={(item) => item.value}
-                getLabel={(item) => item.label}
-                value={watch(`color.${field}`)}
-                onChange={(v) => setValue(`color.${field}`, v)}
-              />
+              <div key={field.replace("-", " ")}>
+                <Typography className="capitalize">{field}</Typography>
+                <Select<{ value: string; label: string }>
+                  items={colorOptions}
+                  getKey={(item) => item.value}
+                  getLabel={(item) => item.label}
+                  value={watch(`color.${field}`)}
+                  onChange={(v) => setValue(`color.${field}`, v)}
+                />
+              </div>
             ))}
           </div>
           {/* Theme Font Family */}

@@ -1,14 +1,13 @@
 import Button from "@components/button";
 import Input from "@components/input";
-import Typography from "@components/typography";
 import {
   colorScaleStringValuesTokens,
   colorScaleValuesTokens,
   type ColorScaleStringValues,
 } from "@token/colors/types";
 import { useCallback, useMemo, useState } from "react";
-import ColorPicker from "../color-picker";
-import { getContrastColor } from "@token/utils";
+import ColorPicker from "../../color-picker";
+import { generateColorScale, getContrastColor } from "@token/utils";
 
 type ColorCollectionProps = {
   collection?: Record<string, Record<ColorScaleStringValues, string>>;
@@ -30,6 +29,7 @@ const ColorCollection = ({
   onColorEdit,
   onColorRemove,
 }: ColorCollectionProps) => {
+  const [baseColor, setBaseColor] = useState<string>("");
   const [editingColor, setEditingColor] = useState<string>();
   const [newColorName, setNewColorName] = useState("");
   const [newColorScales, setNewColorScales] = useState<
@@ -62,6 +62,7 @@ const ColorCollection = ({
 
     onColorAdd(newColorName, newColorScales);
 
+    setBaseColor("");
     setNewColorName("");
     setNewColorScales({});
   }, [newColorName, newColorScales, onColorAdd]);
@@ -73,6 +74,7 @@ const ColorCollection = ({
     onColorEdit(editingColor, newColorName, newColorScales);
     setEditingColor(undefined);
     setNewColorName("");
+    setBaseColor("");
     setNewColorScales({});
   }, [editingColor, newColorName, newColorScales, onColorEdit]);
 
@@ -88,7 +90,6 @@ const ColorCollection = ({
 
   return (
     <>
-      <Typography variant="h3">Base Colors Collection</Typography>
       <table className="w-full border border-border">
         <thead>
           <tr>
@@ -107,6 +108,18 @@ const ColorCollection = ({
               />
             </td>
             <td className="px-2 py-1 flex flex-wrap items-center gap-2">
+              <ColorPicker
+                text={"base"}
+                className="w-6 h-6 flex items-center justify-center"
+                color={baseColor}
+                onColorChange={(color) => {
+                  setBaseColor(color);
+                  setNewColorScales((s) => ({
+                    ...s,
+                    ...(generateColorScale(color) as Record<number, string>),
+                  }));
+                }}
+              />
               {colorScaleValuesTokens.map((scale) => (
                 <div key={scale} className="flex flex-row items-center">
                   <ColorPicker

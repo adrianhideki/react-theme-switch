@@ -103,31 +103,100 @@ const themeSizeSchema = z.object({
 const colorScaleEnum = z.enum(colorScaleStringValuesTokens);
 
 // BaseThemeConfig
-const baseThemeConfigSchema = z.object({
+export const baseThemeConfigSchema = z.object({
   font: z.object({
-    family: z.record(z.enum(fontFamilyTokens), z.string()),
-    spacing: z.record(z.enum(fontSpacingTokens), z.number()),
-    paragraphSpacing: z.record(z.enum(fontParagraphSpacingTokens), z.number()),
-    size: z.record(z.enum(fontSizeTokens), z.number()),
-    weight: z.record(z.enum(fontWeightTokens), z.number()),
-    height: z.record(z.enum(fontHeightTokens), z.number()),
+    family: z
+      .record(z.enum(fontFamilyTokens), z.string().nonempty())
+      .refine((obj) => Object.keys(obj).length === fontFamilyTokens.length, {
+        message: "Configure all font family properties",
+      }),
+    spacing: z
+      .record(z.enum(fontSpacingTokens), z.number().min(0))
+      .refine((obj) => Object.keys(obj).length === fontSpacingTokens.length, {
+        message: "Configure all font spacing properties",
+      }),
+    paragraphSpacing: z
+      .record(z.enum(fontParagraphSpacingTokens), z.number().min(0))
+      .refine(
+        (obj) => Object.keys(obj).length === fontParagraphSpacingTokens.length,
+        {
+          message: "Configure all font paragraph properties",
+        }
+      ),
+    size: z
+      .record(z.enum(fontSizeTokens), z.number().min(0))
+      .refine((obj) => Object.keys(obj).length === fontSizeTokens.length, {
+        message: "Configure all font size properties",
+      }),
+    weight: z
+      .record(z.enum(fontWeightTokens), z.number().min(0))
+      .refine((obj) => Object.keys(obj).length === fontWeightTokens.length, {
+        message: "Configure all font weight properties",
+      }),
+    height: z
+      .record(z.enum(fontHeightTokens), z.number().min(0))
+      .refine((obj) => Object.keys(obj).length === fontHeightTokens.length, {
+        message: "Configure all font height properties",
+      }),
   }),
   color: z.object({
     collection: z
-      .record(z.string(), z.record(colorScaleEnum, z.string()))
-      .refine((obj): obj is Record<string, Record<string, string>> =>
-        colorScaleEnum.options.every((key) => obj[key] != null)
+      .record(
+        z.string(),
+        z.record(
+          colorScaleEnum,
+          z.string().startsWith("#", "Color must be a HEX starting with #.")
+        ),
+        {
+          message: "Configure at least one color!",
+        }
+      )
+      .refine(
+        (obj): obj is Record<string, Record<string, string>> => {
+          return !Object.keys(obj).find((key) =>
+            colorScaleEnum.options.some((scale) => obj[key][scale] == null)
+          );
+        },
+        {
+          message: "You must configure all scales for a color!",
+        }
+      )
+      .refine(
+        (obj): obj is Record<string, Record<string, string>> => {
+          return Object.keys(obj).length > 0;
+        },
+        {
+          message: "You must configure at least one color!",
+        }
       ),
-    foundations: z.object({
-      white: z.string().optional(),
-      black: z.string().optional(),
-    }),
+    foundations: z.object(
+      {
+        white: z
+          .string()
+          .nonempty("Configure a white color!")
+          .startsWith("#", "White color must be a HEX starting with #."),
+        black: z
+          .string()
+          .nonempty("Configure a black color!")
+          .startsWith("#", "Black color must be a HEX starting with #."),
+      },
+      {
+        message: "Configure all foundation colors properties!",
+      }
+    ),
   }),
   size: z.object({
-    dimension: z.record(
-      z.enum(dimensionValuesTokens.map(String) as [string, ...string[]]),
-      z.number()
-    ),
+    dimension: z
+      .record(
+        z.enum(dimensionValuesTokens.map(String) as [string, ...string[]]),
+        z.number().min(0)
+      )
+      .refine(
+        (obj) => Object.keys(obj).length === dimensionValuesTokens.length,
+        {
+          message: "Configure all dimension properties",
+        }
+      ),
   }),
 });
 
