@@ -18,9 +18,7 @@ import {
   themePaletteTextTokens,
 } from "@token/theme/types";
 import z from "zod";
-// --- Helper Enums and Schemas based on Theme types ---
 
-// ColorValues and FoundationValues
 const foundationValues = ["foundation.white", "foundation.black"] as const;
 
 // ThemeColorValue
@@ -61,7 +59,7 @@ const themePaletteBorderSchema = z.object(
   )
 );
 
-const themePaletteSchema = z.object({
+export const themePaletteSchema = z.object({
   surface: themePaletteSurfaceSchema,
   text: themePaletteTextSchema,
   icon: themePaletteIconSchema,
@@ -83,12 +81,12 @@ const themeColorSchema = z.object({
 
 // ThemeFont
 const themeFontSchema = z.object({
-  family: z.record(z.enum(fontValuesTokens), z.string()),
-  spacing: z.record(z.enum(fontValuesTokens), z.string()),
-  size: z.record(z.enum(fontValuesTokens), z.string()),
-  height: z.record(z.enum(fontValuesTokens), z.string()),
-  weight: z.record(z.enum(fontValuesTokens), z.string()),
-  paragraphSpacing: z.record(z.enum(fontValuesTokens), z.string()),
+  family: z.record(z.enum(fontValuesTokens), z.string().min(1)),
+  spacing: z.record(z.enum(fontValuesTokens), z.string().min(1)),
+  size: z.record(z.enum(fontValuesTokens), z.string().min(1)),
+  height: z.record(z.enum(fontValuesTokens), z.string().min(1)),
+  weight: z.record(z.enum(fontValuesTokens), z.string().min(1)),
+  paragraphSpacing: z.record(z.enum(fontValuesTokens), z.string().min(1)),
 });
 
 // ThemeSize
