@@ -8,7 +8,10 @@ import { fontParagraphSpacingTokens } from "@token/fonts/paragraph-spacing/types
 import { fontSizeTokens } from "@token/fonts/size/types";
 import { fontSpacingTokens } from "@token/fonts/spacing/types";
 import { fontWeightTokens } from "@token/fonts/weight/types";
+import { borderRadiusValuesTokens } from "@token/sizes/border-radius/types";
+import { borderWidthValuesTokens } from "@token/sizes/border-width/types";
 import { dimensionValuesTokens } from "@token/sizes/dimensions/types";
+import { spacingValuesTokens } from "@token/sizes/spacing/types";
 import {
   colorValuesTokens,
   fontValuesTokens,
@@ -22,17 +25,20 @@ import z from "zod";
 const foundationValues = ["foundation.white", "foundation.black"] as const;
 
 // ThemeColorValue
-const themeColorValueSchema = z.object({
-  color: z.enum([...colorValuesTokens, ...foundationValues]),
-  scale: z
-    .enum(
-      colorScaleValuesTokens.map((item) => String(item)) as [
-        string,
-        ...string[],
-      ]
-    )
-    .optional(),
-});
+const themeColorValueSchema = z
+  .object({
+    color: z
+      .enum([...colorValuesTokens, ...foundationValues])
+      .refine((item) => String(item) !== "", {
+        message: "You need to configure a color",
+      }),
+    scale: z
+      .enum(["", ...colorScaleValuesTokens.map((item) => String(item))])
+      .optional(),
+  })
+  .refine((item) => item?.color?.startsWith("foundation") || item?.scale, {
+    message: "Configure a scale when choose a color",
+  });
 
 // Palette schemas
 const themePaletteSurfaceSchema = z.object(
@@ -67,35 +73,81 @@ export const themePaletteSchema = z.object({
 });
 
 // ThemeColor<string>
-const themeColorSchema = z.object({
-  primary: z.string(),
-  secondary: z.string(),
-  accent: z.string(),
-  success: z.string(),
-  error: z.string(),
-  information: z.string(),
-  warning: z.string(),
-  "neutral-light": z.string(),
-  "neutral-dark": z.string(),
-});
+const themeColorSchema = z
+  .object({
+    primary: z.string().nonempty(),
+    secondary: z.string().nonempty(),
+    accent: z.string().nonempty(),
+    success: z.string().nonempty(),
+    error: z.string().nonempty(),
+    information: z.string().nonempty(),
+    warning: z.string().nonempty(),
+    "neutral-light": z.string().nonempty(),
+    "neutral-dark": z.string().nonempty(),
+  })
+  .refine((item) => Object.keys(item).length === 9, {
+    message: "Configure all properties",
+  });
 
 // ThemeFont
 const themeFontSchema = z.object({
-  family: z.record(z.enum(fontValuesTokens), z.string().min(1)),
-  spacing: z.record(z.enum(fontValuesTokens), z.string().min(1)),
-  size: z.record(z.enum(fontValuesTokens), z.string().min(1)),
-  height: z.record(z.enum(fontValuesTokens), z.string().min(1)),
-  weight: z.record(z.enum(fontValuesTokens), z.string().min(1)),
-  paragraphSpacing: z.record(z.enum(fontValuesTokens), z.string().min(1)),
+  family: z
+    .record(z.enum(fontValuesTokens), z.string().min(1))
+    .refine((item) => Object.keys(item).length === fontValuesTokens.length, {
+      message: "Configure all properties",
+    }),
+  spacing: z
+    .record(z.enum(fontValuesTokens), z.string().min(1))
+    .refine((item) => Object.keys(item).length === fontValuesTokens.length, {
+      message: "Configure all properties",
+    }),
+  size: z
+    .record(z.enum(fontValuesTokens), z.string().min(1))
+    .refine((item) => Object.keys(item).length === fontValuesTokens.length, {
+      message: "Configure all properties",
+    }),
+  height: z
+    .record(z.enum(fontValuesTokens), z.string().min(1))
+    .refine((item) => Object.keys(item).length === fontValuesTokens.length, {
+      message: "Configure all properties",
+    }),
+  weight: z
+    .record(z.enum(fontValuesTokens), z.string().min(1))
+    .refine((item) => Object.keys(item).length === fontValuesTokens.length, {
+      message: "Configure all properties",
+    }),
+  paragraphSpacing: z
+    .record(z.enum(fontValuesTokens), z.string().min(1))
+    .refine((item) => Object.keys(item).length === fontValuesTokens.length, {
+      message: "Configure all properties",
+    }),
 });
 
 // ThemeSize
 const themeSizeSchema = z.object({
   border: z.object({
-    width: z.record(z.string(), z.string()),
-    radius: z.record(z.string(), z.string()),
+    width: z
+      .record(z.string(), z.string().nonempty())
+      .refine(
+        (item) => Object.keys(item).length === borderWidthValuesTokens.length,
+        {
+          message: "Configure all properties",
+        }
+      ),
+    radius: z
+      .record(z.string(), z.string().nonempty())
+      .refine(
+        (item) => Object.keys(item).length === borderRadiusValuesTokens.length,
+        {
+          message: "Configure all properties",
+        }
+      ),
   }),
-  spacing: z.record(z.string(), z.string()),
+  spacing: z
+    .record(z.string(), z.string().nonempty())
+    .refine((item) => Object.keys(item).length === spacingValuesTokens.length, {
+      message: "Configure all properties",
+    }),
 });
 
 const colorScaleEnum = z.enum(colorScaleStringValuesTokens);
@@ -200,8 +252,7 @@ export const baseThemeConfigSchema = z.object({
 
 // --- Main Theme Schema ---
 export const schema = z.object({
-  id: z.string().optional(),
-  name: z.string().optional(),
+  name: z.string().min(3),
   base: baseThemeConfigSchema,
   color: themeColorSchema,
   font: themeFontSchema,

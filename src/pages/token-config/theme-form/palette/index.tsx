@@ -12,15 +12,28 @@ import {
   type ThemePaletteTextTokens,
 } from "@token/theme/types";
 import { themePaletteSchema } from "../schema";
+import Typography from "@components/typography";
 
 type PaletteSection = "surface" | "text" | "icon" | "border";
 
 type Palette = z.infer<typeof themePaletteSchema>;
 
+type PaletteError = Partial<
+  Record<PaletteSection, Partial<Record<string, { message?: string }>>>
+>;
+
+type PaletteColorError = Partial<
+  Record<
+    PaletteSection,
+    Partial<Record<string, Record<"color" | "scale", { message?: string }>>>
+  >
+>;
+
 type PaletteProps = {
   section: PaletteSection;
   colors: string[];
   value: Palette;
+  errors?: PaletteError | PaletteColorError;
   onChange: (
     section: PaletteSection,
     token: string,
@@ -68,7 +81,11 @@ const Palette = ({
   value,
   onChange,
   onColorPreview,
+  errors,
 }: PaletteProps) => {
+  const colorError = errors as PaletteColorError;
+  const paletteError = errors as PaletteError;
+
   return (
     <div className="flex flex-wrap gap-4">
       <table className="p-2 border-1 border-border">
@@ -100,6 +117,11 @@ const Palette = ({
               <tr key={token}>
                 <td className="border-1 border-border px-2 py-1">
                   <span>{token}</span>
+                  {paletteError?.[section]?.[token]?.message && (
+                    <Typography className="text-error">
+                      {String(paletteError?.[section]?.[token]?.message)}
+                    </Typography>
+                  )}
                 </td>
                 <td className="border-1 border-border px-2 py-1">
                   <Select
@@ -112,6 +134,11 @@ const Palette = ({
                       onChange(section, token, "color", String(v))
                     }
                   />
+                  {colorError?.[section]?.[token]?.color?.message && (
+                    <Typography className="text-error">
+                      {String(colorError?.[section]?.[token]?.color?.message)}
+                    </Typography>
+                  )}
                 </td>
                 <td className="border-1 border-border px-2 py-1">
                   <Select
@@ -125,6 +152,11 @@ const Palette = ({
                     }
                     disabled={String(colorValue)?.startsWith("foundation.")}
                   />
+                  {colorError?.[section]?.[token]?.scale?.message && (
+                    <Typography className="text-error">
+                      {String(colorError?.[section]?.[token]?.scale?.message)}
+                    </Typography>
+                  )}
                 </td>
                 <td className="border-1 border-border px-2 py-1">
                   <div

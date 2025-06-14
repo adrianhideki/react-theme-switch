@@ -5,6 +5,7 @@ type TokenProps<TKey extends string | number, TValue> = {
   keys: Array<TKey>;
   data: Array<TValue>;
   value: Partial<Record<TKey, TValue>>;
+  errors?: Partial<Record<TKey, { message?: string }>>;
   onChange: (key: TKey, item: TValue) => void;
 };
 
@@ -13,6 +14,7 @@ const Token = <TKey extends string, TValue extends string | number>({
   keys,
   value,
   onChange,
+  errors,
 }: TokenProps<TKey, TValue>) => {
   return (
     <div className="flex flex-wrap gap-2">
@@ -27,6 +29,11 @@ const Token = <TKey extends string, TValue extends string | number>({
             onChange={(item) => onChange(key, item as TValue)}
             className="w-20"
           />
+          {errors?.[key]?.message && (
+            <Typography className="text-error">
+              {String(errors?.[key]?.message)}
+            </Typography>
+          )}
         </div>
       ))}
     </div>
