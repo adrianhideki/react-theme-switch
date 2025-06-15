@@ -33,8 +33,11 @@ const themeColorValueSchema = z
         message: "You need to configure a color",
       }),
     scale: z
-      .enum(["", ...colorScaleValuesTokens.map((item) => String(item))])
-      .optional(),
+      .number()
+      .optional()
+      .refine(
+        (item) => !item || colorScaleValuesTokens.some((v) => v === item)
+      ),
   })
   .refine((item) => item?.color?.startsWith("foundation") || item?.scale, {
     message: "Configure a scale when choose a color",
@@ -127,7 +130,7 @@ const themeFontSchema = z.object({
 const themeSizeSchema = z.object({
   border: z.object({
     width: z
-      .record(z.string(), z.string().nonempty())
+      .record(z.string(), z.number())
       .refine(
         (item) => Object.keys(item).length === borderWidthValuesTokens.length,
         {
@@ -135,7 +138,7 @@ const themeSizeSchema = z.object({
         }
       ),
     radius: z
-      .record(z.string(), z.string().nonempty())
+      .record(z.string(), z.number())
       .refine(
         (item) => Object.keys(item).length === borderRadiusValuesTokens.length,
         {
@@ -144,7 +147,7 @@ const themeSizeSchema = z.object({
       ),
   }),
   spacing: z
-    .record(z.string(), z.string().nonempty())
+    .record(z.string(), z.number())
     .refine((item) => Object.keys(item).length === spacingValuesTokens.length, {
       message: "Configure all properties",
     }),

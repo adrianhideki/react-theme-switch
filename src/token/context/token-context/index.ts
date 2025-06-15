@@ -3,6 +3,7 @@ import { createContext } from "react";
 
 export type TokenContextValues = {
   theme: ResultTheme;
+  referenceTheme: PartialTheme;
   updateTheme: (value: PartialTheme) => void;
 };
 

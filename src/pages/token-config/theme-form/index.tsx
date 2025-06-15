@@ -18,6 +18,8 @@ import {
   colorValuesTokens,
   fontValuesTokens,
   type ColorValues,
+  type FoundationValues,
+  type PartialTheme,
 } from "@token/theme/types";
 import { borderRadiusValuesTokens } from "@token/sizes/border-radius/types";
 import { borderWidthValuesTokens } from "@token/sizes/border-width/types";
@@ -30,11 +32,12 @@ type ThemeFormValues = z.infer<typeof schema>;
 
 const modes = ["light", "dark"] as const;
 
-const ThemeForm = ({
-  onSubmit,
-}: {
+type ThemeFormProps = {
+  initialValue?: PartialTheme;
   onSubmit: (values: ThemeFormValues) => void;
-}) => {
+};
+
+const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isBaseFormOpen, setIsBaseFormOpen] = useState(false);
   const {
@@ -46,37 +49,7 @@ const ThemeForm = ({
   } = useForm<ThemeFormValues>({
     resolver: zodResolver(schema),
     defaultValues: {
-      color: {},
-      font: {
-        family: {},
-        height: {},
-        paragraphSpacing: {},
-        size: {},
-        spacing: {},
-        weight: {},
-      },
-      base: {},
-      palette: {
-        light: {
-          surface: {},
-          border: {},
-          icon: {},
-          text: {},
-        },
-        dark: {
-          surface: {},
-          border: {},
-          icon: {},
-          text: {},
-        },
-      },
-      size: {
-        border: {
-          radius: {},
-          width: {},
-        },
-        spacing: {},
-      },
+      ...initialValue,
     },
   });
 
@@ -118,9 +91,10 @@ const ThemeForm = ({
       </div>
       <Modal isOpen={isBaseFormOpen} onClose={() => setIsBaseFormOpen(false)}>
         <BaseForm
+          initialValue={initialValue?.base}
           onSubmit={(value) => {
-            console.log("base submit", value);
             setValue("base", value);
+            setIsBaseFormOpen(false);
           }}
         />
       </Modal>
@@ -233,7 +207,7 @@ const ThemeForm = ({
             keys={Array.from(borderWidthValuesTokens)}
             data={Array.from(dimensionValuesTokens)}
             value={watch(`size.border.width`)}
-            onChange={(k, v) => setValue(`size.border.width.${k}`, String(v))}
+            onChange={(k, v) => setValue(`size.border.width.${k}`, v)}
             errors={errors?.size?.border?.width}
           />
           {errors?.size?.border?.width?.message && (
@@ -246,7 +220,7 @@ const ThemeForm = ({
             keys={Array.from(borderRadiusValuesTokens)}
             data={Array.from(dimensionValuesTokens)}
             value={watch(`size.border.radius`)}
-            onChange={(k, v) => setValue(`size.border.radius.${k}`, String(v))}
+            onChange={(k, v) => setValue(`size.border.radius.${k}`, v)}
             errors={errors?.size?.border?.radius}
           />
           {errors?.size?.border?.radius?.message && (
@@ -259,7 +233,7 @@ const ThemeForm = ({
             keys={Array.from(spacingValuesTokens)}
             data={Array.from(dimensionValuesTokens)}
             value={watch(`size.spacing`)}
-            onChange={(k, v) => setValue(`size.spacing.${k}`, String(v))}
+            onChange={(k, v) => setValue(`size.spacing.${k}`, v)}
             errors={errors?.size?.spacing}
           />
           {errors?.size?.spacing?.message && (
@@ -283,7 +257,12 @@ const ThemeForm = ({
                 colors={paletteColorOptions}
                 value={watch(`palette.${mode}`)}
                 onChange={(section, token, prop, value) =>
-                  setValue(`palette.${mode}.${section}.${token}.${prop}`, value)
+                  setValue(
+                    `palette.${mode}.${section}.${token}.${prop}`,
+                    prop === "color"
+                      ? (value as ColorValues | FoundationValues)
+                      : +value
+                  )
                 }
                 onColorPreview={handleColorPreview}
                 errors={errors.palette?.[mode]}
@@ -294,7 +273,12 @@ const ThemeForm = ({
                 colors={paletteColorOptions}
                 value={watch(`palette.${mode}`)}
                 onChange={(section, token, prop, value) =>
-                  setValue(`palette.${mode}.${section}.${token}.${prop}`, value)
+                  setValue(
+                    `palette.${mode}.${section}.${token}.${prop}`,
+                    prop === "color"
+                      ? (value as ColorValues | FoundationValues)
+                      : +value
+                  )
                 }
                 onColorPreview={handleColorPreview}
                 errors={errors.palette?.[mode]}
@@ -305,7 +289,12 @@ const ThemeForm = ({
                 colors={paletteColorOptions}
                 value={watch(`palette.${mode}`)}
                 onChange={(section, token, prop, value) =>
-                  setValue(`palette.${mode}.${section}.${token}.${prop}`, value)
+                  setValue(
+                    `palette.${mode}.${section}.${token}.${prop}`,
+                    prop === "color"
+                      ? (value as ColorValues | FoundationValues)
+                      : +value
+                  )
                 }
                 onColorPreview={handleColorPreview}
                 errors={errors.palette?.[mode]}
@@ -316,7 +305,12 @@ const ThemeForm = ({
                 colors={paletteColorOptions}
                 value={watch(`palette.${mode}`)}
                 onChange={(section, token, prop, value) =>
-                  setValue(`palette.${mode}.${section}.${token}.${prop}`, value)
+                  setValue(
+                    `palette.${mode}.${section}.${token}.${prop}`,
+                    prop === "color"
+                      ? (value as ColorValues | FoundationValues)
+                      : +value
+                  )
                 }
                 onColorPreview={handleColorPreview}
                 errors={errors.palette?.[mode]}

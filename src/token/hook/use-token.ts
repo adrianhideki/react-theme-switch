@@ -12,6 +12,7 @@ export const useToken = () => {
   if (!context) {
     return {
       theme: transformTheme(defaultTheme),
+      referenceTheme: defaultTheme,
       updateTheme: () => {},
     } as TokenContextValues;
   }

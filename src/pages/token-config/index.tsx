@@ -4,8 +4,10 @@ import Select from "@components/select";
 import Button from "@components/button";
 import { useTokenCollection } from "@token/hook/use-token-collection";
 import ThemeForm from "./theme-form";
+import { useToken } from "@token/hook/use-token";
 
 const TokenConfig = () => {
+  const { referenceTheme } = useToken();
   const { themes, currentTheme, updateCurrentTheme, addTheme, deleteTheme } =
     useTokenCollection();
 
@@ -28,6 +30,7 @@ const TokenConfig = () => {
   const handleDeleteTheme = () => {
     deleteTheme(currentTheme);
   };
+
   return (
     <Page>
       <Typography variant="h1">Choose the token theme:</Typography>
@@ -56,6 +59,7 @@ const TokenConfig = () => {
       </div>
       <div>
         <ThemeForm
+          initialValue={referenceTheme}
           onSubmit={(values) => {
             console.log("submit", values);
           }}

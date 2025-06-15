@@ -37,6 +37,7 @@ const TokenProvider = ({
     <TokenContext.Provider
       value={{
         theme: transformedTheme,
+        referenceTheme: theme,
         updateTheme: handleUpdateTheme,
       }}
     >

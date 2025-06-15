@@ -40,6 +40,7 @@ const BaseToken = <
           <Typography className="capitalize">{key}</Typography>
           <Input
             placeholder={String(key)}
+            defaultValue={data[key]}
             onChange={(e) =>
               setData((p) => ({
                 ...p,

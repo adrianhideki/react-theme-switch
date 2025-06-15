@@ -24,14 +24,16 @@ import { fontWeightTokens } from "@token/fonts/weight/types";
 import type { DimensionValues } from "@token/sizes";
 import { dimensionValuesTokens } from "@token/sizes/dimensions/types";
 import Button from "@components/button";
+import type { PartialTheme } from "@token/theme";
 
 type BaseThemeFormValues = z.infer<typeof baseThemeConfigSchema>;
 
 type BaseFormProps = {
   onSubmit: (values: BaseThemeFormValues) => void;
+  initialValue?: PartialTheme["base"];
 };
 
-const BaseForm = ({ onSubmit }: BaseFormProps) => {
+const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
   const {
     getValues,
     setValue,
@@ -41,7 +43,9 @@ const BaseForm = ({ onSubmit }: BaseFormProps) => {
     formState: { errors },
   } = useForm<BaseThemeFormValues>({
     resolver: zodResolver(baseThemeConfigSchema),
-    defaultValues: {},
+    defaultValues: {
+      ...initialValue,
+    },
   });
 
   const handleAddColor = useCallback(
