@@ -12,7 +12,7 @@ import { deepMerge } from "./utils";
 import { transformTheme } from "@token/theme/transformTheme";
 
 type ThemeProviderProps = {
-  theme: PartialTheme;
+  theme?: PartialTheme;
 };
 
 const TokenProvider = ({
@@ -20,15 +20,25 @@ const TokenProvider = ({
   theme: inputTheme,
 }: PropsWithChildren<ThemeProviderProps>) => {
   const [theme, setTheme] = useState<Theme>(
-    deepMerge<Theme>(inputTheme, defaultTheme)
+    deepMerge<Theme>(defaultTheme, inputTheme ?? defaultTheme)
   );
 
-  const handleUpdateTheme = useCallback((value: PartialTheme) => {
-    setTheme((prev) => deepMerge<Theme>(value, prev));
-  }, []);
+  const handleUpdateTheme = useCallback(
+    (value: PartialTheme) => {
+      if (value?.id === theme?.id) {
+        return;
+      }
+
+      setTheme(value as Theme);
+      console.log("name", value.name);
+    },
+    [theme?.id]
+  );
 
   useEffect(() => {
-    setTheme(deepMerge<Theme>(inputTheme, defaultTheme));
+    if (inputTheme) {
+      setTheme(deepMerge<Theme>(defaultTheme, inputTheme));
+    }
   }, [inputTheme]);
 
   const transformedTheme = useMemo(() => transformTheme(theme), [theme]);

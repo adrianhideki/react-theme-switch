@@ -25,13 +25,16 @@ const TokenCollectionProvider = ({ children }: PropsWithChildren) => {
 
     if (theme) {
       updateTheme(theme);
-      localStorage.setItem("currentToken", String(currentTheme));
     }
   }, [themes, updateTheme, currentTheme]);
 
   useEffect(() => {
     localStorage.setItem("tokens", JSON.stringify(themes));
   }, [themes]);
+
+  useEffect(() => {
+    localStorage.setItem("currentToken", String(currentTheme));
+  }, [currentTheme]);
 
   const handleAddTheme = useCallback(
     (theme: Theme) => setThemes((prev) => [...prev, theme]),

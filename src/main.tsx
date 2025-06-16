@@ -7,25 +7,16 @@ import ThemeCollectionProvider from "@providers/ThemeCollectionContext.tsx";
 import CssBaseLine from "@theme/CssBaseLine";
 import TokenProvider from "@token/provider/token";
 import { router } from "./routes.tsx";
-import { defaultTheme } from "@token/theme/defaultTheme.ts";
+// import { defaultTheme } from "@token/theme/defaultTheme.ts";
 import "./index.css";
 import TokenCollectionProvider from "@token/provider/token-collection/ThemeCollectionContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ModeProvider>
-      <ThemeProvider
-        theme={{
-          colors: {
-            primary: {
-              main: { dark: "#f1f1f1", light: "#000" },
-              contrast: { dark: "#000", light: "#fff" },
-            },
-          },
-        }}
-      >
+      <ThemeProvider>
         <TokenProvider
-          theme={{ ...defaultTheme, id: "default", name: "default" }}
+        // theme={{ ...defaultTheme, id: "default", name: "default" }}
         >
           <CssBaseLine />
           <ThemeCollectionProvider>

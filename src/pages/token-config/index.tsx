@@ -5,11 +5,18 @@ import Button from "@components/button";
 import { useTokenCollection } from "@token/hook/use-token-collection";
 import ThemeForm from "./theme-form";
 import { useToken } from "@token/hook/use-token";
+import type { Theme } from "@token/theme";
 
 const TokenConfig = () => {
   const { referenceTheme } = useToken();
-  const { themes, currentTheme, updateCurrentTheme, addTheme, deleteTheme } =
-    useTokenCollection();
+  const {
+    themes,
+    currentTheme,
+    updateCurrentTheme,
+    addTheme,
+    deleteTheme,
+    updateTheme,
+  } = useTokenCollection();
 
   const handleSelectChange = (value: string) => {
     updateCurrentTheme(value);
@@ -61,7 +68,7 @@ const TokenConfig = () => {
         <ThemeForm
           initialValue={referenceTheme}
           onSubmit={(values) => {
-            console.log("submit", values);
+            updateTheme({ ...values, id: currentTheme } as Theme);
           }}
         />
       </div>

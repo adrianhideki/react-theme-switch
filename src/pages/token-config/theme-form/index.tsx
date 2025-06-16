@@ -1,5 +1,5 @@
 import type { z } from "zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import schema from "./schema";
@@ -45,6 +45,7 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
     setValue,
     handleSubmit,
     register,
+    reset,
     formState: { errors },
   } = useForm<ThemeFormValues>({
     resolver: zodResolver(schema),
@@ -52,6 +53,12 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
       ...initialValue,
     },
   });
+
+  useEffect(() => {
+    reset({
+      ...initialValue,
+    });
+  }, [reset, initialValue]);
 
   // --- Color options for theme.color ---
   const colorOptions = [
