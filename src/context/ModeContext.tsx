@@ -1,8 +1,7 @@
-import type { ThemeMode } from "@theme/types";
 import { createContext } from "react";
 
 export type ModeContextValues = {
-  mode: ThemeMode;
+  mode: "light" | "dark";
   toggle: () => void;
 };
 

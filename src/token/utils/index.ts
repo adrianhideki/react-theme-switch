@@ -119,7 +119,8 @@ export function generateColorScale(hex: string): Record<number, string> {
   const scaleKeys = colorScaleValuesTokens;
   // Example: lightest (100) to darkest (1200)
   const lightnesses = scaleKeys.map(
-    (_, index) => ((scaleKeys.length - (index + 1)) * 100) / scaleKeys.length / 100
+    (_, index) =>
+      ((scaleKeys.length - (index + 1)) * 100) / scaleKeys.length / 100
   );
 
   const scale: Record<number, string> = {};
@@ -129,3 +130,13 @@ export function generateColorScale(hex: string): Record<number, string> {
 
   return scale;
 }
+
+export const getIsDarkMode = () => {
+  const mode = localStorage.getItem("mode");
+
+  if (mode) {
+    return mode === "dark";
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches;
+};

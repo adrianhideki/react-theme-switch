@@ -1,6 +1,6 @@
 import Drawer from "@components/drawer";
 import { useMode } from "@hooks/useMode";
-import { useTheme } from "@hooks/useTheme";
+import { useToken } from "@token/hook/use-token";
 import { useState } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 
 const Navbar = () => {
   const { toggle, mode } = useMode();
-  const { theme } = useTheme();
+  const { theme } = useToken();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const Navbar = () => {
             onClick={() => {
               setOpen(true);
             }}
-            size={theme.spacing * 3}
+            size={theme.size.spacing?.md}
           />
           <span
             className="text-primary-contrast text-h2 cursor-pointer"
@@ -44,9 +44,9 @@ const Navbar = () => {
         </div>
         <div className="cursor-pointer" onClick={toggle}>
           {mode === "dark" ? (
-            <FaSun size={theme.spacing * 3} />
+            <FaSun size={theme.size.spacing?.md} />
           ) : (
-            <FaMoon size={theme.spacing * 3} />
+            <FaMoon size={theme.size.spacing?.md} />
           )}
         </div>
       </div>

@@ -88,6 +88,11 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
     return "";
   }
 
+  const handleFormSubmit = () => {
+    handleSubmit(onSubmit);
+    setIsOpen(false);
+  };
+
   return (
     <>
       <div className="flex gap-2">
@@ -106,10 +111,7 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
         />
       </Modal>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <form
-          className="flex flex-col gap-2 p-4"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="flex flex-col gap-2 p-4" onSubmit={handleFormSubmit}>
           <Typography variant="h2">Theme Properties</Typography>
           <Typography>Name</Typography>
           <Input placeholder="Name" {...register("name")} />

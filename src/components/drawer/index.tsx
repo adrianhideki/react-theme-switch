@@ -1,8 +1,8 @@
-import IconButton from "@components/icon-button";
-import Typography from "@components/typography";
-import { useTheme } from "@hooks/useTheme";
 import type { PropsWithChildren } from "react";
 import { MdClose } from "react-icons/md";
+import IconButton from "@components/icon-button";
+import Typography from "@components/typography";
+import { useToken } from "@token/hook/use-token";
 
 type DrawerProps = {
   open: boolean;
@@ -14,7 +14,7 @@ const Drawer = ({
   onOpenChange,
   children,
 }: PropsWithChildren<DrawerProps>) => {
-  const { theme } = useTheme();
+  const { theme } = useToken();
 
   const handleCloseClick = () => {
     onOpenChange(false);
@@ -45,7 +45,7 @@ const Drawer = ({
             <div className="px-4 sm:px-6 flex justify-between">
               <Typography variant="h2">React Theme Switcher</Typography>
               <IconButton
-                icon={<MdClose size={theme.spacing * 3} />}
+                icon={<MdClose size={theme.size.spacing?.md} />}
                 onClick={handleCloseClick}
               />
             </div>

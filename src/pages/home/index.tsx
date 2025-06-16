@@ -5,13 +5,13 @@ import Page from "@components/page";
 import Alert from "@components/alert";
 import IconButton from "@components/icon-button";
 import { MdClose } from "react-icons/md";
-import { useTheme } from "@hooks/useTheme";
 import Card from "@components/card";
 import Tag from "@components/tag";
+import { useToken } from "@token/hook/use-token";
 
 const Home = () => {
   const [count, setCount] = useState(0);
-  const { theme } = useTheme();
+  const { theme } = useToken();
 
   return (
     <Page>
@@ -104,25 +104,25 @@ const Home = () => {
         <Alert className="font-medium" level="success">
           <div className="flex justify-between">
             This is a success alert!{" "}
-            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
+            <IconButton icon={<MdClose size={theme.size.spacing?.md} />} />
           </div>
         </Alert>
         <Alert className="font-medium" level="error">
           <div className="flex justify-between">
             This is a error alert!
-            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
+            <IconButton icon={<MdClose size={theme.size.spacing?.md} />} />
           </div>
         </Alert>
         <Alert className="font-medium" level="warning">
           <div className="flex justify-between">
             This is a warning alert!
-            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
+            <IconButton icon={<MdClose size={theme.size.spacing?.md} />} />
           </div>
         </Alert>
         <Alert className="font-medium" level="info">
           <div className="flex justify-between">
             This is a information alert!
-            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
+            <IconButton icon={<MdClose size={theme.size.spacing?.md} />} />
           </div>
         </Alert>
         <Button
