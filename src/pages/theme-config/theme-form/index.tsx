@@ -113,15 +113,15 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
       </Modal>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <form className="flex flex-col gap-2 p-4" onSubmit={handleFormSubmit}>
-          <Typography variant="h2">Theme Properties</Typography>
+          <Typography variant="h4">Theme Properties</Typography>
           <Typography>Name</Typography>
           <Input placeholder="Name" {...register("name")} />
           {errors.name?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors.name?.message)}
             </Typography>
           )}
-          <Typography variant="h3">Theme Colors</Typography>
+          <Typography variant="h5">Theme Colors</Typography>
           <Token
             keys={Array.from(colorValuesThemes)}
             data={colorOptions}
@@ -130,11 +130,11 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
             errors={errors.color}
           />
           {errors.color?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors.color?.message)}
             </Typography>
           )}
-          <Typography variant="h3">Theme Font Family</Typography>
+          <Typography variant="h5">Theme Font Family</Typography>
           <Token
             keys={Array.from(fontValuesThemes)}
             data={Array.from(fontFamilyThemes)}
@@ -143,11 +143,11 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
             errors={errors.font?.family}
           />
           {errors.font?.family?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors.font?.family?.message)}
             </Typography>
           )}
-          <Typography variant="h3">Theme Font Height</Typography>
+          <Typography variant="h5">Theme Font Height</Typography>
           <Token
             keys={Array.from(fontValuesThemes)}
             data={Array.from(fontHeightThemes)}
@@ -156,11 +156,11 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
             errors={errors.font?.height}
           />
           {errors.font?.height?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors.font?.height?.message)}
             </Typography>
           )}
-          <Typography variant="h3">Theme Font Spacing</Typography>
+          <Typography variant="h5">Theme Font Spacing</Typography>
           <Token
             keys={Array.from(fontValuesThemes)}
             data={Array.from(fontSpacingThemes)}
@@ -169,11 +169,11 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
             errors={errors.font?.spacing}
           />
           {errors.font?.spacing?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors.font?.spacing?.message)}
             </Typography>
           )}
-          <Typography variant="h3">Theme Font Size</Typography>
+          <Typography variant="h5">Theme Font Size</Typography>
           <Token
             keys={Array.from(fontValuesThemes)}
             data={Array.from(fontSizeThemes)}
@@ -182,11 +182,11 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
             errors={errors.font?.size}
           />
           {errors.font?.size?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors.font?.size?.message)}
             </Typography>
           )}
-          <Typography variant="h3">Theme Font Weight</Typography>
+          <Typography variant="h5">Theme Font Weight</Typography>
           <Token
             keys={Array.from(fontValuesThemes)}
             data={Array.from(fontWeightThemes)}
@@ -195,11 +195,11 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
             errors={errors.font?.weight}
           />
           {errors.font?.weight?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors.font?.weight?.message)}
             </Typography>
           )}
-          <Typography variant="h3">Theme Font Paragraph Spacing</Typography>
+          <Typography variant="h5">Theme Font Paragraph Spacing</Typography>
           <Token
             keys={Array.from(fontValuesThemes)}
             data={Array.from(fontParagraphSpacingThemes)}
@@ -208,11 +208,11 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
             errors={errors.font?.paragraphSpacing}
           />
           {errors.font?.paragraphSpacing?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors.font?.paragraphSpacing?.message)}
             </Typography>
           )}
-          <Typography variant="h3">Theme Size Border Width</Typography>
+          <Typography variant="h5">Theme Size Border Width</Typography>
           <Token
             keys={Array.from(borderWidthValuesThemes)}
             data={Array.from(dimensionValuesThemes)}
@@ -221,11 +221,11 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
             errors={errors?.size?.border?.width}
           />
           {errors?.size?.border?.width?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors?.size?.border?.width?.message)}
             </Typography>
           )}
-          <Typography variant="h3">Theme Size Border Radius</Typography>
+          <Typography variant="h5">Theme Size Border Radius</Typography>
           <Token
             keys={Array.from(borderRadiusValuesThemes)}
             data={Array.from(dimensionValuesThemes)}
@@ -234,11 +234,11 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
             errors={errors?.size?.border?.radius}
           />
           {errors?.size?.border?.radius?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors?.size?.border?.radius?.message)}
             </Typography>
           )}
-          <Typography variant="h3">Theme Size Spacing</Typography>
+          <Typography variant="h5">Theme Size Spacing</Typography>
           <Token
             keys={Array.from(spacingValuesThemes)}
             data={Array.from(dimensionValuesThemes)}
@@ -247,11 +247,11 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
             errors={errors?.size?.spacing}
           />
           {errors?.size?.spacing?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors?.size?.spacing?.message)}
             </Typography>
           )}
-          <Typography variant="h3">Palette (light/dark)</Typography>
+          <Typography variant="h5">Palette (light/dark)</Typography>
           <Typography>
             For each palette property, select a color from your collection or
             theme color.

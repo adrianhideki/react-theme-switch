@@ -41,9 +41,9 @@ const Drawer = ({
             open ? "max-w-md" : "max-w-0"
           }`}
         >
-          <div className="flex h-full flex-col overflow-y-auto bg-background py-6 shadow-xl">
+          <div className="flex h-full flex-col overflow-y-auto bg-surface-page py-6 shadow-xl">
             <div className="px-4 sm:px-6 flex justify-between">
-              <Typography variant="h2">React Theme Switcher</Typography>
+              <Typography variant="h5">React Theme Switcher</Typography>
               <IconButton
                 icon={<MdClose size={theme.size.spacing?.md} />}
                 onClick={handleCloseClick}

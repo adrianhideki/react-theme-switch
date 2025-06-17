@@ -35,7 +35,7 @@ const ColorFoundation = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <Typography variant="h3">Base Foundations</Typography>
+      <Typography variant="h5">Base Foundations</Typography>
       <div className="flex gap-2 items-center">
         <Typography>White</Typography>
         <ColorPicker

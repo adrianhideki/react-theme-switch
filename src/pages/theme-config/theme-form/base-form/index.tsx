@@ -105,8 +105,8 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
   return (
     <div>
       <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
-        <Typography variant="h2">Base Properties</Typography>
-        <Typography variant="h3">Colors Collection</Typography>
+        <Typography variant="h4">Base Properties</Typography>
+        <Typography variant="h5">Colors Collection</Typography>
         <ColorCollection
           collection={watch("color.collection")}
           onColorAdd={handleAddColor}
@@ -114,7 +114,7 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
           onColorRemove={handleRemoveColor}
         />
         {errors.color?.collection && (
-          <Typography className="text-error">
+          <Typography className="text-text-text-error-default-default">
             {String(errors.color.collection?.message)}
           </Typography>
         )}
@@ -123,21 +123,21 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
           onChange={handleColorFoundationChange}
         />
         {errors?.color?.foundations?.message && (
-          <Typography className="text-error">
+          <Typography className="text-text-error-default">
             {String(errors?.color?.foundations?.message)}
           </Typography>
         )}
         {errors?.color?.foundations?.white && (
-          <Typography className="text-error">
+          <Typography className="text-text-error-default">
             {String(errors?.color?.foundations?.white.message)}
           </Typography>
         )}
         {errors?.color?.foundations?.black && (
-          <Typography className="text-error">
+          <Typography className="text-text-error-default">
             {String(errors?.color?.foundations?.black.message)}
           </Typography>
         )}
-        <Typography variant="h3">Font Family</Typography>
+        <Typography variant="h5">Font Family</Typography>
         <BaseTheme<FontFamily, string>
           themes={fontFamilyThemes}
           data={getValues("font.family") as Record<FontFamily, string>}
@@ -147,11 +147,11 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
           }
         />
         {errors?.font?.family?.message && (
-          <Typography className="text-error">
+          <Typography className="text-text-error-default">
             {String(errors?.font?.family?.message)}
           </Typography>
         )}
-        <Typography variant="h3">Font Height</Typography>
+        <Typography variant="h5">Font Height</Typography>
         <BaseTheme<FontHeight, number>
           themes={fontHeightThemes}
           data={getValues("font.height") as Record<FontHeight, number>}
@@ -162,11 +162,11 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
           }
         />
         {errors?.font?.height?.message && (
-          <Typography className="text-error">
+          <Typography className="text-text-error-default">
             {String(errors?.font?.height?.message)}
           </Typography>
         )}
-        <Typography variant="h3">Font Spacing</Typography>
+        <Typography variant="h5">Font Spacing</Typography>
         <BaseTheme<FontSpacing, number>
           themes={fontSpacingThemes}
           data={getValues("font.spacing") as Record<FontSpacing, number>}
@@ -177,11 +177,11 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
           }
         />
         {errors?.font?.spacing?.message && (
-          <Typography className="text-error">
+          <Typography className="text-text-error-default">
             {String(errors?.font?.spacing?.message)}
           </Typography>
         )}
-        <Typography variant="h3">Font Paragraph Spacing</Typography>
+        <Typography variant="h5">Font Paragraph Spacing</Typography>
         <BaseTheme<FontParagraphSpacing, number>
           themes={fontParagraphSpacingThemes}
           data={
@@ -200,11 +200,11 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
           }
         />
         {errors?.font?.paragraphSpacing?.message && (
-          <Typography className="text-error">
+          <Typography className="text-text-error-default">
             {String(errors?.font?.paragraphSpacing?.message)}
           </Typography>
         )}
-        <Typography variant="h3">Font Size</Typography>
+        <Typography variant="h5">Font Size</Typography>
         <BaseTheme<FontSize, number>
           themes={fontSizeThemes}
           data={getValues("font.size") as Record<FontSize, number>}
@@ -213,11 +213,11 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
           error={errors.font?.size as Record<FontSize, { message?: string }>}
         />
         {errors?.font?.size?.message && (
-          <Typography className="text-error">
+          <Typography className="text-text-error-default">
             {String(errors?.font?.size?.message)}
           </Typography>
         )}
-        <Typography variant="h3">Font Weight</Typography>
+        <Typography variant="h5">Font Weight</Typography>
         <BaseTheme<FontWeight, number>
           themes={fontWeightThemes}
           data={getValues("font.weight") as Record<FontWeight, number>}
@@ -228,11 +228,11 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
           }
         />
         {errors?.font?.weight?.message && (
-          <Typography className="text-error">
+          <Typography className="text-text-error-default">
             {String(errors?.font?.weight?.message)}
           </Typography>
         )}
-        <Typography variant="h3">Dimensions</Typography>
+        <Typography variant="h5">Dimensions</Typography>
         <BaseTheme<DimensionValues, number>
           themes={dimensionValuesThemes}
           data={getValues("size.dimension") as Record<DimensionValues, number>}
@@ -246,7 +246,7 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
           }
         />
         {errors?.size?.dimension?.message && (
-          <Typography className="text-error">
+          <Typography className="text-text-error-default">
             {String(errors?.size?.dimension?.message)}
           </Typography>
         )}

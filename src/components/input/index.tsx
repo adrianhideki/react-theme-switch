@@ -27,9 +27,9 @@ const Input = ({
   ...props
 }: InputProps) => {
   const style =
-    "p-2 min-w-0 text-text border-2 rounded-default focus:transition-all focus:outline-none focus:border-primary border-border";
+    "p-2 min-w-0 text-text border-2 rounded-xs focus:transition-all focus:outline-none focus:border-surface-primary-default border-default";
 
-  const errorStyle = "border-error";
+  const errorStyle = "border-error-default";
 
   const disableStyle = "cursor-not-allowed bg-gray-500/25";
 

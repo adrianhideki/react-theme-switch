@@ -45,10 +45,10 @@ const Navbar = () => {
             onClick={() => {
               setOpen(true);
             }}
-            size={theme.size.spacing?.md}
+            size={theme.size.spacing?.lg}
           />
           <span
-            className="text-text-primary-default text-h2 cursor-pointer"
+            className="text-text-primary-default text-h4 cursor-pointer"
             onClick={handleHomeClick}
           >
             React Theme Switcher
@@ -56,9 +56,9 @@ const Navbar = () => {
         </div>
         <div className="cursor-pointer" onClick={toggle}>
           {mode === "dark" ? (
-            <FaSun size={theme.size.spacing?.md} />
+            <FaSun size={theme.size.spacing?.lg} />
           ) : (
-            <FaMoon size={theme.size.spacing?.md} />
+            <FaMoon size={theme.size.spacing?.lg} />
           )}
         </div>
       </div>

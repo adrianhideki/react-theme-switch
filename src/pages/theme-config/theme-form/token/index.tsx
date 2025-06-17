@@ -27,10 +27,10 @@ const Token = <TKey extends string, TValue extends string | number>({
             getLabel={(item) => String(item)}
             value={value?.[key]}
             onChange={(item) => onChange(key, item as TValue)}
-            className="w-20"
+            className="w-40"
           />
           {errors?.[key]?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(errors?.[key]?.message)}
             </Typography>
           )}

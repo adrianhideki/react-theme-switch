@@ -70,7 +70,7 @@ const ColorPicker = ({
     <>
       <div
         className={cn(
-          "w-4 h-4 border-2 border-border text-text cursor-pointer rounded-default",
+          "w-4 h-4 border-1 border-default text-text cursor-pointer rounded-default",
           className
         )}
         style={{
@@ -88,7 +88,7 @@ const ColorPicker = ({
       {showPicker && (
         <>
           <div
-            className="fixed z-10 bg-surface-page border-border border-2 rounded-sm"
+            className="fixed z-10 bg-surface-page border-default border-2 rounded-sm"
             style={{
               top: getTopPosition(),
               left: getLeftPosition(),

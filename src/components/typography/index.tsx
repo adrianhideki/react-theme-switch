@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import React from "react";
+import cn from "classnames";
 
 type TypographyVariant =
   | "h1"
@@ -8,11 +9,13 @@ type TypographyVariant =
   | "h4"
   | "h5"
   | "h6"
-  | "subtitle"
-  | "subtitle-secondary"
+  | "hyperlink"
+  | "hyperlinkHover"
   | "body"
-  | "body-secondary"
-  | "button"
+  | "bodyShort"
+  | "bodyLong"
+  | "label"
+  | "labelLong"
   | "caption";
 
 type TypographyProps = {
@@ -24,16 +27,18 @@ type TypographyProps = {
 const getElement = (variant: TypographyVariant) => {
   const elements: Record<TypographyVariant, string> = {
     body: "p",
-    "body-secondary": "p",
-    subtitle: "span",
-    "subtitle-secondary": "span",
+    bodyShort: "p",
+    bodyLong: "p",
+    hyperlink: "span",
+    hyperlinkHover: "span",
     h1: "h1",
     h2: "h2",
     h3: "h3",
     h4: "h4",
     h5: "h5",
     h6: "h6",
-    button: "span",
+    label: "span",
+    labelLong: "span",
     caption: "span",
   };
 
@@ -44,9 +49,14 @@ const Typography = React.memo(
   ({ variant = "body", children, ...props }: TypographyProps) => {
     const enhancedProps = {
       ...props,
-      className: `text-${variant} font-${variant} font-weight-${variant} ${
-        props.className ?? ""
-      }`,
+      className: cn(
+        `text-${variant}`,
+        `font-${variant}`,
+        `font-family-${variant}`,
+        `font-weight-${variant}`,
+        `tracking-${variant}`,
+        `${props.className ?? ""}`
+      ),
     };
 
     const element = React.createElement(

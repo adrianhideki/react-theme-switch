@@ -52,7 +52,7 @@ const BaseTheme = <
             error={error?.[key]?.message}
           />
           {error?.[key]?.message && (
-            <Typography className="text-error">
+            <Typography className="text-text-error-default">
               {String(error?.[key]?.message)}
             </Typography>
           )}

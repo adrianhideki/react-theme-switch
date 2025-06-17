@@ -18,7 +18,7 @@ const Card = ({
   return (
     <div
       className={cn(
-        "bg-surface-page max-w-sm rounded-default overflow-hidden",
+        "bg-surface-pageAlternative max-w-sm rounded-xs overflow-hidden",
         className
       )}
     >
@@ -30,7 +30,7 @@ const Card = ({
         />
       )}
       <div className="px-6 py-4">
-        <div className="font-bold text-h4 mb-2">{title}</div>
+        <div className="font-semiBold text-h5 mb-2">{title}</div>
         {children}
       </div>
       {actions && <div className="px-6 pt-4 pb-2">{actions}</div>}

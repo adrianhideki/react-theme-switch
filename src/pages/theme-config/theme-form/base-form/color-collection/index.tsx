@@ -90,17 +90,17 @@ const ColorCollection = ({
 
   return (
     <>
-      <table className="w-full border border-border">
+      <table className="w-full border border-default">
         <thead>
           <tr>
-            <th className="border border-border px-2 py-1">Color Name</th>
-            <th className="border border-border px-2 py-1">Scales</th>
-            <th className="border border-border px-2 py-1">Actions</th>
+            <th className="border border-default px-2 py-1">Color Name</th>
+            <th className="border border-default px-2 py-1">Scales</th>
+            <th className="border border-default px-2 py-1">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className="border border-border px-2 py-1">
+            <td className="border border-default px-2 py-1">
               <Input
                 placeholder="Color name"
                 value={newColorName}
@@ -110,7 +110,7 @@ const ColorCollection = ({
             <td className="px-2 py-1 flex flex-wrap items-center gap-2">
               <ColorPicker
                 text={"base"}
-                className="w-6 h-6 flex items-center justify-center"
+                className="w-10 h-10 flex items-center justify-center"
                 color={baseColor}
                 onColorChange={(color) => {
                   setBaseColor(color);
@@ -124,7 +124,7 @@ const ColorCollection = ({
                 <div key={scale} className="flex flex-row items-center">
                   <ColorPicker
                     text={String(scale)}
-                    className="w-6 h-6 flex items-center justify-center"
+                    className="w-10 h-10 flex items-center justify-center"
                     color={newColorScales[scale] || ""}
                     onColorChange={(color) =>
                       setNewColorScales((s) => ({
@@ -136,7 +136,7 @@ const ColorCollection = ({
                 </div>
               ))}
             </td>
-            <td className="border border-border px-2 py-1">
+            <td className="border border-default px-2 py-1">
               {editingColor ? (
                 <Button
                   type="button"
@@ -159,13 +159,13 @@ const ColorCollection = ({
 
           {Object.entries(collection ?? {}).map(([name, scales]) => (
             <tr key={name}>
-              <td className="border border-border px-2 py-1">{name}</td>
-              <td className="border border-border px-2 py-1">
+              <td className="border border-default px-2 py-1">{name}</td>
+              <td className="border border-default px-2 py-1">
                 <div className="flex gap-2">
                   {Object.entries(scales).map(([scale, value]) => (
                     <span
                       key={scale}
-                      className="flex border border-border flex-col gap-1 w-6 h-6"
+                      className="flex border border-default flex-col gap-1 w-10 h-10"
                       style={{
                         background: value,
                         display: "inline-block",
@@ -185,7 +185,7 @@ const ColorCollection = ({
                   ))}
                 </div>
               </td>
-              <td className="border border-border px-2 py-1">
+              <td className="border border-default px-2 py-1">
                 <div className="flex gap-2 items-center justify-center">
                   <Button type="button" onClick={() => handleEditColor(name)}>
                     Edit

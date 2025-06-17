@@ -31,11 +31,12 @@ const Button = ({
     let style = "bg-surface-primary-default text-text-primary-default ";
 
     if (variant === "outlined") {
-      style = "bg-transparent text-primary border-2 border-b-primary";
+      style =
+        "bg-transparent text-surface-primary-default border-2 border-surface-primary-default";
     }
 
     if (variant === "text") {
-      style = "bg-transparent text-primary";
+      style = "bg-transparent text-surface-primary-default";
     }
 
     if (disabled) {
@@ -51,11 +52,11 @@ const Button = ({
       {...props}
       disabled={disabled}
       className={cn(
-        "text-button",
-        "rounded-default",
+        "rounded-3xs",
         "cursor-pointer",
         "hover:transition",
-        "p-1",
+        "px-2",
+        "py-1",
         getStyle(),
         { "hover:brightness-150 hover:transition-all": !disabled },
         className

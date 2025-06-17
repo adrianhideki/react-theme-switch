@@ -88,13 +88,13 @@ const Palette = ({
 
   return (
     <div className="flex flex-wrap gap-4">
-      <table className="p-2 border-1 border-border">
-        <thead className="border-1 border-border">
+      <table className="p-2 border-1 border-default">
+        <thead className="border-1 border-default">
           <tr>
-            <th className="border-1 border-border px-2 py-1">Theme</th>
-            <th className="border-1 border-border px-2 py-1">Color</th>
-            <th className="border-1 border-border px-2 py-1">Scale</th>
-            <th className="border-1 border-border px-2 py-1">Preview</th>
+            <th className="border-1 border-default px-2 py-1">Theme</th>
+            <th className="border-1 border-default px-2 py-1">Color</th>
+            <th className="border-1 border-default px-2 py-1">Scale</th>
+            <th className="border-1 border-default px-2 py-1">Preview</th>
           </tr>
         </thead>
         <tbody>
@@ -115,17 +115,17 @@ const Palette = ({
 
             return (
               <tr key={theme}>
-                <td className="border-1 border-border px-2 py-1">
+                <td className="border-1 border-default px-2 py-1">
                   <span>{theme}</span>
                   {paletteError?.[section]?.[theme]?.message && (
-                    <Typography className="text-error">
+                    <Typography className="text-text-error-default">
                       {String(paletteError?.[section]?.[theme]?.message)}
                     </Typography>
                   )}
                 </td>
-                <td className="border-1 border-border px-2 py-1">
+                <td className="border-1 border-default px-2 py-1">
                   <Select
-                    className="w-20"
+                    className="w-40"
                     items={["", ...colors]}
                     getKey={(item) => item}
                     getLabel={(item) => item}
@@ -135,14 +135,14 @@ const Palette = ({
                     }
                   />
                   {colorError?.[section]?.[theme]?.color?.message && (
-                    <Typography className="text-error">
+                    <Typography className="text-text-error-default">
                       {String(colorError?.[section]?.[theme]?.color?.message)}
                     </Typography>
                   )}
                 </td>
-                <td className="border-1 border-border px-2 py-1">
+                <td className="border-1 border-default px-2 py-1">
                   <Select
-                    className="w-14"
+                    className="w-20"
                     items={["", ...Array.from(colorScaleStringValuesThemes)]}
                     getKey={(item) => item}
                     getLabel={(item) => item}
@@ -153,12 +153,12 @@ const Palette = ({
                     disabled={String(colorValue)?.startsWith("foundation.")}
                   />
                   {colorError?.[section]?.[theme]?.scale?.message && (
-                    <Typography className="text-error">
+                    <Typography className="text-text-error-default">
                       {String(colorError?.[section]?.[theme]?.scale?.message)}
                     </Typography>
                   )}
                 </td>
-                <td className="border-1 border-border px-2 py-1">
+                <td className="border-1 border-default px-2 py-1">
                   <div
                     style={{
                       backgroundColor: onColorPreview(

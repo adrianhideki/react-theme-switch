@@ -38,10 +38,11 @@ const Select = <T = object,>({
         { "cursor-pointer": !disabled },
         { "bg-gray-500": disabled },
         { "cursor-not-allowed": disabled },
-        "rounded-default",
+        "rounded-xs",
         "transition-all",
         "border-1",
-        "border-border",
+        "p-2",
+        "border-default",
         className
       )}
       value={value}
@@ -50,7 +51,11 @@ const Select = <T = object,>({
     >
       {items.map((item) => (
         <option
-          className={cn("bg-surface-page", "text-text-default-body")}
+          className={cn(
+            "bg-surface-pageAlternative",
+            "text-text-default-body",
+            "p-2"
+          )}
           key={getKey(item)}
           value={getKey(item)}
         >

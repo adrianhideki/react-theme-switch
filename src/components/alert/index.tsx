@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
 import cn from "classnames";
 
-type LevelVariants = "info" | "success" | "error" | "warning";
+type LevelVariants = "information" | "success" | "error" | "warning";
 
 type AlertProps = {
   level: LevelVariants;
@@ -16,12 +16,12 @@ const Alert = ({
   return (
     <div
       className={cn(
-        `bg-${level}`,
-        `text-${level}-contrast`,
+        `bg-surface-${level}-default`,
+        `text-text-${level}-default`,
         "rounded-default",
         "p-4",
         "border-2",
-        "border-border",
+        `border-${level}-default`,
         className
       )}
     >
