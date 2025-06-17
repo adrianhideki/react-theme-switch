@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react";
 import { MdClose } from "react-icons/md";
 import IconButton from "@components/icon-button";
 import Typography from "@components/typography";
-import { useToken } from "@token/hook/use-token";
+import { useTheme } from "@theme/hook/use-theme";
 
 type DrawerProps = {
   open: boolean;
@@ -14,7 +14,7 @@ const Drawer = ({
   onOpenChange,
   children,
 }: PropsWithChildren<DrawerProps>) => {
-  const { theme } = useToken();
+  const { theme } = useTheme();
 
   const handleCloseClick = () => {
     onOpenChange(false);

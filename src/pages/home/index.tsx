@@ -7,11 +7,11 @@ import IconButton from "@components/icon-button";
 import { MdClose } from "react-icons/md";
 import Card from "@components/card";
 import Tag from "@components/tag";
-import { useToken } from "@token/hook/use-token";
+import { useTheme } from "@theme/hook/use-theme";
 
 const Home = () => {
   const [count, setCount] = useState(0);
-  const { theme } = useToken();
+  const { theme } = useTheme();
 
   return (
     <Page>

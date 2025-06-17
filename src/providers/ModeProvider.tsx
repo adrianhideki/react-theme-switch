@@ -1,5 +1,5 @@
 import { ModeContext } from "@context/ModeContext";
-import { getIsDarkMode } from "@token/utils";
+import { getIsDarkMode } from "@theme/utils";
 import {
   useCallback,
   useEffect,

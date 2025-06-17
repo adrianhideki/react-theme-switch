@@ -1,20 +1,17 @@
-import Drawer from "@components/drawer";
-import { useMode } from "@hooks/useMode";
-import { useToken } from "@token/hook/use-token";
 import { useState } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
 import { useNavigate } from "react-router";
+import cn from "classnames";
+import Drawer from "@components/drawer";
+import { useMode } from "@hooks/useMode";
+import { useTheme } from "@theme/hook/use-theme";
 
 const Navbar = () => {
   const { toggle, mode } = useMode();
-  const { theme } = useToken();
+  const { theme } = useTheme();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
-
-  const handleConfigureTokenClick = () => {
-    navigate("/token-config");
-  };
 
   const handleConfigureThemeClick = () => {
     navigate("/theme-config");
@@ -26,7 +23,22 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="top-0 right-0 left-0 w-full min-h-8 bg-primary mb-2 p-2 flex gap-2 justify-between items-center text-primary-contrast">
+      <div
+        className={cn(
+          "top-0",
+          "right-0",
+          "left-0",
+          "w-full",
+          "min-h-8",
+          "bg-surface-primary-default",
+          "mb-2",
+          "p-2",
+          "flex",
+          "gap-2",
+          "justify-between",
+          "items-center"
+        )}
+      >
         <div className="flex gap-2 items-center flex-1">
           <FaBars
             className="cursor-pointer transition-all"
@@ -36,7 +48,7 @@ const Navbar = () => {
             size={theme.size.spacing?.md}
           />
           <span
-            className="text-primary-contrast text-h2 cursor-pointer"
+            className="text-text-primary-default text-h2 cursor-pointer"
             onClick={handleHomeClick}
           >
             React Theme Switcher
@@ -62,12 +74,6 @@ const Navbar = () => {
           onClick={handleConfigureThemeClick}
         >
           Configure theme
-        </a>
-        <a
-          className="text-text cursor-pointer flex w-full transition-all hover:text-secondary"
-          onClick={handleConfigureTokenClick}
-        >
-          Configure token
         </a>
       </Drawer>
     </>

@@ -2,21 +2,22 @@ import { StrictMode } from "react";
 import { RouterProvider } from "react-router";
 import { createRoot } from "react-dom/client";
 import ModeProvider from "@providers/ModeProvider.tsx";
-import TokenProvider from "@token/provider/token";
+import ThemeProvider from "@theme/provider/theme";
 import { router } from "./routes.tsx";
 import "./index.css";
-import TokenCollectionProvider from "@token/provider/token-collection/ThemeCollectionContext.tsx";
+import ThemeCollectionProvider from "@theme/provider/theme-collection";
+import CssBaseline from "@theme/css-baseline";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ModeProvider>
-      <TokenProvider
-      // theme={{ ...defaultTheme, id: "default", name: "default" }}
-      >
-        <TokenCollectionProvider>
-          <RouterProvider router={router} />
-        </TokenCollectionProvider>
-      </TokenProvider>
+      <ThemeProvider>
+        <CssBaseline>
+          <ThemeCollectionProvider>
+            <RouterProvider router={router} />
+          </ThemeCollectionProvider>
+        </CssBaseline>
+      </ThemeProvider>
     </ModeProvider>
   </StrictMode>
 );

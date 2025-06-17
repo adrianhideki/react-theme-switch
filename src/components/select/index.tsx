@@ -31,9 +31,9 @@ const Select = <T = object,>({
   return (
     <select
       className={cn(
-        { "bg-paper": !disabled },
+        { "bg-surface-page": !disabled },
         { "hover:brightness-150": !disabled },
-        "text-paper-contrast",
+        "text-text-default-body",
         "p-1",
         { "cursor-pointer": !disabled },
         { "bg-gray-500": disabled },
@@ -50,7 +50,7 @@ const Select = <T = object,>({
     >
       {items.map((item) => (
         <option
-          className="p-1 bg-paper text-paper-contrast hover:bg-primary hover:text-primary-contrast hover:transition-all min-h-6"
+          className={cn("bg-surface-page", "text-text-default-body")}
           key={getKey(item)}
           value={getKey(item)}
         >

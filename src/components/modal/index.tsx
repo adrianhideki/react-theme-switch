@@ -11,7 +11,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
 
   return (
     <>
-      <div className="bg-paper rounded-default p-6 shadow-lg z-10 relative">
+      <div className="bg-surface-page rounded-default p-6 shadow-lg z-10 relative">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 text-text cursor-pointer"

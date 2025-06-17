@@ -7,8 +7,8 @@ option:last-of-type {
 }
 
 option:hover {
-  background-color: var(--color-secondary) !important;
-  color: var(--color-secondary-contrast) !important;
+  background-color: var(--color-surface-secondary-default) !important;
+  color: var(--color-text-secondary-default) !important;
   transition: 0.5s ease-out;
 }
 
@@ -41,13 +41,13 @@ option::checkmark {
 
 option:checked {
   font-weight: bold;
-  background-color: var(--color-primary);
-  color: var(--color-primary-contrast);
+  background-color: var(--color-surface-primary-default);
+  color: var(--color-text-primary-default);
 }
 
 ::picker(select) {
   opacity: 0;
-  transition: all 0.4s allow-discrete;
+  transition: all 0.2s allow-discrete;
 }
 ::picker(select):popover-open {
   opacity: 1;

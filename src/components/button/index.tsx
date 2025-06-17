@@ -28,7 +28,7 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const getStyle = useCallback(() => {
-    let style = "bg-primary text-primary-contrast ";
+    let style = "bg-surface-primary-default text-text-primary-default ";
 
     if (variant === "outlined") {
       style = "bg-transparent text-primary border-2 border-b-primary";

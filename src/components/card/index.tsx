@@ -18,7 +18,7 @@ const Card = ({
   return (
     <div
       className={cn(
-        "bg-paper max-w-sm rounded-default overflow-hidden",
+        "bg-surface-page max-w-sm rounded-default overflow-hidden",
         className
       )}
     >

@@ -29,8 +29,7 @@
       "@hooks/*": ["src/hooks/*"],
       "@context/*": ["src/context/*"],
       "@pages/*": ["src/pages/*"],
-      "@providers/*": ["src/providers/*"],
-      "@token/*": ["src/token/*"]
+      "@providers/*": ["src/providers/*"]
     }
   },
   "include": ["src"]
