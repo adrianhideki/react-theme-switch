@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTheme } from "theme-token-manager";
 import Button from "@components/button";
 import Typography from "@components/typography";
 import Page from "@components/page";
@@ -7,7 +8,6 @@ import IconButton from "@components/icon-button";
 import { MdClose } from "react-icons/md";
 import Card from "@components/card";
 import Tag from "@components/tag";
-import { useTheme } from "@theme/hook/use-theme";
 
 const Home = () => {
   const [count, setCount] = useState(0);

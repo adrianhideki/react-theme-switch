@@ -1,11 +1,11 @@
 import { ModeContext } from "@context/ModeContext";
-import { getIsDarkMode } from "@theme/utils";
 import {
   useCallback,
   useEffect,
   useState,
   type PropsWithChildren,
 } from "react";
+import { getIsDarkMode } from "theme-token-manager/theme";
 
 const ModeProvider = ({ children }: PropsWithChildren) => {
   const [mode, setMode] = useState<"dark" | "light">(

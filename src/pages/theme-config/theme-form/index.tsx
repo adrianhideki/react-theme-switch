@@ -7,26 +7,28 @@ import Button from "@components/button";
 import Typography from "@components/typography";
 import Input from "@components/input";
 import Modal from "@components/modal";
-import { fontFamilyThemes } from "@theme/fonts/family/types";
-import { fontHeightThemes } from "@theme/fonts/height/types";
-import { fontSpacingThemes } from "@theme/fonts/spacing/types";
-import { fontParagraphSpacingThemes } from "@theme/fonts/paragraph-spacing/types";
-import { fontSizeThemes } from "@theme/fonts/size/types";
-import { fontWeightThemes } from "@theme/fonts/weight/types";
-import { dimensionValuesThemes } from "@theme/sizes/dimensions/types";
-import {
-  colorValuesThemes,
-  fontValuesThemes,
-  type ColorValues,
-  type FoundationValues,
-  type PartialTheme,
-} from "@theme/theme/types";
-import { borderRadiusValuesThemes } from "@theme/sizes/border-radius/types";
-import { borderWidthValuesThemes } from "@theme/sizes/border-width/types";
-import { spacingValuesThemes } from "@theme/sizes/spacing/types";
 import BaseForm from "./base-form";
 import Token from "./token";
 import Palette from "./palette";
+import {
+  type PartialTheme,
+  colorValuesTokens,
+  fontValuesTokens,
+  fontFamilyTokens,
+  fontHeightTokens,
+  fontSpacingTokens,
+  fontSizeTokens,
+  fontWeightTokens,
+  fontParagraphSpacingTokens,
+  borderWidthValuesTokens,
+  dimensionValuesTokens,
+  borderRadiusValuesTokens,
+  spacingValuesTokens,
+} from "theme-token-manager";
+import type {
+  ColorValues,
+  FoundationValues,
+} from "theme-token-manager/theme/types";
 
 type ThemeFormValues = z.infer<typeof schema>;
 
@@ -123,7 +125,7 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
           )}
           <Typography variant="h5">Theme Colors</Typography>
           <Token
-            keys={Array.from(colorValuesThemes)}
+            keys={Array.from(colorValuesTokens)}
             data={colorOptions}
             value={watch(`color`)}
             onChange={(k, v) => setValue(`color.${k}`, v)}
@@ -136,8 +138,8 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
           )}
           <Typography variant="h5">Theme Font Family</Typography>
           <Token
-            keys={Array.from(fontValuesThemes)}
-            data={Array.from(fontFamilyThemes)}
+            keys={Array.from(fontValuesTokens)}
+            data={Array.from(fontFamilyTokens)}
             value={watch(`font.family`)}
             onChange={(k, v) => setValue(`font.family.${k}`, v)}
             errors={errors.font?.family}
@@ -149,8 +151,8 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
           )}
           <Typography variant="h5">Theme Font Height</Typography>
           <Token
-            keys={Array.from(fontValuesThemes)}
-            data={Array.from(fontHeightThemes)}
+            keys={Array.from(fontValuesTokens)}
+            data={Array.from(fontHeightTokens)}
             value={watch(`font.height`)}
             onChange={(k, v) => setValue(`font.height.${k}`, v)}
             errors={errors.font?.height}
@@ -162,8 +164,8 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
           )}
           <Typography variant="h5">Theme Font Spacing</Typography>
           <Token
-            keys={Array.from(fontValuesThemes)}
-            data={Array.from(fontSpacingThemes)}
+            keys={Array.from(fontValuesTokens)}
+            data={Array.from(fontSpacingTokens)}
             value={watch(`font.spacing`)}
             onChange={(k, v) => setValue(`font.spacing.${k}`, v)}
             errors={errors.font?.spacing}
@@ -175,8 +177,8 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
           )}
           <Typography variant="h5">Theme Font Size</Typography>
           <Token
-            keys={Array.from(fontValuesThemes)}
-            data={Array.from(fontSizeThemes)}
+            keys={Array.from(fontValuesTokens)}
+            data={Array.from(fontSizeTokens)}
             value={watch(`font.size`)}
             onChange={(k, v) => setValue(`font.size.${k}`, v)}
             errors={errors.font?.size}
@@ -188,8 +190,8 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
           )}
           <Typography variant="h5">Theme Font Weight</Typography>
           <Token
-            keys={Array.from(fontValuesThemes)}
-            data={Array.from(fontWeightThemes)}
+            keys={Array.from(fontValuesTokens)}
+            data={Array.from(fontWeightTokens)}
             value={watch(`font.weight`)}
             onChange={(k, v) => setValue(`font.weight.${k}`, v)}
             errors={errors.font?.weight}
@@ -201,8 +203,8 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
           )}
           <Typography variant="h5">Theme Font Paragraph Spacing</Typography>
           <Token
-            keys={Array.from(fontValuesThemes)}
-            data={Array.from(fontParagraphSpacingThemes)}
+            keys={Array.from(fontValuesTokens)}
+            data={Array.from(fontParagraphSpacingTokens)}
             value={watch(`font.paragraphSpacing`)}
             onChange={(k, v) => setValue(`font.paragraphSpacing.${k}`, v)}
             errors={errors.font?.paragraphSpacing}
@@ -214,8 +216,8 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
           )}
           <Typography variant="h5">Theme Size Border Width</Typography>
           <Token
-            keys={Array.from(borderWidthValuesThemes)}
-            data={Array.from(dimensionValuesThemes)}
+            keys={Array.from(borderWidthValuesTokens)}
+            data={Array.from(dimensionValuesTokens)}
             value={watch(`size.border.width`)}
             onChange={(k, v) => setValue(`size.border.width.${k}`, v)}
             errors={errors?.size?.border?.width}
@@ -227,8 +229,8 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
           )}
           <Typography variant="h5">Theme Size Border Radius</Typography>
           <Token
-            keys={Array.from(borderRadiusValuesThemes)}
-            data={Array.from(dimensionValuesThemes)}
+            keys={Array.from(borderRadiusValuesTokens)}
+            data={Array.from(dimensionValuesTokens)}
             value={watch(`size.border.radius`)}
             onChange={(k, v) => setValue(`size.border.radius.${k}`, v)}
             errors={errors?.size?.border?.radius}
@@ -240,8 +242,8 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
           )}
           <Typography variant="h5">Theme Size Spacing</Typography>
           <Token
-            keys={Array.from(spacingValuesThemes)}
-            data={Array.from(dimensionValuesThemes)}
+            keys={Array.from(spacingValuesTokens)}
+            data={Array.from(dimensionValuesTokens)}
             value={watch(`size.spacing`)}
             onChange={(k, v) => setValue(`size.spacing.${k}`, v)}
             errors={errors?.size?.spacing}

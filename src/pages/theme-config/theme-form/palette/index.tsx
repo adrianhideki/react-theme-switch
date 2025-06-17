@@ -1,18 +1,20 @@
 import z from "zod";
 import Select from "@components/select";
-import { colorScaleStringValuesThemes } from "@theme/colors/types";
-import {
-  themePaletteBorderThemes,
-  themePaletteIconThemes,
-  themePaletteSurfaceThemes,
-  themePaletteTextThemes,
-  type ThemePaletteBorderThemes,
-  type ThemePaletteIconThemes,
-  type ThemePaletteSurfaceThemes,
-  type ThemePaletteTextThemes,
-} from "@theme/theme/types";
 import { themePaletteSchema } from "../schema";
 import Typography from "@components/typography";
+import {
+  themePaletteSurfaceTokens,
+  themePaletteIconTokens,
+  themePaletteTextTokens,
+  themePaletteBorderTokens,
+  colorScaleStringValuesTokens,
+} from "theme-token-manager";
+import type {
+  ThemePaletteSurfaceValues,
+  ThemePaletteBorderValues,
+  ThemePaletteIconValues,
+  ThemePaletteTextValues,
+} from "theme-token-manager/theme/types";
 
 type PaletteSection = "surface" | "text" | "icon" | "border";
 
@@ -44,10 +46,10 @@ type PaletteProps = {
 };
 
 const paletteThemes = {
-  surface: Array.from(themePaletteSurfaceThemes),
-  icon: Array.from(themePaletteIconThemes),
-  text: Array.from(themePaletteTextThemes),
-  border: Array.from(themePaletteBorderThemes),
+  surface: Array.from(themePaletteSurfaceTokens),
+  icon: Array.from(themePaletteIconTokens),
+  text: Array.from(themePaletteTextTokens),
+  border: Array.from(themePaletteBorderTokens),
 };
 
 const getColorPropFromPalette = (
@@ -57,19 +59,19 @@ const getColorPropFromPalette = (
   prop: "color" | "scale"
 ) => {
   if (section === "surface") {
-    return value?.[section]?.[theme as ThemePaletteSurfaceThemes]?.[prop];
+    return value?.[section]?.[theme as ThemePaletteSurfaceValues]?.[prop];
   }
 
   if (section === "border") {
-    return value?.[section]?.[theme as ThemePaletteBorderThemes]?.[prop];
+    return value?.[section]?.[theme as ThemePaletteBorderValues]?.[prop];
   }
 
   if (section === "icon") {
-    return value?.[section]?.[theme as ThemePaletteIconThemes]?.[prop];
+    return value?.[section]?.[theme as ThemePaletteIconValues]?.[prop];
   }
 
   if (section === "text") {
-    return value?.[section]?.[theme as ThemePaletteTextThemes]?.[prop];
+    return value?.[section]?.[theme as ThemePaletteTextValues]?.[prop];
   }
 
   return "";
@@ -127,7 +129,7 @@ const Palette = ({
             <div className="flex gap-2">
               <Select
                 className="w-full"
-                items={["", ...Array.from(colorScaleStringValuesThemes)]}
+                items={["", ...Array.from(colorScaleStringValuesTokens)]}
                 getKey={(item) => item}
                 getLabel={(item) => item}
                 value={scaleValue}

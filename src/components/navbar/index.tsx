@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import cn from "classnames";
 import Drawer from "@components/drawer";
 import { useMode } from "@hooks/useMode";
-import { useTheme } from "@theme/hook/use-theme";
+import { useTheme } from "theme-token-manager";
 
 const Navbar = () => {
   const { toggle, mode } = useMode();

@@ -2,10 +2,8 @@ import Page from "@components/page";
 import Typography from "@components/typography";
 import Select from "@components/select";
 import Button from "@components/button";
-import { useThemeCollection } from "@theme/hook/use-theme-collection";
 import ThemeForm from "./theme-form";
-import { useTheme } from "@theme/hook/use-theme";
-import type { Theme } from "@theme/theme";
+import { useTheme, useThemeCollection, type Theme } from "theme-token-manager";
 
 const ThemeConfig = () => {
   const { referenceTheme } = useTheme();

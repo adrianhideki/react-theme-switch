@@ -1,7 +1,7 @@
 import { HexColorPicker, HexColorInput } from "react-colorful";
 import { useRef, useState } from "react";
 import cn from "classnames";
-import { getContrastColor } from "@theme/utils";
+import { getContrastColor } from "theme-token-manager";
 
 type ColorPickerProps = {
   color: string;

@@ -7,24 +7,24 @@ import Typography from "@components/typography";
 import ColorCollection from "./color-collection";
 import ColorFoundation from "./color-foundation";
 import BaseTheme from "./base-theme";
-import type {
-  FontFamily,
-  FontHeight,
-  FontParagraphSpacing,
-  FontSize,
-  FontSpacing,
-  FontWeight,
-} from "@theme/fonts";
-import { fontFamilyThemes } from "@theme/fonts/family/types";
-import { fontHeightThemes } from "@theme/fonts/height/types";
-import { fontSpacingThemes } from "@theme/fonts/spacing/types";
-import { fontParagraphSpacingThemes } from "@theme/fonts/paragraph-spacing/types";
-import { fontSizeThemes } from "@theme/fonts/size/types";
-import { fontWeightThemes } from "@theme/fonts/weight/types";
-import type { DimensionValues } from "@theme/sizes";
-import { dimensionValuesThemes } from "@theme/sizes/dimensions/types";
 import Button from "@components/button";
-import type { PartialTheme } from "@theme/theme";
+import {
+  type PartialTheme,
+  type FontFamily,
+  fontFamilyTokens,
+  type FontHeight,
+  fontHeightTokens,
+  type FontSpacing,
+  fontSpacingTokens,
+  type FontParagraphSpacing,
+  fontParagraphSpacingTokens,
+  type FontSize,
+  fontSizeTokens,
+  type FontWeight,
+  fontWeightTokens,
+  type DimensionValues,
+  dimensionValuesTokens,
+} from "theme-token-manager";
 
 type BaseThemeFormValues = z.infer<typeof baseThemeConfigSchema>;
 
@@ -139,7 +139,7 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
         )}
         <Typography variant="h5">Font Family</Typography>
         <BaseTheme<FontFamily, string>
-          themes={fontFamilyThemes}
+          themes={fontFamilyTokens}
           data={getValues("font.family") as Record<FontFamily, string>}
           onChange={getHandleThemeChange("font.family")}
           error={
@@ -153,7 +153,7 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
         )}
         <Typography variant="h5">Font Height</Typography>
         <BaseTheme<FontHeight, number>
-          themes={fontHeightThemes}
+          themes={fontHeightTokens}
           data={getValues("font.height") as Record<FontHeight, number>}
           onChange={getHandleThemeChange("font.height")}
           type="number"
@@ -168,7 +168,7 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
         )}
         <Typography variant="h5">Font Spacing</Typography>
         <BaseTheme<FontSpacing, number>
-          themes={fontSpacingThemes}
+          themes={fontSpacingTokens}
           data={getValues("font.spacing") as Record<FontSpacing, number>}
           onChange={getHandleThemeChange("font.spacing")}
           type="number"
@@ -183,7 +183,7 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
         )}
         <Typography variant="h5">Font Paragraph Spacing</Typography>
         <BaseTheme<FontParagraphSpacing, number>
-          themes={fontParagraphSpacingThemes}
+          themes={fontParagraphSpacingTokens}
           data={
             getValues("font.paragraphSpacing") as Record<
               FontParagraphSpacing,
@@ -206,7 +206,7 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
         )}
         <Typography variant="h5">Font Size</Typography>
         <BaseTheme<FontSize, number>
-          themes={fontSizeThemes}
+          themes={fontSizeTokens}
           data={getValues("font.size") as Record<FontSize, number>}
           onChange={getHandleThemeChange("font.size")}
           type="number"
@@ -219,7 +219,7 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
         )}
         <Typography variant="h5">Font Weight</Typography>
         <BaseTheme<FontWeight, number>
-          themes={fontWeightThemes}
+          themes={fontWeightTokens}
           data={getValues("font.weight") as Record<FontWeight, number>}
           onChange={getHandleThemeChange("font.weight")}
           type="number"
@@ -234,7 +234,7 @@ const BaseForm = ({ onSubmit, initialValue }: BaseFormProps) => {
         )}
         <Typography variant="h5">Dimensions</Typography>
         <BaseTheme<DimensionValues, number>
-          themes={dimensionValuesThemes}
+          themes={dimensionValuesTokens}
           data={getValues("size.dimension") as Record<DimensionValues, number>}
           onChange={getHandleThemeChange("size.dimension")}
           type="number"

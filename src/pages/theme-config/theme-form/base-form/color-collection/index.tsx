@@ -1,13 +1,14 @@
 import Button from "@components/button";
 import Input from "@components/input";
-import {
-  colorScaleStringValuesThemes,
-  colorScaleValuesThemes,
-  type ColorScaleStringValues,
-} from "@theme/colors/types";
 import { useCallback, useMemo, useState } from "react";
 import ColorPicker from "../../color-picker";
-import { generateColorScale, getContrastColor } from "@theme/utils";
+import {
+  colorScaleStringValuesTokens,
+  colorScaleValuesTokens,
+  generateColorScale,
+  getContrastColor,
+  type ColorScaleStringValues,
+} from "theme-token-manager/theme";
 
 type ColorCollectionProps = {
   collection?: Record<string, Record<ColorScaleStringValues, string>>;
@@ -81,7 +82,7 @@ const ColorCollection = ({
   const isAddEnable = useMemo(
     () =>
       Object.keys(newColorScales).every((key) =>
-        colorScaleStringValuesThemes.find((v) => v === key)
+        colorScaleStringValuesTokens.find((v) => v === key)
       ) &&
       Object.keys(newColorScales).length > 0 &&
       newColorName,
@@ -120,7 +121,7 @@ const ColorCollection = ({
                   }));
                 }}
               />
-              {colorScaleValuesThemes.map((scale) => (
+              {colorScaleValuesTokens.map((scale) => (
                 <div key={scale} className="flex flex-row items-center">
                   <ColorPicker
                     text={String(scale)}
