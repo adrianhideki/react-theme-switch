@@ -112,7 +112,7 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
         />
       </Modal>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <form className="flex flex-col gap-2 p-4" onSubmit={handleFormSubmit}>
+        <form className="flex flex-col gap-4 p-4" onSubmit={handleFormSubmit}>
           <Typography variant="h4">Theme Properties</Typography>
           <Typography>Name</Typography>
           <Input placeholder="Name" {...register("name")} />
@@ -257,7 +257,7 @@ const ThemeForm = ({ onSubmit, initialValue }: ThemeFormProps) => {
             theme color.
           </Typography>
           {modes.map((mode) => (
-            <div key={mode}>
+            <div key={mode} className="flex flex-col gap-2">
               <Typography variant="h4">
                 {mode.charAt(0).toUpperCase() + mode.slice(1)} Palette
               </Typography>

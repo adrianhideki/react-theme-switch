@@ -88,93 +88,71 @@ const Palette = ({
 
   return (
     <div className="flex flex-wrap gap-4">
-      <table className="p-2 border-1 border-default">
-        <thead className="border-1 border-default">
-          <tr>
-            <th className="border-1 border-default px-2 py-1">Theme</th>
-            <th className="border-1 border-default px-2 py-1">Color</th>
-            <th className="border-1 border-default px-2 py-1">Scale</th>
-            <th className="border-1 border-default px-2 py-1">Preview</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paletteThemes[section].map((theme) => {
-            const colorValue = getColorPropFromPalette(
-              section,
-              value,
-              theme,
-              "color"
-            );
+      {paletteThemes[section].map((theme) => {
+        const colorValue = getColorPropFromPalette(
+          section,
+          value,
+          theme,
+          "color"
+        );
 
-            const scaleValue = getColorPropFromPalette(
-              section,
-              value,
-              theme,
-              "scale"
-            );
+        const scaleValue = getColorPropFromPalette(
+          section,
+          value,
+          theme,
+          "scale"
+        );
 
-            return (
-              <tr key={theme}>
-                <td className="border-1 border-default px-2 py-1">
-                  <span>{theme}</span>
-                  {paletteError?.[section]?.[theme]?.message && (
-                    <Typography className="text-text-error-default">
-                      {String(paletteError?.[section]?.[theme]?.message)}
-                    </Typography>
-                  )}
-                </td>
-                <td className="border-1 border-default px-2 py-1">
-                  <Select
-                    className="w-40"
-                    items={["", ...colors]}
-                    getKey={(item) => item}
-                    getLabel={(item) => item}
-                    value={colorValue}
-                    onChange={(v) =>
-                      onChange(section, theme, "color", String(v))
-                    }
-                  />
-                  {colorError?.[section]?.[theme]?.color?.message && (
-                    <Typography className="text-text-error-default">
-                      {String(colorError?.[section]?.[theme]?.color?.message)}
-                    </Typography>
-                  )}
-                </td>
-                <td className="border-1 border-default px-2 py-1">
-                  <Select
-                    className="w-20"
-                    items={["", ...Array.from(colorScaleStringValuesThemes)]}
-                    getKey={(item) => item}
-                    getLabel={(item) => item}
-                    value={scaleValue}
-                    onChange={(v) =>
-                      onChange(section, theme, "scale", String(v))
-                    }
-                    disabled={String(colorValue)?.startsWith("foundation.")}
-                  />
-                  {colorError?.[section]?.[theme]?.scale?.message && (
-                    <Typography className="text-text-error-default">
-                      {String(colorError?.[section]?.[theme]?.scale?.message)}
-                    </Typography>
-                  )}
-                </td>
-                <td className="border-1 border-default px-2 py-1">
-                  <div
-                    style={{
-                      backgroundColor: onColorPreview(
-                        String(colorValue),
-                        String(scaleValue)
-                      ),
-                      width: 40,
-                      height: 40,
-                    }}
-                  ></div>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+        return (
+          <div
+            key={theme}
+            className="flex flex-col p-2 gap-2 bg-surface-pageAlternative rounded-xs w-60"
+          >
+            <span className="capitalize">
+              {theme.replace(/([a-z])([A-Z])/g, "$1 $2").replace("-", " ")}
+            </span>
+            {paletteError?.[section]?.[theme]?.message && (
+              <Typography className="text-text-error-default">
+                {String(paletteError?.[section]?.[theme]?.message)}
+              </Typography>
+            )}
+            <Select
+              className="w-full"
+              items={["", ...colors]}
+              getKey={(item) => item}
+              getLabel={(item) => item}
+              value={colorValue}
+              onChange={(v) => onChange(section, theme, "color", String(v))}
+            />
+            <div className="flex gap-2">
+              <Select
+                className="w-full"
+                items={["", ...Array.from(colorScaleStringValuesThemes)]}
+                getKey={(item) => item}
+                getLabel={(item) => item}
+                value={scaleValue}
+                onChange={(v) => onChange(section, theme, "scale", String(v))}
+                disabled={String(colorValue)?.startsWith("foundation.")}
+              />
+              <div
+                style={{
+                  backgroundColor: onColorPreview(
+                    String(colorValue),
+                    String(scaleValue)
+                  ),
+                  width: 40,
+                  height: 40,
+                }}
+              ></div>
+            </div>
+            {colorError?.[section]?.[theme]?.scale?.message && (
+              <Typography className="text-text-error-default">
+                {String(colorError?.[section]?.[theme]?.scale?.message)}
+              </Typography>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };

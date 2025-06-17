@@ -40,7 +40,7 @@ const ThemeConfig = () => {
 
   return (
     <Page>
-      <Typography variant="h1">Choose the theme theme:</Typography>
+      <Typography variant="h4">Choose the theme theme:</Typography>
       <div className="flex w-full gap-2">
         <Select
           items={themes}
@@ -50,11 +50,7 @@ const ThemeConfig = () => {
           onChange={(value) => handleSelectChange(value)}
           className="w-full"
         />
-        <Button
-          disabled={themes.length <= 1}
-          className="min-w-10"
-          onClick={handleDeleteTheme}
-        >
+        <Button disabled={themes.length <= 1} onClick={handleDeleteTheme}>
           Delete
         </Button>
         <Button

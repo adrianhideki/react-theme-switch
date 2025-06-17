@@ -160,33 +160,31 @@ const ColorCollection = ({
           {Object.entries(collection ?? {}).map(([name, scales]) => (
             <tr key={name}>
               <td className="border border-default px-2 py-1">{name}</td>
-              <td className="border border-default px-2 py-1">
-                <div className="flex gap-2">
-                  {Object.entries(scales).map(([scale, value]) => (
+              <td className="border border-default px-2 py-1 flex flex-wrap gap-2">
+                {Object.entries(scales).map(([scale, value]) => (
+                  <span
+                    key={scale}
+                    className="flex border border-default flex-col gap-1 w-10 h-10"
+                    style={{
+                      background: value,
+                      display: "inline-block",
+                    }}
+                    title={value}
+                  >
                     <span
                       key={scale}
-                      className="flex border border-default flex-col gap-1 w-10 h-10"
+                      className="flex flex-col items-center justify-center w-full h-full"
                       style={{
-                        background: value,
-                        display: "inline-block",
+                        color: value ? getContrastColor(value) : undefined,
                       }}
-                      title={value}
                     >
-                      <span
-                        key={scale}
-                        className="flex flex-col items-center justify-center w-full h-full"
-                        style={{
-                          color: value ? getContrastColor(value) : undefined,
-                        }}
-                      >
-                        <b>{scale}</b>
-                      </span>
+                      <b>{scale}</b>
                     </span>
-                  ))}
-                </div>
+                  </span>
+                ))}
               </td>
               <td className="border border-default px-2 py-1">
-                <div className="flex gap-2 items-center justify-center">
+                <div className="flex gap-2 items-center justify-start">
                   <Button type="button" onClick={() => handleEditColor(name)}>
                     Edit
                   </Button>
