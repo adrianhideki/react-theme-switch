@@ -1,5 +1,4 @@
 import { ModeContext } from "@context/ModeContext";
-import type { ThemeMode } from "@theme/types";
 import { getIsDarkMode } from "@theme/utils";
 import {
   useCallback,
@@ -9,7 +8,7 @@ import {
 } from "react";
 
 const ModeProvider = ({ children }: PropsWithChildren) => {
-  const [mode, setMode] = useState<ThemeMode>(
+  const [mode, setMode] = useState<"dark" | "light">(
     getIsDarkMode() ? "dark" : "light"
   );
 

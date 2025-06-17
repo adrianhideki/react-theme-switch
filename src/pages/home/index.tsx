@@ -5,9 +5,9 @@ import Page from "@components/page";
 import Alert from "@components/alert";
 import IconButton from "@components/icon-button";
 import { MdClose } from "react-icons/md";
-import { useTheme } from "@hooks/useTheme";
 import Card from "@components/card";
 import Tag from "@components/tag";
+import { useTheme } from "@theme/hook/use-theme";
 
 const Home = () => {
   const [count, setCount] = useState(0);
@@ -72,7 +72,7 @@ const Home = () => {
           ipsum vitae tellus sagittis, non hendrerit odio commodo. Aliquam
           pulvinar urna mollis, pharetra enim eget, pulvinar arcu.
         </Typography>
-        <Typography variant="subtitle" className="text-text">
+        <Typography variant="label" className="text-text">
           Subtitle - Text Color
         </Typography>
         <Typography>
@@ -81,7 +81,7 @@ const Home = () => {
           nisl consequat convallis. Pellentesque volutpat nunc at leo tempor
           accumsan. Vivamus vel metus eros.
         </Typography>
-        <Typography variant="subtitle-secondary" className="text-text">
+        <Typography variant="labelLong" className="text-text">
           Subtitle Secondary - Text Color
         </Typography>
         <Typography>
@@ -92,11 +92,11 @@ const Home = () => {
         <Typography variant="body" className="text-text">
           Body - Text Color
         </Typography>
-        <Typography variant="body-secondary" className="text-text">
-          Body Secondary - Text Color
+        <Typography variant="bodyLong" className="text-text">
+          Body Long - Text Color
         </Typography>
-        <Typography variant="button" className="text-text">
-          Button - Text Color
+        <Typography variant="bodyShort" className="text-text">
+          Body Short
         </Typography>
         <Typography variant="caption" className="text-text">
           Caption - Text Color
@@ -104,25 +104,25 @@ const Home = () => {
         <Alert className="font-medium" level="success">
           <div className="flex justify-between">
             This is a success alert!{" "}
-            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
+            <IconButton icon={<MdClose size={theme.size.spacing?.md} />} />
           </div>
         </Alert>
         <Alert className="font-medium" level="error">
           <div className="flex justify-between">
             This is a error alert!
-            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
+            <IconButton icon={<MdClose size={theme.size.spacing?.md} />} />
           </div>
         </Alert>
         <Alert className="font-medium" level="warning">
           <div className="flex justify-between">
             This is a warning alert!
-            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
+            <IconButton icon={<MdClose size={theme.size.spacing?.md} />} />
           </div>
         </Alert>
-        <Alert className="font-medium" level="info">
+        <Alert className="font-medium" level="information">
           <div className="flex justify-between">
             This is a information alert!
-            <IconButton icon={<MdClose size={theme.spacing * 3} />} />
+            <IconButton icon={<MdClose size={theme.size.spacing?.md} />} />
           </div>
         </Alert>
         <Button

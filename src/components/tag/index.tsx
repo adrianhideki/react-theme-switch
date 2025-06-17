@@ -12,7 +12,7 @@ const Tag = ({ children, className }: PropsWithChildren<TagProps>) => {
         "text-paper",
         "text-body2",
         "inline-block",
-        "bg-paper",
+        "bg-surface-page",
         "rounded-default",
         "px-3",
         "py-1",

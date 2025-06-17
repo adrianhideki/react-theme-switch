@@ -1,25 +1,22 @@
 import Page from "@components/page";
-import Select from "@components/select";
 import Typography from "@components/typography";
-import { useThemeCollection } from "@hooks/useThemeCollection";
-import ThemeEditor from "./theme-editor";
+import Select from "@components/select";
 import Button from "@components/button";
-import type { Theme } from "@theme/types";
-import { useEffect } from "react";
+import { useThemeCollection } from "@theme/hook/use-theme-collection";
+import ThemeForm from "./theme-form";
+import { useTheme } from "@theme/hook/use-theme";
+import type { Theme } from "@theme/theme";
 
 const ThemeConfig = () => {
+  const { referenceTheme } = useTheme();
   const {
     themes,
+    currentTheme,
     updateCurrentTheme,
     addTheme,
-    currentTheme,
     deleteTheme,
     updateTheme,
   } = useThemeCollection();
-
-  useEffect(() => {
-    console.log(themes.length);
-  });
 
   const handleSelectChange = (value: string) => {
     updateCurrentTheme(value);
@@ -41,30 +38,19 @@ const ThemeConfig = () => {
     deleteTheme(currentTheme);
   };
 
-  const handleFormSave = (value: Theme) => {
-    updateTheme({
-      ...value,
-      id: currentTheme,
-    });
-  };
-
   return (
     <Page>
-      <Typography variant="h1">Choose the theme:</Typography>
+      <Typography variant="h4">Choose the theme theme:</Typography>
       <div className="flex w-full gap-2">
         <Select
           items={themes}
-          keyField="id"
+          getKey={(item) => item.id ?? ""}
           value={currentTheme}
           getLabel={(item) => String(item["name"])}
           onChange={(value) => handleSelectChange(value)}
           className="w-full"
         />
-        <Button
-          disabled={themes.length <= 1}
-          className="min-w-10"
-          onClick={handleDeleteTheme}
-        >
+        <Button disabled={themes.length <= 1} onClick={handleDeleteTheme}>
           Delete
         </Button>
         <Button
@@ -74,10 +60,14 @@ const ThemeConfig = () => {
           Duplicate
         </Button>
       </div>
-      <ThemeEditor
-        onSave={handleFormSave}
-        theme={themes.find((t) => t.id === currentTheme)}
-      />
+      <div>
+        <ThemeForm
+          initialValue={referenceTheme}
+          onSubmit={(values) => {
+            updateTheme({ ...values, id: currentTheme } as Theme);
+          }}
+        />
+      </div>
     </Page>
   );
 };

@@ -2,29 +2,21 @@ import { StrictMode } from "react";
 import { RouterProvider } from "react-router";
 import { createRoot } from "react-dom/client";
 import ModeProvider from "@providers/ModeProvider.tsx";
-import ThemeProvider from "@providers/ThemeProvider.tsx";
-import ThemeCollectionProvider from "@providers/ThemeCollectionContext.tsx";
-import CssBaseLine from "@theme/CssBaseLine";
+import ThemeProvider from "@theme/provider/theme";
 import { router } from "./routes.tsx";
 import "./index.css";
+import ThemeCollectionProvider from "@theme/provider/theme-collection";
+import CssBaseline from "@theme/css-baseline";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ModeProvider>
-      <ThemeProvider
-        theme={{
-          colors: {
-            primary: {
-              main: { dark: "#f1f1f1", light: "#000" },
-              contrast: { dark: "#000", light: "#fff" },
-            },
-          },
-        }}
-      >
-        <CssBaseLine />
-        <ThemeCollectionProvider>
-          <RouterProvider router={router} />
-        </ThemeCollectionProvider>
+      <ThemeProvider>
+        <CssBaseline>
+          <ThemeCollectionProvider>
+            <RouterProvider router={router} />
+          </ThemeCollectionProvider>
+        </CssBaseline>
       </ThemeProvider>
     </ModeProvider>
   </StrictMode>
