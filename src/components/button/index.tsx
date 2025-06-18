@@ -28,15 +28,15 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const getStyle = useCallback(() => {
-    let style = "bg-surface-primary-default text-text-primary-default ";
+    let style = "bg-surface-secondary-default text-text-secondary-default ";
 
     if (variant === "outlined") {
       style =
-        "bg-transparent text-surface-primary-default border-2 border-surface-primary-default";
+        "bg-transparent text-surface-secondary-default border-2 border-surface-secondary-default";
     }
 
     if (variant === "text") {
-      style = "bg-transparent text-surface-primary-default";
+      style = "bg-transparent text-surface-secondary-default";
     }
 
     if (disabled) {

@@ -4,9 +4,10 @@ import Select from "@components/select";
 import Button from "@components/button";
 import ThemeForm from "./theme-form";
 import { useTheme, useThemeCollection, type Theme } from "theme-token-manager";
+import { useEffect } from "react";
 
 const ThemeConfig = () => {
-  const { referenceTheme } = useTheme();
+  const { referenceTheme, theme } = useTheme();
   const {
     themes,
     currentTheme,
@@ -15,6 +16,10 @@ const ThemeConfig = () => {
     deleteTheme,
     updateTheme,
   } = useThemeCollection();
+
+  useEffect(() => {
+    console.log(theme?.name, theme?.id);
+  }, [theme]);
 
   const handleSelectChange = (value: string) => {
     updateCurrentTheme(value);
