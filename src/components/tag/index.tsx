@@ -13,7 +13,7 @@ const Tag = ({ children, className }: PropsWithChildren<TagProps>) => {
         "text-body2",
         "inline-block",
         "bg-surface-page",
-        "rounded-default",
+        "rounded-3xs",
         "px-3",
         "py-1",
         "font-semibold",

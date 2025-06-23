@@ -39,13 +39,13 @@ const ColorFoundation = ({
       <div className="flex gap-2 items-center">
         <Typography>White</Typography>
         <ColorPicker
-          className="w-6 h-6"
+          className="w-10 h-10 rounded-3xs"
           color={data?.white ?? ""}
           onColorChange={handleWhiteChange}
         />
         <Typography>Black</Typography>
         <ColorPicker
-          className="w-6 h-6"
+          className="w-10 h-10 rounded-3xs"
           color={data?.black ?? ""}
           onColorChange={handleBlackChange}
         />

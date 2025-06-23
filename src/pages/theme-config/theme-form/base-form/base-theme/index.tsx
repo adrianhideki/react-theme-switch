@@ -24,7 +24,7 @@ const BaseTheme = <
   error,
 }: BaseThemeProps<TKey, TResult>) => {
   const [data, setData] = useState<Record<TKey, TResult>>(
-    () => initialData ?? ({} as Record<TKey, TResult>)
+    initialData ?? ({} as Record<TKey, TResult>)
   );
 
   useEffect(() => {
@@ -39,8 +39,9 @@ const BaseTheme = <
         <div key={key}>
           <Typography className="capitalize">{key}</Typography>
           <Input
+            type={type}
             placeholder={String(key)}
-            defaultValue={data[key]}
+            value={String(data[key])}
             onChange={(e) =>
               setData((p) => ({
                 ...p,
@@ -48,7 +49,6 @@ const BaseTheme = <
                   type === "number" ? +e.target.value : e.target.value,
               }))
             }
-            type={type}
             error={error?.[key]?.message}
           />
           {error?.[key]?.message && (

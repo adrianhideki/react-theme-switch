@@ -12,7 +12,6 @@ const IconButton = ({ onClick, icon, className }: IconButtonProps) => {
     <button
       type="button"
       className={cn(
-        "relative",
         "cursor-pointer",
         "focus:border-0",
         "focus:outline-hidden",

@@ -18,7 +18,7 @@ const Alert = ({
       className={cn(
         `bg-surface-${level}-default`,
         `text-text-${level}-default`,
-        "rounded-default",
+        "rounded-3xs",
         "p-4",
         "border-2",
         `border-${level}-default`,

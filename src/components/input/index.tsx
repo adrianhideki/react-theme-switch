@@ -27,7 +27,7 @@ const Input = ({
   ...props
 }: InputProps) => {
   const style =
-    "p-2 min-w-0 text-text border-2 rounded-xs focus:transition-all focus:outline-none focus:border-surface-primary-default border-default";
+    "p-2 min-w-0 text-text border-2 rounded-3xs focus:transition-all focus:outline-none focus:border-surface-primary-default border-default";
 
   const errorStyle = "border-error-default";
 

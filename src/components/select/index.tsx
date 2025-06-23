@@ -38,7 +38,7 @@ const Select = <T = object,>({
         { "cursor-pointer": !disabled },
         { "bg-gray-500": disabled },
         { "cursor-not-allowed": disabled },
-        "rounded-xs",
+        "rounded-3xs",
         "transition-all",
         "border-1",
         "p-2",

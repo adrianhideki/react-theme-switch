@@ -90,16 +90,16 @@ const ColorCollection = ({
   );
 
   return (
-    <>
-      <table className="w-full border border-default">
+    <div className="border border-default rounded-3xs overflow-auto">
+      <table className="w-full border-hidden border-collapse">
         <thead>
-          <tr>
+          <tr className="bg-surface-primary-default">
             <th className="border border-default px-2 py-1">Color Name</th>
             <th className="border border-default px-2 py-1">Scales</th>
             <th className="border border-default px-2 py-1">Actions</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="bg-surface-page-default">
           <tr>
             <td className="border border-default px-2 py-1">
               <Input
@@ -111,7 +111,7 @@ const ColorCollection = ({
             <td className="px-2 py-1 flex flex-wrap items-center gap-2">
               <ColorPicker
                 text={"base"}
-                className="w-10 h-10 flex items-center justify-center"
+                className="w-10 h-10 flex items-center justify-center rounded-3xs"
                 color={baseColor}
                 onColorChange={(color) => {
                   setBaseColor(color);
@@ -125,7 +125,7 @@ const ColorCollection = ({
                 <div key={scale} className="flex flex-row items-center">
                   <ColorPicker
                     text={String(scale)}
-                    className="w-10 h-10 flex items-center justify-center"
+                    className="w-10 h-10 flex items-center justify-center rounded-3xs"
                     color={newColorScales[scale] || ""}
                     onColorChange={(color) =>
                       setNewColorScales((s) => ({
@@ -165,7 +165,7 @@ const ColorCollection = ({
                 {Object.entries(scales).map(([scale, value]) => (
                   <span
                     key={scale}
-                    className="flex border border-default flex-col gap-1 w-10 h-10"
+                    className="flex border border-default flex-col gap-1 w-10 h-10 rounded-3xs"
                     style={{
                       background: value,
                       display: "inline-block",
@@ -198,7 +198,7 @@ const ColorCollection = ({
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 };
 

@@ -33,7 +33,7 @@ class ErrorBoundary extends React.Component<
     if (this.state.hasError) {
       return (
         this.props.fallback || (
-          <div className="p-4 bg-error-default text-text-error-default rounded">
+          <div className="p-4 bg-error-default text-text-error-default rounded-3xs">
             <h2>Something went wrong.</h2>
             <span>Try to refresh the page.</span>
             <pre>{this.state.error?.message}</pre>

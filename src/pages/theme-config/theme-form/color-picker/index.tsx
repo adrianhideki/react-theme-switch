@@ -88,7 +88,7 @@ const ColorPicker = ({
       {showPicker && (
         <>
           <div
-            className="fixed z-10 bg-surface-page border-default border-2 rounded-sm"
+            className="fixed z-10 bg-surface-page border-default border-2 rounded-3xs"
             style={{
               top: getTopPosition(),
               left: getLeftPosition(),

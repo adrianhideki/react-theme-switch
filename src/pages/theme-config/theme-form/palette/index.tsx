@@ -108,7 +108,7 @@ const Palette = ({
         return (
           <div
             key={theme}
-            className="flex flex-col p-2 gap-2 bg-surface-pageAlternative rounded-xs w-60"
+            className="flex flex-col p-2 gap-2 bg-surface-pageAlternative rounded-3xs w-60"
           >
             <span className="capitalize">
               {theme.replace(/([a-z])([A-Z])/g, "$1 $2").replace("-", " ")}
@@ -145,6 +145,7 @@ const Palette = ({
                   width: 40,
                   height: 40,
                 }}
+                className="rounded-3xs"
               ></div>
             </div>
             {colorError?.[section]?.[theme]?.scale?.message && (
